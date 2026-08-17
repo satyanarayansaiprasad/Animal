@@ -30,8 +30,6 @@ app.use('/api', apiRoutes);
 // Serve uploads or static images if needed
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
-const PORT = process.env.PORT || 5000;
-
 const server = app.listen(PORT, () => {
   console.log(`🚀 Al Namoos Veterinary Express Backend running on port ${PORT}`);
 }).on('error', (err) => {
