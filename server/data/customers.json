@@ -1,0 +1,22 @@
+[
+  {
+    "id": "cust_1",
+    "name": "Sheikh Nasser Al-Hajri",
+    "email": "nasser@example.com",
+    "phone": "+968 9876 5432",
+    "city": "Muscat",
+    "country": "Oman",
+    "total_orders": 4,
+    "total_spent_omr": 340.500
+  },
+  {
+    "id": "cust_2",
+    "name": "Tariq Al-Mansoori",
+    "email": "tariq.mansoori@example.ae",
+    "phone": "+971 50 123 4567",
+    "city": "Abu Dhabi",
+    "country": "UAE",
+    "total_orders": 2,
+    "total_spent_omr": 115.000
+  }
+]

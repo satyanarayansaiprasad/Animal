@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-sand: #F6F1E7;
+    --color-surface: #FFFDF9;
+    --color-charcoal: #16302B;
+    --color-clay: #B85C2E;
+    --color-teal: #2E6F63;
+    --color-bodytext: #2A241E;
+    --color-muted: #8B8175;
+    --color-gold: #B8862E;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-sand);
+    color: var(--color-bodytext);
+    font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', sans-serif;
+  }
+
+  /* Arabic Line-Height Breathing Room */
+  html[dir="rtl"] {
+    line-height: 1.65;
+  }
+
+  html[dir="ltr"] {
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+  }
+
+  .font-mono-price {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* Accessible outline focus states */
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid #B85C2E;
+    outline-offset: 2px;
+  }
+}
+
+/* RTL Icon Mirroring Utility */
+.rtl-flip {
+  transform: scaleX(1);
+}
+html[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F6F1E7;
+}
+::-webkit-scrollbar-thumb {
+  background: #2E6F63;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #16302B;
+}
+
+/* Petroglyph Circle Badge Styling */
+.petroglyph-badge {
+  background: radial-gradient(circle, #FAF6EE 0%, #EAE3D2 100%);
+  border: 1px solid #DED5C3;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.petroglyph-badge:hover {
+  border-color: #B85C2E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(184, 92, 46, 0.15);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.35s ease-out forwards;
+}

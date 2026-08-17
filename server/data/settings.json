@@ -1,0 +1,44 @@
+{
+  "store_name_en": "Al Namoos Veterinary Store & Pharmacy",
+  "store_name_ar": "متجر وصيدلية الناموس البيطرية",
+  "tagline_en": "Trusted Desert Veterinary Specialist | Delivery Across GCC",
+  "tagline_ar": "الخبير البيطري الموثوق | توصيل لكافة دول مجلس التعاون الخليجي",
+  "primary_whatsapp": "+968 9526 6144",
+  "sales_whatsapp_1": "+968 9526 6144",
+  "sales_whatsapp_2": "+968 9951 9155",
+  "sales_whatsapp_3": "+971 56 297 3007",
+  "doctor_consultation_1": "+968 9469 4666",
+  "doctor_consultation_2": "+968 7964 4471",
+  "email": "ysalhajri20006@gmail.com",
+  "instagram": "https://instagram.com/alnamoos.c",
+  "omr_to_aed": 9.55,
+  "bank_details": {
+    "adib_account": "28966881",
+    "adib_holder": "Al Namoos Veterinary Pharmacy",
+    "bank_muscat_account": "0412004099970014",
+    "bank_muscat_holder": "Al Namoos Veterinary Supplies LLC"
+  },
+  "branch_locations": [
+    {
+      "name_en": "Muscat Branch — Central Pharmacy",
+      "name_ar": "فرع مسقط — الصيدلية المركزية",
+      "address_en": "Al Seeb Industrial Zone, Muscat, Sultanate of Oman",
+      "address_ar": "منطقة السيب الصناعية، مسقط، سلطنة عمان",
+      "map_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.345!2d58.1834!3d23.6012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDM2JzA0LjMiTiA1OMKwMTEnMDAuMiJF!5e0!3m2!1sen!2som!4v1600000000000!5m2!1sen!2som"
+    },
+    {
+      "name_en": "Al Batinah Branch — Camel & Livestock Hub",
+      "name_ar": "فرع الباطنة — مجمع الإبل والمواشي",
+      "address_en": "Sohar Livestock Market Road, Sohar, Sultanate of Oman",
+      "address_ar": "طريق سوق المواشي، صحار، سلطنة عمان",
+      "map_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3630.123!2d56.7321!3d24.3567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDIxJzI0LjEiTiA1NsKwNDMnNTUuNiJF!5e0!3m2!1sen!2som!4v1600000000000!5m2!1sen!2som"
+    }
+  ],
+  "shipping_rates": {
+    "oman_standard_omr": 2.000,
+    "oman_express_omr": 3.500,
+    "gcc_standard_omr": 6.500,
+    "gcc_express_omr": 10.000,
+    "free_shipping_threshold_omr": 50.000
+  }
+}

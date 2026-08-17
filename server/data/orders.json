@@ -1,0 +1,70 @@
+[
+  {
+    "id": "ALN-84921",
+    "createdAt": "2026-08-15T14:30:00Z",
+    "customer": {
+      "name": "Sheikh Nasser Al-Hajri",
+      "phone": "+968 9876 5432",
+      "email": "nasser@example.com",
+      "city": "Muscat",
+      "country": "Oman",
+      "address": "Villa 12, Al Mouj Street"
+    },
+    "items": [
+      {
+        "id": "prod_c_med_1",
+        "name_en": "Camel Endurance Multi-Vitamin Injection",
+        "name_ar": "حقن فيتامينات متعدّدة للتحمّل والإجهاد للهجن",
+        "price_omr": 19.500,
+        "quantity": 2
+      },
+      {
+        "id": "prod_c_sup_1",
+        "name_en": "Royal Oasis Camel Electrolyte & Hydration Powder (5kg)",
+        "name_ar": "بودرة أملاح وتعويض السوائل للإبل (5 كجم)",
+        "price_omr": 27.500,
+        "quantity": 1
+      }
+    ],
+    "subtotal_omr": 66.500,
+    "shipping_omr": 0.000,
+    "total_omr": 66.500,
+    "total_aed": 635.07,
+    "currency": "OMR",
+    "payment_method": "bank_transfer",
+    "bank_selected": "Bank Muscat (0412004099970014)",
+    "status": "processing",
+    "payment_status": "paid_verified",
+    "notes": "Fast delivery requested for camel training camp in Barka."
+  },
+  {
+    "id": "ALN-84920",
+    "createdAt": "2026-08-16T09:15:00Z",
+    "customer": {
+      "name": "Tariq Al-Mansoori",
+      "phone": "+971 50 123 4567",
+      "email": "tariq.mansoori@example.ae",
+      "city": "Abu Dhabi",
+      "country": "UAE",
+      "address": "Al Wathba Camel Race Track St."
+    },
+    "items": [
+      {
+        "id": "prod_h_med_1",
+        "name_en": "EquiFlex Joint & Anti-Inflammatory Solution (1L)",
+        "name_ar": "محلول إكوي فليكس لصحة المفاصل ومضاد الالتهاب للخيل (1 لتر)",
+        "price_omr": 24.000,
+        "quantity": 1
+      }
+    ],
+    "subtotal_omr": 24.000,
+    "shipping_omr": 6.500,
+    "total_omr": 30.500,
+    "total_aed": 291.28,
+    "currency": "AED",
+    "payment_method": "apple_pay",
+    "status": "shipped",
+    "payment_status": "paid",
+    "notes": "GCC Express shipping."
+  }
+]

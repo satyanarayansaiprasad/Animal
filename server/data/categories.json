@@ -1,0 +1,57 @@
+{
+  "species": [
+    {
+      "id": "camel",
+      "slug": "camel",
+      "name_en": "Camels",
+      "name_ar": "الإبل والهجن",
+      "subtitle_en": "Racing, breeding, and endurance camel care",
+      "subtitle_ar": "عناية شاملة بهجن السباق والمزاينة والإبل الأصيلة",
+      "icon": "camel"
+    },
+    {
+      "id": "horse",
+      "slug": "horse",
+      "name_en": "Horses",
+      "name_ar": "الخيل",
+      "subtitle_en": "Equestrian health, stamina, and farrier supplies",
+      "subtitle_ar": "مستلزمات الخيل العربي وسباقات القدرة والفروسية",
+      "icon": "horse"
+    },
+    {
+      "id": "cow",
+      "slug": "cow",
+      "name_en": "Cows & Cattle",
+      "name_ar": "الأبقار والمواشي",
+      "subtitle_en": "Dairy productivity, veterinary care, and rumen health",
+      "subtitle_ar": "إنتاج الحليب والعناية وصحة المواشي والأبقار",
+      "icon": "cow"
+    }
+  ],
+  "types": [
+    {
+      "id": "medicine",
+      "slug": "medicine",
+      "name_en": "Veterinary Medicine",
+      "name_ar": "الأدوية البيطرية"
+    },
+    {
+      "id": "supplements",
+      "slug": "supplements",
+      "name_en": "Supplements & Vitamins",
+      "name_ar": "المكملات والفيتامينات"
+    },
+    {
+      "id": "feed",
+      "slug": "feed",
+      "name_en": "Feed & Nutrition",
+      "name_ar": "الأعلاف والتغذية"
+    },
+    {
+      "id": "equipment",
+      "slug": "equipment",
+      "name_en": "Equipment & Supplies",
+      "name_ar": "المعدات والمستلزمات"
+    }
+  ]
+}

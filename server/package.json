@@ -1,0 +1,16 @@
+{
+  "name": "al-namoos-veterinary-server",
+  "version": "1.0.0",
+  "description": "Backend API server for Al Namoos Veterinary Store & Pharmacy",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
