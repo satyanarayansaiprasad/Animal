@@ -4,6 +4,7 @@ import { Filter, SlidersHorizontal, Search, RotateCcw, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { ProductCard } from '../components/ProductCard';
 import { PetroglyphIcon } from '../components/PetroglyphIcon';
+import { apiFetch } from '../services/api';
 
 export const Shop = () => {
   const { language, isRtl, t } = useLanguage();
@@ -31,10 +32,9 @@ export const Shop = () => {
     if (inStockParam) query.append('in_stock', 'true');
     if (maxPriceParam) query.append('maxPrice', maxPriceParam);
 
-    fetch(`/api/products?${query.toString()}`)
-      .then((res) => res.json())
+    apiFetch(`/api/products?${query.toString()}`)
       .then((data) => {
-        if (data.success && data.data) {
+        if (data && data.success && data.data) {
           setProducts(data.data);
         }
         setLoading(false);

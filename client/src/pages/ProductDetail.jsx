@@ -6,6 +6,7 @@ import { useCurrency } from '../context/CurrencyContext';
 import { useCart } from '../context/CartContext';
 import { PetroglyphIcon } from '../components/PetroglyphIcon';
 import { ProductCard } from '../components/ProductCard';
+import { apiFetch } from '../services/api';
 
 export const ProductDetail = () => {
   const { id } = useParams();
@@ -22,17 +23,15 @@ export const ProductDetail = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/api/products/${id}`)
-      .then((res) => res.json())
+    apiFetch(`/api/products/${id}`)
       .then((data) => {
-        if (data.success && data.data) {
+        if (data && data.success && data.data) {
           setProduct(data.data);
 
           // Fetch related products of same category
-          fetch(`/api/products?category=${data.data.category}`)
-            .then((r) => r.json())
+          apiFetch(`/api/products?category=${data.data.category}`)
             .then((relData) => {
-              if (relData.success && relData.data) {
+              if (relData && relData.success && relData.data) {
                 setRelatedProducts(relData.data.filter((p) => p.id !== data.data.id).slice(0, 4));
               }
             });

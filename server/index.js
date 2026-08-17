@@ -27,17 +27,9 @@ app.get('/api/health', (req, res) => {
 // API Routes
 app.use('/api', apiRoutes);
 
-// Serve uploads or static images if needed
+// Serve static product images
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
-const server = app.listen(PORT, () => {
-  console.log(`🚀 Al Namoos Veterinary Express Backend running on port ${PORT}`);
-}).on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    const ALT_PORT = 5001;
-    app.listen(ALT_PORT, () => {
-      console.log(`🚀 Al Namoos Veterinary Express Backend running on fallback port ${ALT_PORT}`);
-    });
-  }
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Al Namoos Veterinary Express Backend running on http://0.0.0.0:${PORT}`);
 });
-

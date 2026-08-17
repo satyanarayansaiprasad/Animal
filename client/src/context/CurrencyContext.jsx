@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useLanguage } from './LanguageContext';
+import { apiFetch } from '../services/api';
 
 const CurrencyContext = createContext();
 
@@ -18,10 +19,9 @@ export const CurrencyProvider = ({ children }) => {
 
   // Fetch live exchange rate from backend settings if available
   useEffect(() => {
-    fetch('/api/settings')
-      .then((res) => res.json())
+    apiFetch('/api/settings')
       .then((res) => {
-        if (res.success && res.data && res.data.omr_to_aed) {
+        if (res && res.success && res.data && res.data.omr_to_aed) {
           setOmrToAedRate(res.data.omr_to_aed);
         }
       })

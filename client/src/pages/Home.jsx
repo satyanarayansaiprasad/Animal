@@ -5,6 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { PetroglyphIcon } from '../components/PetroglyphIcon';
 import { ProductCard } from '../components/ProductCard';
+import { apiFetch } from '../services/api';
 
 export const Home = () => {
   const { language, isRtl, t } = useLanguage();
@@ -14,10 +15,9 @@ export const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/products')
-      .then((res) => res.json())
+    apiFetch('/api/products')
       .then((data) => {
-        if (data.success && data.data) {
+        if (data && data.success && data.data) {
           setFeaturedProducts(data.data.filter((p) => p.is_featured).slice(0, 8));
           setBestSellers(data.data.filter((p) => p.is_best_seller).slice(0, 8));
         }
