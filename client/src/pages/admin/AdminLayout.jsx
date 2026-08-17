@@ -26,7 +26,11 @@ export const AdminLayout = () => {
       {/* Top Admin Bar */}
       <header className="bg-charcoal text-sand py-3 px-6 border-b border-charcoal-light flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <PetroglyphIcon species="camel" size="sm" />
+          <img
+            src="/images/logo.jpg"
+            alt="Al Namoos Logo"
+            className="w-9 h-9 rounded-full object-cover border border-gold"
+          />
           <span className="font-display font-extrabold text-white text-base">
             AL NAMOOS VET — ADMIN PORTAL
           </span>

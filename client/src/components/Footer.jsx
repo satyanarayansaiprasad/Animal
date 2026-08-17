@@ -58,7 +58,11 @@ export const Footer = () => {
           {/* Col 1: Brand Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <PetroglyphIcon species="camel" size="sm" />
+              <img
+                src="/images/logo.jpg"
+                alt="Al Namoos Vet Clinic Logo"
+                className="w-12 h-12 rounded-full object-cover border-2 border-gold/40 shadow-md"
+              />
               <span className="font-display font-black text-xl text-white">
                 {language === 'ar' ? 'صيدلية الناموس' : 'Al Namoos Vet'}
               </span>

@@ -109,7 +109,11 @@ export const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-3">
           {/* Logo & Brand Name */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-            <PetroglyphIcon species="camel" size="sm" />
+            <img
+              src="/images/logo.jpg"
+              alt="Al Namoos Vet Clinic Logo"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-clay/30 shadow-md group-hover:scale-105 transition-transform"
+            />
             <div className="flex flex-col text-start">
               <span className="font-display font-extrabold text-base sm:text-xl text-charcoal tracking-tight group-hover:text-clay transition-colors leading-tight">
                 {language === 'ar' ? 'صيدلية الناموس البيطرية' : 'Al Namoos Vet Pharmacy'}

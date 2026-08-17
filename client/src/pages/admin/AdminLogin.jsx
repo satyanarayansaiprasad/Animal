@@ -36,8 +36,12 @@ export const AdminLogin = ({ onLogin }) => {
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4 font-body">
       <div className="w-full max-w-md bg-surface border border-surface-bordered p-8 rounded-3xl shadow-2xl space-y-6">
-        <div className="text-center space-y-2">
-          <PetroglyphIcon species="camel" size="md" className="mx-auto" />
+        <div className="text-center space-y-3">
+          <img
+            src="/images/logo.jpg"
+            alt="Al Namoos Vet Clinic Logo"
+            className="w-20 h-20 rounded-full object-cover border-4 border-clay mx-auto shadow-lg"
+          />
           <h2 className="font-display font-black text-2xl text-charcoal">Admin Portal Login</h2>
           <p className="text-xs text-bodytext-muted">Al Namoos Veterinary Store Management System</p>
         </div>

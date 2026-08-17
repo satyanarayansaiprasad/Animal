@@ -757,28 +757,5 @@
     "dosage_en": "Follow licensed veterinarian instructions or packaging directions.",
     "dosage_ar": "اتبع تعليمات الطبيب البيطري المرخص أو نشرة الاستعمال المرفقة.",
     "image": "/images/products/item_33_cattle_teat_dipping_cup.jpg"
-  },
-  {
-    "id": "prod_34_cow_equipment",
-    "sku": "COW-EQP-02-133",
-    "name_en": "Veterinary Calving Jack & Obstetric Puller Set ",
-    "name_ar": "جهاز ومعدة البيطري المساعدة في ولادة الأبقار ",
-    "category": "cow",
-    "type": "equipment",
-    "price_omr": 85,
-    "price_aed": 810,
-    "sale_price_omr": 72.25,
-    "in_stock": true,
-    "stock_quantity": 101,
-    "is_featured": false,
-    "is_best_seller": true,
-    "is_placeholder": true,
-    "rating": 4.9,
-    "reviews_count": 111,
-    "desc_en": "High performance veterinary supply formula for cow care in desert climates.",
-    "desc_ar": "تركيبة ومعدّة بيطرية عالية الجودة للعناية بـ الأبقار والمواشي في بيئة عمان والخليج.",
-    "dosage_en": "Follow licensed veterinarian instructions or packaging directions.",
-    "dosage_ar": "اتبع تعليمات الطبيب البيطري المرخص أو نشرة الاستعمال المرفقة.",
-    "image": "/images/products/item_34_cattle_calving_jack_puller.jpg"
   }
 ]
