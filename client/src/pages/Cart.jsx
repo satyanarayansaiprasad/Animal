@@ -23,7 +23,7 @@ export const Cart = () => {
         </p>
         <Link
           to="/shop"
-          className="px-8 py-3.5 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-2xl text-sm inline-block shadow-lg transition-all"
+          className="px-8 py-3.5 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-2xl text-xs sm:text-sm inline-block shadow-lg transition-all touch-target"
         >
           {t('startShopping')}
         </Link>
@@ -32,15 +32,15 @@ export const Cart = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 font-body space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 font-body space-y-6 sm:space-y-8 text-start">
       <div className="border-b border-surface-bordered pb-4">
-        <h1 className="font-display font-black text-3xl sm:text-4xl text-charcoal">
+        <h1 className="font-display font-black text-2xl sm:text-4xl text-charcoal">
           {t('cart')} ({cartItems.length} items)
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Cart Items Table */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+        {/* Cart Items List */}
         <div className="lg:col-span-8 space-y-4">
           <div className="bg-surface border border-surface-bordered rounded-3xl p-4 sm:p-6 shadow-warm divide-y divide-surface-bordered">
             {cartItems.map(({ product, quantity }) => {
@@ -49,23 +49,23 @@ export const Cart = () => {
               const itemTotal = unitPrice * quantity;
 
               return (
-                <div key={product.id} className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div key={product.id} className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-4 w-full sm:w-auto">
                     <img
                       src={product.image || '/favicon.svg'}
                       alt={title}
-                      className="w-20 h-20 object-cover rounded-2xl border border-surface-bordered bg-sand shrink-0"
+                      className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-2xl border border-surface-bordered bg-sand shrink-0"
                     />
-                    <div className="space-y-1">
-                      <Link to={`/product/${product.id}`} className="font-display font-bold text-charcoal text-sm sm:text-base hover:text-clay">
+                    <div className="space-y-1 text-start">
+                      <Link to={`/product/${product.id}`} className="font-display font-bold text-charcoal text-xs sm:text-base hover:text-clay line-clamp-2">
                         {title}
                       </Link>
-                      <p className="text-xs text-teal font-semibold capitalize">{product.category} — {product.type}</p>
-                      <p className="text-xs text-bodytext-muted font-mono">SKU: {product.sku}</p>
+                      <p className="text-[11px] sm:text-xs text-teal font-semibold capitalize">{product.category} — {product.type}</p>
+                      <p className="text-[10px] sm:text-xs text-bodytext-muted font-mono">SKU: {product.sku}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto border-t sm:border-0 pt-3 sm:pt-0">
+                  <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-6 w-full sm:w-auto border-t sm:border-0 pt-3 sm:pt-0">
                     {/* Quantity Control */}
                     <div className="flex items-center border border-surface-bordered rounded-xl bg-white overflow-hidden">
                       <button
@@ -84,7 +84,7 @@ export const Cart = () => {
                     </div>
 
                     {/* Total Price */}
-                    <span className="font-mono-price font-bold text-clay text-base sm:text-lg">
+                    <span className="font-mono-price font-bold text-clay text-sm sm:text-lg">
                       {formatPrice(itemTotal)}
                     </span>
 
@@ -93,7 +93,7 @@ export const Cart = () => {
                       className="p-2 text-bodytext-muted hover:text-clay transition-colors"
                       title="Remove Item"
                     >
-                      <Trash2 className="w-5 h-5" />
+                      <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
                     </button>
                   </div>
                 </div>
@@ -118,7 +118,7 @@ export const Cart = () => {
         {/* Order Summary Sidebar */}
         <div className="lg:col-span-4 space-y-6">
           <div className="bg-surface border border-surface-bordered p-6 rounded-3xl shadow-warm space-y-6">
-            <h3 className="font-display font-bold text-charcoal text-lg border-b border-surface-bordered pb-4">
+            <h3 className="font-display font-bold text-charcoal text-base sm:text-lg border-b border-surface-bordered pb-4">
               Order Summary
             </h3>
 
@@ -129,17 +129,17 @@ export const Cart = () => {
               </div>
               <div className="flex justify-between text-bodytext-muted">
                 <span>{t('shipping')}</span>
-                <span className="text-teal font-semibold">Calculated at step 2</span>
+                <span className="text-teal font-semibold">Calculated at checkout</span>
               </div>
               <div className="pt-3 border-t border-surface-bordered flex justify-between font-display font-bold text-base text-charcoal">
                 <span>{t('total')}</span>
-                <span className="font-mono-price text-clay text-xl">{formatPrice(subtotalOMR)}</span>
+                <span className="font-mono-price text-clay text-lg sm:text-xl">{formatPrice(subtotalOMR)}</span>
               </div>
             </div>
 
             <button
               onClick={() => navigate('/checkout')}
-              className="w-full py-4 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-2xl text-sm transition-all shadow-lg flex items-center justify-center gap-2"
+              className="w-full py-4 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-2xl text-xs sm:text-sm transition-all shadow-lg flex items-center justify-center gap-2 touch-target"
             >
               <span>{t('proceedCheckout')}</span>
               {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
@@ -147,11 +147,11 @@ export const Cart = () => {
 
             <div className="space-y-2 pt-2 border-t border-surface-bordered text-[11px] text-bodytext-muted">
               <div className="flex items-center gap-2">
-                <Truck className="w-3.5 h-3.5 text-teal" />
+                <Truck className="w-3.5 h-3.5 text-teal shrink-0" />
                 <span>Express GCC Delivery across Oman, UAE, KSA, Qatar, Kuwait & Bahrain</span>
               </div>
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-gold" />
+                <ShieldCheck className="w-3.5 h-3.5 text-gold shrink-0" />
                 <span>Accepting Apple Pay & Direct Bank Transfer (ADIB & Bank Muscat)</span>
               </div>
             </div>

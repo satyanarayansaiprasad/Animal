@@ -43,16 +43,16 @@ export const ProductDetail = () => {
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-16 text-center space-y-4">
-        <div className="w-16 h-16 border-4 border-clay border-t-transparent rounded-full animate-spin mx-auto" />
-        <p className="font-display font-semibold text-charcoal text-sm">Loading Veterinary Product Specifications...</p>
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center space-y-4 font-body">
+        <div className="w-12 h-12 border-4 border-clay border-t-transparent rounded-full animate-spin mx-auto" />
+        <p className="font-display font-bold text-charcoal text-sm">Loading Veterinary Product Specifications...</p>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-16 text-center space-y-4">
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center space-y-4 font-body">
         <PetroglyphIcon species="camel" size="xl" className="mx-auto" />
         <h2 className="font-display font-bold text-charcoal text-2xl">Product Not Found</h2>
         <p className="text-xs text-bodytext-muted">The requested veterinary supply item could not be retrieved.</p>
@@ -79,9 +79,9 @@ export const ProductDetail = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 font-body space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 font-body space-y-8 sm:space-y-12 text-start">
       {/* Breadcrumb Navigation */}
-      <nav className="flex items-center gap-2 text-xs text-bodytext-muted">
+      <nav className="flex items-center gap-2 text-xs text-bodytext-muted flex-wrap">
         <Link to="/" className="hover:text-charcoal">{t('home')}</Link>
         <span>/</span>
         <Link to="/shop" className="hover:text-charcoal">{t('shop')}</Link>
@@ -90,19 +90,19 @@ export const ProductDetail = () => {
           {product.category}
         </Link>
         <span>/</span>
-        <span className="text-charcoal font-semibold truncate max-w-xs">{title}</span>
+        <span className="text-charcoal font-bold truncate max-w-xs">{title}</span>
       </nav>
 
       {/* Main Product Showcase Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-        {/* Left Column: Image Gallery & Petroglyph Badge */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-12">
+        {/* Left Column: Image Showcase & Petroglyph Badge */}
         <div className="lg:col-span-6 space-y-4">
           <div className="relative aspect-square bg-surface border border-surface-bordered rounded-3xl overflow-hidden shadow-warm flex items-center justify-center p-6">
             {/* Top Badges */}
             <div className="absolute top-4 left-4 right-4 z-10 flex justify-between items-center pointer-events-none">
               <PetroglyphIcon species={product.category} size="md" />
               {product.sale_price_omr && (
-                <span className="bg-gold text-charcoal font-display font-extrabold text-xs px-3 py-1 rounded-full shadow-md">
+                <span className="bg-gold text-charcoal font-display font-black text-xs px-3 py-1 rounded-full shadow-md">
                   SPECIAL OFFER
                 </span>
               )}
@@ -116,17 +116,17 @@ export const ProductDetail = () => {
           </div>
         </div>
 
-        {/* Right Column: Product Information & Purchase Actions */}
-        <div className="lg:col-span-6 space-y-6">
+        {/* Right Column: Product Specs & Purchase Actions */}
+        <div className="lg:col-span-6 space-y-5 sm:space-y-6">
           <div className="space-y-2">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <span className="px-3 py-1 rounded-full bg-teal-light text-teal font-bold text-xs capitalize">
                 {product.type}
               </span>
               <span className="text-xs font-mono text-bodytext-muted">SKU: {product.sku}</span>
             </div>
 
-            <h1 className="font-display font-black text-2xl sm:text-3xl text-charcoal leading-snug">
+            <h1 className="font-display font-black text-xl sm:text-3xl text-charcoal leading-snug">
               {title}
             </h1>
 
@@ -134,7 +134,7 @@ export const ProductDetail = () => {
             <div className="flex items-center gap-2 text-xs">
               <div className="flex text-gold">
                 {[1, 2, 3, 4, 5].map((s) => (
-                  <Star key={s} className="w-4 h-4 fill-gold text-gold" />
+                  <Star key={s} className="w-3.5 h-3.5 fill-gold text-gold" />
                 ))}
               </div>
               <span className="font-mono font-bold text-charcoal">{product.rating || 4.9}</span>
@@ -146,11 +146,11 @@ export const ProductDetail = () => {
           <div className="bg-surface border border-surface-bordered p-4 sm:p-5 rounded-2xl space-y-2">
             <div className="flex items-baseline gap-3">
               {product.sale_price_omr && (
-                <span className="text-sm text-bodytext-muted line-through font-mono-price">
+                <span className="text-xs sm:text-sm text-bodytext-muted line-through font-mono-price">
                   {formatPrice(product.price_omr)}
                 </span>
               )}
-              <span className="font-mono-price font-extrabold text-2xl sm:text-3xl text-clay">
+              <span className="font-mono-price font-black text-2xl sm:text-3xl text-clay">
                 {formatPrice(unitPrice)}
               </span>
             </div>
@@ -169,7 +169,7 @@ export const ProductDetail = () => {
           </div>
 
           {/* Short Description */}
-          <p className="text-bodytext text-sm leading-relaxed">{description}</p>
+          <p className="text-bodytext text-xs sm:text-sm leading-relaxed">{description}</p>
 
           {/* Quantity Selector & Action Buttons */}
           <div className="space-y-4 pt-2">
@@ -192,11 +192,11 @@ export const ProductDetail = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <button
                 onClick={handleAddToCart}
                 disabled={!product.in_stock}
-                className={`w-full py-4 rounded-2xl font-display font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-lg active:scale-98 ${
+                className={`w-full py-4 rounded-2xl font-display font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-lg active:scale-98 touch-target ${
                   added
                     ? 'bg-teal text-white'
                     : product.in_stock
@@ -221,7 +221,7 @@ export const ProductDetail = () => {
                 href={whatsappInquiryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-2xl font-display font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-lg active:scale-98"
+                className="w-full py-4 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-2xl font-display font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-lg active:scale-98 touch-target"
               >
                 <MessageCircle className="w-5 h-5 fill-white text-[#25D366]" />
                 <span>{t('inquireWhatsapp')}</span>
@@ -232,23 +232,23 @@ export const ProductDetail = () => {
           {/* Guarantee Badges */}
           <div className="grid grid-cols-2 gap-4 pt-4 border-t border-surface-bordered text-xs text-bodytext-muted">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-teal" />
+              <ShieldCheck className="w-4 h-4 text-teal shrink-0" />
               <span>Certified Pharmacy Standard</span>
             </div>
             <div className="flex items-center gap-2">
-              <Truck className="w-4 h-4 text-clay" />
+              <Truck className="w-4 h-4 text-clay shrink-0" />
               <span>Cold-Chain GCC Transport</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Tabbed Detailed Specifications & Veterinary Directions */}
-      <div className="bg-surface border border-surface-bordered rounded-3xl p-6 sm:p-8 space-y-6 shadow-warm">
-        <div className="flex border-b border-surface-bordered gap-6 text-sm font-display font-bold">
+      {/* Tabbed Detailed Specifications & Directions */}
+      <div className="bg-surface border border-surface-bordered rounded-3xl p-5 sm:p-8 space-y-6 shadow-warm">
+        <div className="flex border-b border-surface-bordered gap-6 text-xs sm:text-sm font-display font-bold overflow-x-auto">
           <button
             onClick={() => setActiveTab('dosage')}
-            className={`pb-3 transition-colors border-b-2 ${
+            className={`pb-3 transition-colors border-b-2 whitespace-nowrap ${
               activeTab === 'dosage' ? 'border-clay text-clay' : 'border-transparent text-bodytext-muted hover:text-charcoal'
             }`}
           >
@@ -256,7 +256,7 @@ export const ProductDetail = () => {
           </button>
           <button
             onClick={() => setActiveTab('warnings')}
-            className={`pb-3 transition-colors border-b-2 ${
+            className={`pb-3 transition-colors border-b-2 whitespace-nowrap ${
               activeTab === 'warnings' ? 'border-clay text-clay' : 'border-transparent text-bodytext-muted hover:text-charcoal'
             }`}
           >
@@ -264,7 +264,7 @@ export const ProductDetail = () => {
           </button>
         </div>
 
-        <div className="text-sm text-bodytext leading-relaxed">
+        <div className="text-xs sm:text-sm text-bodytext leading-relaxed">
           {activeTab === 'dosage' && (
             <div className="space-y-4">
               <div className="p-4 bg-sand rounded-2xl border border-surface-bordered flex items-start gap-3">
@@ -290,8 +290,8 @@ export const ProductDetail = () => {
       {/* Related Products Section */}
       {relatedProducts.length > 0 && (
         <div className="space-y-6">
-          <h2 className="font-display font-bold text-2xl text-charcoal">{t('relatedProducts')}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="font-display font-bold text-xl sm:text-2xl text-charcoal">{t('relatedProducts')}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {relatedProducts.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}

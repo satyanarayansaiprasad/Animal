@@ -57,11 +57,11 @@ export const Shop = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 font-body space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 font-body space-y-6 sm:space-y-8 text-start">
       {/* Header & Page Title */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surface-bordered pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surface-bordered pb-4 sm:pb-6">
         <div>
-          <h1 className="font-display font-black text-3xl sm:text-4xl text-charcoal">
+          <h1 className="font-display font-black text-2xl sm:text-4xl text-charcoal">
             {t('shop')}
           </h1>
           <p className="text-xs sm:text-sm text-bodytext-muted mt-1">
@@ -73,7 +73,7 @@ export const Shop = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMobileFilterOpen(true)}
-            className="md:hidden flex items-center gap-2 px-4 py-2.5 bg-surface border border-surface-bordered rounded-xl text-xs font-bold text-charcoal shadow-sm"
+            className="md:hidden flex items-center gap-2 px-4 py-2.5 bg-surface border border-surface-bordered rounded-xl text-xs font-bold text-charcoal shadow-sm touch-target"
           >
             <Filter className="w-4 h-4 text-clay" />
             <span>Filters</span>
@@ -135,7 +135,7 @@ export const Shop = () => {
       )}
 
       {/* Main Layout: Sidebar Filters + Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
         {/* DESKTOP SIDEBAR FILTERS */}
         <aside className="hidden md:block md:col-span-3 space-y-6">
           <div className="bg-surface border border-surface-bordered p-6 rounded-3xl shadow-warm space-y-6">
@@ -161,13 +161,13 @@ export const Shop = () => {
                   <button
                     key={item.id}
                     onClick={() => updateFilter('category', item.id)}
-                    className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-start transition-colors font-medium ${
+                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-start transition-colors font-semibold ${
                       categoryParam === item.id
-                        ? 'bg-clay text-white font-bold'
+                        ? 'bg-clay text-white'
                         : 'hover:bg-sand text-bodytext'
                     }`}
                   >
-                    <PetroglyphIcon species={item.icon || 'camel'} size="sm" badge={false} className="w-4 h-4" />
+                    <PetroglyphIcon species={item.icon || 'camel'} size="sm" badge={false} className="w-4 h-4 shrink-0" />
                     <span>{item.label}</span>
                   </button>
                 ))}
@@ -190,9 +190,9 @@ export const Shop = () => {
                   <button
                     key={item.id}
                     onClick={() => updateFilter('type', item.id)}
-                    className={`w-full text-start px-3 py-2 rounded-xl transition-colors font-medium ${
+                    className={`w-full text-start px-3 py-2.5 rounded-xl transition-colors font-semibold ${
                       typeParam === item.id
-                        ? 'bg-teal text-white font-bold'
+                        ? 'bg-teal text-white'
                         : 'hover:bg-sand text-bodytext'
                     }`}
                   >
@@ -221,13 +221,13 @@ export const Shop = () => {
         {/* PRODUCTS GRID AREA */}
         <main className="md:col-span-9 space-y-6">
           {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="h-80 bg-surface rounded-2xl animate-pulse border border-surface-bordered" />
               ))}
             </div>
           ) : products.length === 0 ? (
-            <div className="bg-surface border border-surface-bordered rounded-3xl p-12 text-center space-y-4">
+            <div className="bg-surface border border-surface-bordered rounded-3xl p-8 sm:p-12 text-center space-y-4">
               <PetroglyphIcon species="camel" size="xl" className="mx-auto" />
               <h3 className="font-display font-bold text-charcoal text-xl">No Products Found</h3>
               <p className="text-xs sm:text-sm text-bodytext-muted max-w-md mx-auto">
@@ -235,13 +235,13 @@ export const Shop = () => {
               </p>
               <button
                 onClick={clearAllFilters}
-                className="px-6 py-2.5 bg-clay hover:bg-clay-hover text-white font-bold rounded-xl text-xs transition-colors"
+                className="px-6 py-2.5 bg-clay hover:bg-clay-hover text-white font-bold rounded-xl text-xs transition-colors touch-target"
               >
                 Reset Catalog Filters
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -254,41 +254,52 @@ export const Shop = () => {
       {mobileFilterOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden font-body md:hidden">
           <div className="fixed inset-0 bg-charcoal/60 backdrop-blur-sm" onClick={() => setMobileFilterOpen(false)} />
-          <div className="fixed inset-y-0 right-0 max-w-xs w-full bg-surface p-6 shadow-2xl space-y-6 overflow-y-auto">
+          <div className={`fixed inset-y-0 ${isRtl ? 'left-0' : 'right-0'} max-w-xs w-full bg-surface p-6 shadow-2xl space-y-6 overflow-y-auto`}>
             <div className="flex items-center justify-between border-b border-surface-bordered pb-4">
-              <h3 className="font-display font-bold text-charcoal text-lg">Filter Products</h3>
+              <h3 className="font-display font-bold text-charcoal text-base">Filter Catalog</h3>
               <button onClick={() => setMobileFilterOpen(false)}><X className="w-6 h-6 text-charcoal" /></button>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 text-start">
               <h4 className="font-display font-bold text-xs uppercase tracking-wider text-charcoal">{t('categories')}</h4>
-              {['', 'camel', 'horse', 'cow'].map((cat) => (
+              {[
+                { id: '', label: 'All Species' },
+                { id: 'camel', label: t('camel') },
+                { id: 'horse', label: t('horse') },
+                { id: 'cow', label: t('cow') },
+              ].map((item) => (
                 <button
-                  key={cat}
-                  onClick={() => { updateFilter('category', cat); setMobileFilterOpen(false); }}
-                  className={`w-full text-start py-2 px-3 rounded-lg text-xs font-semibold ${categoryParam === cat ? 'bg-clay text-white' : 'bg-sand text-bodytext'}`}
+                  key={item.id}
+                  onClick={() => { updateFilter('category', item.id); setMobileFilterOpen(false); }}
+                  className={`w-full text-start py-2.5 px-3 rounded-xl text-xs font-semibold ${categoryParam === item.id ? 'bg-clay text-white' : 'bg-sand text-bodytext'}`}
                 >
-                  {cat ? cat.toUpperCase() : 'All Species'}
+                  {item.label}
                 </button>
               ))}
             </div>
 
-            <div className="space-y-4 border-t border-surface-bordered pt-4">
+            <div className="space-y-3 border-t border-surface-bordered pt-4 text-start">
               <h4 className="font-display font-bold text-xs uppercase tracking-wider text-charcoal">Product Type</h4>
-              {['', 'medicine', 'supplements', 'feed', 'equipment'].map((tType) => (
+              {[
+                { id: '', label: 'All Types' },
+                { id: 'medicine', label: t('medicine') },
+                { id: 'supplements', label: t('supplements') },
+                { id: 'feed', label: t('feed') },
+                { id: 'equipment', label: t('equipment') },
+              ].map((item) => (
                 <button
-                  key={tType}
-                  onClick={() => { updateFilter('type', tType); setMobileFilterOpen(false); }}
-                  className={`w-full text-start py-2 px-3 rounded-lg text-xs font-semibold ${typeParam === tType ? 'bg-teal text-white' : 'bg-sand text-bodytext'}`}
+                  key={item.id}
+                  onClick={() => { updateFilter('type', item.id); setMobileFilterOpen(false); }}
+                  className={`w-full text-start py-2.5 px-3 rounded-xl text-xs font-semibold ${typeParam === item.id ? 'bg-teal text-white' : 'bg-sand text-bodytext'}`}
                 >
-                  {tType ? tType.toUpperCase() : 'All Types'}
+                  {item.label}
                 </button>
               ))}
             </div>
 
             <button
               onClick={() => { clearAllFilters(); setMobileFilterOpen(false); }}
-              className="w-full py-3 bg-charcoal text-sand rounded-xl font-bold text-xs"
+              className="w-full py-3.5 bg-charcoal text-sand rounded-xl font-bold text-xs shadow-md"
             >
               Reset Filters
             </button>

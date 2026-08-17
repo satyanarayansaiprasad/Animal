@@ -8,12 +8,12 @@ export const Footer = () => {
   const { language, t } = useLanguage();
 
   return (
-    <footer className="bg-charcoal text-sand pt-12 pb-8 border-t-4 border-clay font-body">
+    <footer className="bg-charcoal text-sand pt-12 pb-8 border-t-4 border-clay font-body text-start">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Top Feature Badges Bar */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-10 mb-10 border-b border-charcoal-light">
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-charcoal-light text-gold rounded-full">
+            <div className="p-3 bg-charcoal-light text-gold rounded-2xl shrink-0">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
@@ -23,7 +23,7 @@ export const Footer = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-charcoal-light text-clay rounded-full">
+            <div className="p-3 bg-charcoal-light text-clay rounded-2xl shrink-0">
               <Truck className="w-6 h-6" />
             </div>
             <div>
@@ -33,7 +33,7 @@ export const Footer = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-charcoal-light text-teal rounded-full">
+            <div className="p-3 bg-charcoal-light text-teal rounded-2xl shrink-0">
               <Stethoscope className="w-6 h-6" />
             </div>
             <div>
@@ -43,7 +43,7 @@ export const Footer = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-charcoal-light text-gold rounded-full">
+            <div className="p-3 bg-charcoal-light text-gold rounded-2xl shrink-0">
               <CreditCard className="w-6 h-6" />
             </div>
             <div>
@@ -54,13 +54,13 @@ export const Footer = () => {
         </div>
 
         {/* Main Footer Links */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-charcoal-light">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-charcoal-light">
           {/* Col 1: Brand Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <PetroglyphIcon species="camel" size="sm" />
               <span className="font-display font-black text-xl text-white">
-                {language === 'ar' ? 'صيدلية الناموس' : 'AL NAMOOS VET'}
+                {language === 'ar' ? 'صيدلية الناموس' : 'Al Namoos Vet'}
               </span>
             </div>
             <p className="text-xs text-sand/80 leading-relaxed">
@@ -71,7 +71,7 @@ export const Footer = () => {
                 href="https://instagram.com/alnamoos.c"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-charcoal-light hover:bg-clay text-white rounded-full transition-colors flex items-center gap-2 text-xs"
+                className="p-2.5 bg-charcoal-light hover:bg-clay text-white rounded-xl transition-colors flex items-center gap-2 text-xs font-semibold"
               >
                 <Instagram className="w-4 h-4 text-gold" />
                 <span>@alnamoos.c</span>
@@ -81,7 +81,7 @@ export const Footer = () => {
 
           {/* Col 2: Quick Links */}
           <div className="space-y-3">
-            <h4 className="font-display font-bold text-gold text-base">{t('quickLinks')}</h4>
+            <h4 className="font-display font-bold text-gold text-sm uppercase tracking-wider">{t('quickLinks')}</h4>
             <ul className="space-y-2 text-xs text-sand/80">
               <li>
                 <Link to="/" className="hover:text-gold transition-colors">{t('home')}</Link>
@@ -105,14 +105,14 @@ export const Footer = () => {
                 <Link to="/terms-privacy" className="hover:text-gold transition-colors">{t('termsPrivacy')}</Link>
               </li>
               <li>
-                <Link to="/admin" className="hover:text-gold transition-colors font-semibold">{t('adminPanel')}</Link>
+                <Link to="/admin" className="hover:text-gold transition-colors font-bold">{t('adminPanel')}</Link>
               </li>
             </ul>
           </div>
 
           {/* Col 3: Species Categories */}
           <div className="space-y-3">
-            <h4 className="font-display font-bold text-gold text-base">{t('categories')}</h4>
+            <h4 className="font-display font-bold text-gold text-sm uppercase tracking-wider">{t('categories')}</h4>
             <ul className="space-y-2.5 text-xs text-sand/80">
               <li>
                 <Link to="/shop?category=camel" className="flex items-center gap-2 hover:text-gold transition-colors">
@@ -149,11 +149,11 @@ export const Footer = () => {
 
           {/* Col 4: Contact & Locations */}
           <div className="space-y-3">
-            <h4 className="font-display font-bold text-gold text-base">{t('contactInfo')}</h4>
+            <h4 className="font-display font-bold text-gold text-sm uppercase tracking-wider">{t('contactInfo')}</h4>
             <div className="space-y-2 text-xs text-sand/80">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-clay shrink-0 mt-0.5" />
-                <span>Al Seeb Industrial, Muscat & Sohar Livestock Market, Oman</span>
+                <span>Muscat Central & Sohar Livestock Hub, Oman</span>
               </div>
               <div className="flex items-center gap-2 dir-ltr">
                 <Phone className="w-4 h-4 text-teal shrink-0" />
@@ -177,12 +177,12 @@ export const Footer = () => {
 
         {/* Bottom Bar: Copyright & Payment Badges */}
         <div className="pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-sand/60">
-          <p>{t('rightsReserved')}</p>
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] text-sand/50">Accepted Payments:</span>
-            <span className="px-2 py-0.5 bg-charcoal-light rounded text-white font-mono font-bold text-[10px]">Apple Pay</span>
-            <span className="px-2 py-0.5 bg-charcoal-light rounded text-gold font-mono font-bold text-[10px]">Bank Muscat</span>
-            <span className="px-2 py-0.5 bg-charcoal-light rounded text-teal-light text-charcoal font-mono font-bold text-[10px]">ADIB</span>
+          <p className="text-center sm:text-start">{t('rightsReserved')}</p>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <span className="text-[11px] text-sand/50 me-1">Accepted Payments:</span>
+            <span className="px-2.5 py-1 bg-charcoal-light rounded-lg text-white font-mono font-bold text-[10px]">Apple Pay</span>
+            <span className="px-2.5 py-1 bg-charcoal-light rounded-lg text-gold font-mono font-bold text-[10px]">Bank Muscat</span>
+            <span className="px-2.5 py-1 bg-charcoal-light rounded-lg text-teal-light text-charcoal font-mono font-bold text-[10px]">ADIB</span>
           </div>
         </div>
       </div>

@@ -29,87 +29,86 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className="space-y-16 pb-16 font-body">
+    <div className="space-y-12 sm:space-y-16 pb-16 font-body text-start">
       {/* 1. HERO BANNER SECTION */}
-      <section className="relative bg-charcoal text-sand overflow-hidden rounded-3xl mx-4 sm:mx-6 lg:mx-8 mt-4 border border-charcoal-light shadow-2xl">
-        {/* Subtle desert motif pattern backdrop */}
+      <section className="relative bg-charcoal text-sand overflow-hidden rounded-2xl sm:rounded-3xl mx-3 sm:mx-6 lg:mx-8 mt-3 sm:mt-4 border border-charcoal-light shadow-2xl">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#B85C2E_1px,transparent_1px)] [background-size:16px_16px]" />
 
-        <div className="relative max-w-7xl mx-auto px-6 py-12 sm:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-charcoal-light border border-gold/30 text-gold text-xs font-semibold">
-              <Sparkles className="w-4 h-4 text-gold" />
+        <div className="relative max-w-7xl mx-auto px-5 py-10 sm:py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-light border border-gold/30 text-gold text-[11px] sm:text-xs font-bold">
+              <Sparkles className="w-3.5 h-3.5 text-gold shrink-0" />
               <span>{t('trustedSpecialist')}</span>
             </div>
 
-            <h1 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
+            <h1 className="font-display font-black text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight">
               {t('heroTitle')}
             </h1>
 
-            <p className="text-sand/80 text-sm sm:text-lg leading-relaxed max-w-2xl font-normal">
+            <p className="text-sand/80 text-xs sm:text-base leading-relaxed max-w-2xl font-normal">
               {t('heroSubtitle')}
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <Link
                 to="/shop"
-                className="px-8 py-4 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-2xl shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-sm sm:text-base flex items-center gap-2"
+                className="px-6 py-3.5 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-2xl shadow-lg transition-all text-xs sm:text-sm flex items-center justify-center gap-2 touch-target"
               >
                 <span>{t('exploreStore')}</span>
-                {isRtl ? <ArrowLeft className="w-5 h-5" /> : <ArrowRight className="w-5 h-5" />}
+                {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
               </Link>
 
               <Link
                 to="/consultation"
-                className="px-6 py-4 bg-charcoal-light hover:bg-teal text-white border border-sand/20 font-display font-semibold rounded-2xl transition-all text-sm sm:text-base flex items-center gap-2"
+                className="px-6 py-3.5 bg-charcoal-light hover:bg-teal text-white border border-sand/20 font-display font-bold rounded-2xl transition-all text-xs sm:text-sm flex items-center justify-center gap-2 touch-target"
               >
-                <Stethoscope className="w-5 h-5 text-gold" />
+                <Stethoscope className="w-4 h-4 text-gold" />
                 <span>{t('askDoctor')}</span>
               </Link>
             </div>
 
-            {/* Quick Stats */}
-            <div className="pt-8 border-t border-charcoal-light grid grid-cols-3 gap-4 text-center sm:text-start">
+            {/* Quick Stats Bar */}
+            <div className="pt-6 sm:pt-8 border-t border-charcoal-light grid grid-cols-3 gap-2 sm:gap-4 text-center sm:text-start">
               <div>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-gold">100%</span>
-                <p className="text-xs text-sand/70">Certified Medicines</p>
+                <span className="font-mono text-lg sm:text-2xl font-bold text-gold block">100%</span>
+                <p className="text-[10px] sm:text-xs text-sand/70">Certified Formulas</p>
               </div>
               <div>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-gold">24/7</span>
-                <p className="text-xs text-sand/70">Veterinary Support</p>
+                <span className="font-mono text-lg sm:text-2xl font-bold text-gold block">24/7</span>
+                <p className="text-[10px] sm:text-xs text-sand/70">Vet Consultation</p>
               </div>
               <div>
-                <span className="font-mono text-xl sm:text-2xl font-bold text-gold">GCC</span>
-                <p className="text-xs text-sand/70">Cold-Chain Express</p>
+                <span className="font-mono text-lg sm:text-2xl font-bold text-gold block">GCC</span>
+                <p className="text-[10px] sm:text-xs text-sand/70">Express Delivery</p>
               </div>
             </div>
           </div>
 
-          {/* Hero Visual: Petroglyph Showcase Cards */}
+          {/* Hero Visual Badge Card */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-md bg-surface/10 backdrop-blur-md border border-white/10 p-8 rounded-3xl space-y-6 shadow-2xl">
-              <div className="text-center space-y-2">
-                <span className="text-xs font-bold text-gold uppercase tracking-wider">Species Specialty</span>
-                <h3 className="font-display font-bold text-white text-xl">Omani Desert Livestock</h3>
+            <div className="relative w-full max-w-md bg-surface/10 backdrop-blur-md border border-white/10 p-6 sm:p-8 rounded-3xl space-y-6 shadow-2xl">
+              <div className="text-center space-y-1">
+                <span className="text-[10px] font-extrabold text-gold uppercase tracking-widest block">Species Specialty</span>
+                <h3 className="font-display font-bold text-white text-lg sm:text-xl">Omani Desert Livestock</h3>
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
-                <Link to="/shop?category=camel" className="flex flex-col items-center gap-2 group">
+              <div className="grid grid-cols-3 gap-3">
+                <Link to="/shop?category=camel" className="flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors">
                   <PetroglyphIcon species="camel" size="md" />
                   <span className="text-xs font-bold text-white group-hover:text-gold transition-colors">{t('camel')}</span>
                 </Link>
-                <Link to="/shop?category=horse" className="flex flex-col items-center gap-2 group">
+                <Link to="/shop?category=horse" className="flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors">
                   <PetroglyphIcon species="horse" size="md" />
                   <span className="text-xs font-bold text-white group-hover:text-gold transition-colors">{t('horse')}</span>
                 </Link>
-                <Link to="/shop?category=cow" className="flex flex-col items-center gap-2 group">
+                <Link to="/shop?category=cow" className="flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors">
                   <PetroglyphIcon species="cow" size="md" />
                   <span className="text-xs font-bold text-white group-hover:text-gold transition-colors">{t('cow')}</span>
                 </Link>
               </div>
 
-              <div className="bg-charcoal/80 p-4 rounded-2xl border border-gold/20 text-xs text-sand/90 flex items-center gap-3">
-                <Award className="w-8 h-8 text-gold shrink-0" />
+              <div className="bg-charcoal/80 p-3.5 rounded-2xl border border-gold/20 text-xs text-sand/90 flex items-center gap-3">
+                <Award className="w-6 h-6 text-gold shrink-0" />
                 <span>Formulated for Arabian Peninsula climate and racing season endurance.</span>
               </div>
             </div>
@@ -119,8 +118,8 @@ export const Home = () => {
 
       {/* 2. SPECIES CATEGORY PETROGLYPH TILES SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center space-y-3 mb-10">
-          <span className="text-xs font-extrabold text-clay uppercase tracking-widest">Target Livestock</span>
+        <div className="text-center space-y-2 mb-8 sm:mb-10">
+          <span className="text-[11px] font-extrabold text-clay uppercase tracking-widest block">Target Livestock</span>
           <h2 className="font-display font-black text-2xl sm:text-4xl text-charcoal">
             {language === 'ar' ? 'اختر نوع الحلال والحيوان' : 'Select Animal Species'}
           </h2>
@@ -129,15 +128,15 @@ export const Home = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
           {/* Camel Tile */}
           <Link
             to="/shop?category=camel"
-            className="group relative bg-surface border border-surface-bordered p-8 rounded-3xl shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col items-center text-center space-y-4 hover:-translate-y-1"
+            className="group relative bg-surface border border-surface-bordered p-6 sm:p-8 rounded-3xl shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col items-center text-center space-y-4 hover:-translate-y-1"
           >
             <PetroglyphIcon species="camel" size="lg" />
             <div className="space-y-1">
-              <h3 className="font-display font-extrabold text-xl text-charcoal group-hover:text-clay transition-colors">
+              <h3 className="font-display font-extrabold text-lg sm:text-xl text-charcoal group-hover:text-clay transition-colors">
                 {t('camel')}
               </h3>
               <p className="text-xs text-bodytext-muted">
@@ -153,11 +152,11 @@ export const Home = () => {
           {/* Horse Tile */}
           <Link
             to="/shop?category=horse"
-            className="group relative bg-surface border border-surface-bordered p-8 rounded-3xl shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col items-center text-center space-y-4 hover:-translate-y-1"
+            className="group relative bg-surface border border-surface-bordered p-6 sm:p-8 rounded-3xl shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col items-center text-center space-y-4 hover:-translate-y-1"
           >
             <PetroglyphIcon species="horse" size="lg" />
             <div className="space-y-1">
-              <h3 className="font-display font-extrabold text-xl text-charcoal group-hover:text-clay transition-colors">
+              <h3 className="font-display font-extrabold text-lg sm:text-xl text-charcoal group-hover:text-clay transition-colors">
                 {t('horse')}
               </h3>
               <p className="text-xs text-bodytext-muted">
@@ -173,11 +172,11 @@ export const Home = () => {
           {/* Cow Tile */}
           <Link
             to="/shop?category=cow"
-            className="group relative bg-surface border border-surface-bordered p-8 rounded-3xl shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col items-center text-center space-y-4 hover:-translate-y-1"
+            className="group relative bg-surface border border-surface-bordered p-6 sm:p-8 rounded-3xl shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col items-center text-center space-y-4 hover:-translate-y-1"
           >
             <PetroglyphIcon species="cow" size="lg" />
             <div className="space-y-1">
-              <h3 className="font-display font-extrabold text-xl text-charcoal group-hover:text-clay transition-colors">
+              <h3 className="font-display font-extrabold text-lg sm:text-xl text-charcoal group-hover:text-clay transition-colors">
                 {t('cow')}
               </h3>
               <p className="text-xs text-bodytext-muted">
@@ -194,9 +193,9 @@ export const Home = () => {
 
       {/* 3. FEATURED VETERINARY PRODUCTS GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div>
-            <span className="text-xs font-extrabold text-teal uppercase tracking-widest">Pharmacy Highlights</span>
+            <span className="text-[11px] font-extrabold text-teal uppercase tracking-widest block">Pharmacy Highlights</span>
             <h2 className="font-display font-black text-2xl sm:text-3xl text-charcoal">
               {language === 'ar' ? 'أبرز الأدوية والمكملات المعتمدة' : 'Featured Certified Medicines'}
             </h2>
@@ -211,13 +210,13 @@ export const Home = () => {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="h-80 bg-surface rounded-2xl animate-pulse border border-surface-bordered" />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -226,7 +225,7 @@ export const Home = () => {
       </section>
 
       {/* 4. ASK A DOCTOR VETERINARY CONSULTATION SECTION */}
-      <section className="bg-sand-dark py-14 border-y border-surface-bordered">
+      <section className="bg-sand-dark py-12 sm:py-14 border-y border-surface-bordered">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-teal/10 text-teal font-bold text-xs rounded-full">
@@ -236,16 +235,16 @@ export const Home = () => {
             <h2 className="font-display font-black text-2xl sm:text-4xl text-charcoal">
               {t('askDoctorTitle')}
             </h2>
-            <p className="text-bodytext text-sm sm:text-base leading-relaxed">
+            <p className="text-bodytext text-xs sm:text-base leading-relaxed">
               {t('askDoctorSubtitle')}
             </p>
 
-            <div className="flex flex-wrap gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <a
                 href="https://wa.me/96894694666"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-xl text-sm transition-all flex items-center gap-2 shadow-md"
+                className="px-6 py-3.5 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-2xl text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md touch-target"
               >
                 <PhoneCall className="w-4 h-4" />
                 <span>Dr. Ahmed (+968 9469 4666)</span>
@@ -255,7 +254,7 @@ export const Home = () => {
                 href="https://wa.me/96879644471"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 bg-teal hover:bg-teal-hover text-white font-display font-bold rounded-xl text-sm transition-all flex items-center gap-2 shadow-md"
+                className="px-6 py-3.5 bg-teal hover:bg-teal-hover text-white font-display font-bold rounded-2xl text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md touch-target"
               >
                 <PhoneCall className="w-4 h-4" />
                 <span>Dr. Sarah (+968 7964 4471)</span>
@@ -263,19 +262,19 @@ export const Home = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-4 bg-surface p-6 rounded-2xl border border-surface-bordered shadow-warm space-y-3">
-            <h4 className="font-display font-bold text-charcoal text-base">Quick Consultation Topics</h4>
+          <div className="lg:col-span-4 bg-surface p-6 rounded-3xl border border-surface-bordered shadow-warm space-y-3">
+            <h4 className="font-display font-bold text-charcoal text-sm sm:text-base">Quick Consultation Topics</h4>
             <ul className="space-y-2 text-xs text-bodytext-muted">
               <li className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-clay" />
+                <span className="w-2 h-2 rounded-full bg-clay shrink-0" />
                 <span>Pre-race camel injection schedules & ATP protocols</span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-teal" />
+                <span className="w-2 h-2 rounded-full bg-teal shrink-0" />
                 <span>Equine joint stiffness & ulcer paste treatment</span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-gold" />
+                <span className="w-2 h-2 rounded-full bg-gold shrink-0" />
                 <span>Dairy cattle bloat emergency & milk fever prevention</span>
               </li>
             </ul>
@@ -285,14 +284,14 @@ export const Home = () => {
 
       {/* 5. BEST SELLERS GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="mb-8">
-          <span className="text-xs font-extrabold text-gold uppercase tracking-widest">Most Requested</span>
+        <div className="mb-6 sm:mb-8">
+          <span className="text-[11px] font-extrabold text-gold uppercase tracking-widest block">Most Requested</span>
           <h2 className="font-display font-black text-2xl sm:text-3xl text-charcoal">
             {language === 'ar' ? 'الأكثر طلبًا في المزارع والعزب' : 'Best-Selling Farm Supplies'}
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {bestSellers.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

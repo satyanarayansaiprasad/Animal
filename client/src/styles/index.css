@@ -19,9 +19,10 @@
     background-color: var(--color-sand);
     color: var(--color-bodytext);
     font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', sans-serif;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* Arabic Line-Height Breathing Room */
+  /* Arabic vs English Line Height & Breathing Room */
   html[dir="rtl"] {
     line-height: 1.65;
   }
@@ -33,31 +34,39 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cairo', sans-serif;
     font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  html[dir="ltr"] h1, html[dir="ltr"] h2, html[dir="ltr"] h3 {
+    letter-spacing: -0.02em;
   }
 
   .font-mono-price {
     font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
   }
 
-  /* Accessible outline focus states */
+  /* Accessible focus states */
   a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
     outline: 2px solid #B85C2E;
     outline-offset: 2px;
   }
 }
 
-/* RTL Icon Mirroring Utility */
-.rtl-flip {
-  transform: scaleX(1);
-}
-html[dir="rtl"] .rtl-flip {
-  transform: scaleX(-1);
+@layer utilities {
+  /* Directional Text Alignment Helpers */
+  .text-start-dir {
+    text-align: start;
+  }
+  .text-end-dir {
+    text-align: end;
+  }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #F6F1E7;
@@ -82,11 +91,21 @@ html[dir="rtl"] .rtl-flip {
   box-shadow: 0 6px 16px rgba(184, 92, 46, 0.15);
 }
 
-/* Animations */
+/* Touch Friendly Targets on Mobile */
+@media (max-width: 640px) {
+  button, input, select, a {
+    min-height: 40px;
+  }
+  .touch-target {
+    min-height: 44px;
+  }
+}
+
+/* Keyframe Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in {
-  animation: fadeIn 0.35s ease-out forwards;
+  animation: fadeIn 0.3s ease-out forwards;
 }
