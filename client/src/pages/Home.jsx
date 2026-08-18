@@ -1,12 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Truck, Stethoscope, ArrowRight, ArrowLeft, Award, Sparkles, PhoneCall } from 'lucide-react';
+import { ShieldCheck, Truck, Stethoscope, ArrowRight, ArrowLeft, Award, Sparkles, PhoneCall, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { PetroglyphIcon } from '../components/PetroglyphIcon';
-import { ProductCard } from '../components/ProductCard';
 import { ProductSlider } from '../components/ProductSlider';
 import { apiFetch } from '../services/api';
+
+const heroSlides = [
+  {
+    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1920&q=80',
+    title_en: "Oman's Trusted Desert Veterinary Specialist",
+    title_ar: "الخبير البيطري الموثوق لإبل وهجن وجياد الخليج",
+    subtitle_en: "Certified medicines, performance supplements, specialized feed, and equipment for camels, horses, and livestock.",
+    subtitle_ar: "أدوية بيطرية معتمدة، مكملات الأداء، أعلاف تخصصية ومعدات عالية الجودة للإبل والخيل والمواشي.",
+    badge_en: "Licensed Oman & GCC Veterinary Pharmacy",
+    badge_ar: "صيدلية بيطرية مرخصة بعمان ودول الخليج",
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1920&q=80',
+    title_en: "Arabian Horse & Equestrian Health Solutions",
+    title_ar: "رعاية شاملة للخيل العربية وسباقات القدرة والفروسية",
+    subtitle_en: "Joint support formulas, biotin hoof powders, anti-ulcer pastes, and endurance feeds for stallions.",
+    subtitle_ar: "تركيبات مفاصل صيدلانية، بودرة البيوتين للحوافر، وأعلاف طاقة مخصصة لجياد القدرة والفروسية.",
+    badge_en: "Certified Equine Veterinary Formulas",
+    badge_ar: "تركيبات مخصصة لخيول الجمال وسباقات القدرة",
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1920&q=80',
+    title_en: "Cattle Productivity & Rumen Digestive Care",
+    title_ar: "حلول تخصصية للأبقار والمواشي وزيادة إدرار الحليب",
+    subtitle_en: "Broad spectrum antibiotics, bloat tonics, calcium gels, and milk yield concentrates for farms.",
+    subtitle_ar: "مضادات حيوية واسعة المجال، منشطات الكرش، وجيل الكالسيوم مع مركزات زيادة إدرار الحليب.",
+    badge_en: "High Yield Livestock & Dairy Care",
+    badge_ar: "حلول متكاملة لمزارع الأبقار والماشية بالخليج",
+  },
+];
 
 export const Home = () => {
   const { language, isRtl, t } = useLanguage();
@@ -14,6 +43,7 @@ export const Home = () => {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
     apiFetch('/api/products')
@@ -28,6 +58,27 @@ export const Home = () => {
       });
   }, []);
 
+  // Hero Background Slideshow Timer (Switch slide every 5 seconds)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const nextSlide = () => {
+    setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const prevSlide = () => {
+    setActiveSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
+  const currentSlideData = heroSlides[activeSlide];
+  const heroTitle = language === 'ar' ? currentSlideData.title_ar : currentSlideData.title_en;
+  const heroSubtitle = language === 'ar' ? currentSlideData.subtitle_ar : currentSlideData.subtitle_en;
+  const heroBadge = language === 'ar' ? currentSlideData.badge_ar : currentSlideData.badge_en;
+
   const topProducts = products.filter((p) => p.is_featured);
   const camelProducts = products.filter((p) => p.category === 'camel');
   const horseProducts = products.filter((p) => p.category === 'horse');
@@ -35,29 +86,48 @@ export const Home = () => {
 
   return (
     <div className="space-y-12 sm:space-y-16 pb-16 font-body text-start">
-      {/* 1. HERO BANNER SECTION */}
-      <section className="relative bg-charcoal text-sand overflow-hidden rounded-2xl sm:rounded-3xl mx-3 sm:mx-6 lg:mx-8 mt-3 sm:mt-4 border border-charcoal-light shadow-2xl">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#B85C2E_1px,transparent_1px)] [background-size:16px_16px]" />
+      {/* 1. HERO BANNER WITH SLIDING BACKGROUND IMAGES */}
+      <section className="relative bg-charcoal text-sand overflow-hidden rounded-2xl sm:rounded-3xl mx-3 sm:mx-6 lg:mx-8 mt-3 sm:mt-4 border border-charcoal-light shadow-2xl min-h-[500px] sm:min-h-[560px] flex items-center">
+        {/* Background Image Slideshow with Smooth Cross-Fade */}
+        {heroSlides.map((slide, idx) => (
+          <div
+            key={idx}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              idx === activeSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'
+            }`}
+          >
+            <img
+              src={slide.image}
+              alt="Hero Desert Background"
+              className="w-full h-full object-cover object-center transform transition-transform duration-10000 ease-out"
+            />
+          </div>
+        ))}
 
-        <div className="relative max-w-7xl mx-auto px-5 py-10 sm:py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        {/* High-Contrast Gradient Backdrop Layer */}
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/95 via-charcoal/85 to-charcoal/60 z-0" />
+        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#B85C2E_1px,transparent_1px)] [background-size:16px_16px] z-0" />
+
+        {/* Hero Main Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-5 py-12 sm:py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
           <div className="lg:col-span-7 space-y-5 sm:space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-light border border-gold/30 text-gold text-[11px] sm:text-xs font-bold">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-charcoal-light/90 border border-gold/40 text-gold text-[11px] sm:text-xs font-bold shadow-md">
               <Sparkles className="w-3.5 h-3.5 text-gold shrink-0" />
-              <span>{t('trustedSpecialist')}</span>
+              <span>{heroBadge}</span>
             </div>
 
-            <h1 className="font-display font-black text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight">
-              {t('heroTitle')}
+            <h1 className="font-display font-black text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight min-h-[3.5rem] sm:min-h-[4.5rem]">
+              {heroTitle}
             </h1>
 
-            <p className="text-sand/80 text-xs sm:text-base leading-relaxed max-w-2xl font-normal">
-              {t('heroSubtitle')}
+            <p className="text-sand/90 text-xs sm:text-base leading-relaxed max-w-2xl font-normal min-h-[3rem]">
+              {heroSubtitle}
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <Link
                 to="/shop"
-                className="px-6 py-3.5 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-2xl shadow-lg transition-all text-xs sm:text-sm flex items-center justify-center gap-2 touch-target"
+                className="px-7 py-3.5 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-2xl shadow-xl transition-all text-xs sm:text-sm flex items-center justify-center gap-2 touch-target"
               >
                 <span>{t('exploreStore')}</span>
                 {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
@@ -65,7 +135,7 @@ export const Home = () => {
 
               <Link
                 to="/consultation"
-                className="px-6 py-4 bg-charcoal-light hover:bg-teal text-white border border-sand/20 font-display font-bold rounded-2xl transition-all text-xs sm:text-sm flex items-center justify-center gap-2 touch-target"
+                className="px-6 py-3.5 bg-charcoal-light/90 hover:bg-teal text-white border border-sand/30 font-display font-bold rounded-2xl transition-all text-xs sm:text-sm flex items-center justify-center gap-2 touch-target shadow-md backdrop-blur-sm"
               >
                 <Stethoscope className="w-4 h-4 text-gold" />
                 <span>{t('askDoctor')}</span>
@@ -73,50 +143,83 @@ export const Home = () => {
             </div>
 
             {/* Quick Stats Bar */}
-            <div className="pt-6 sm:pt-8 border-t border-charcoal-light grid grid-cols-3 gap-2 sm:gap-4 text-center sm:text-start">
+            <div className="pt-6 sm:pt-8 border-t border-sand/20 grid grid-cols-3 gap-2 sm:gap-4 text-center sm:text-start">
               <div>
                 <span className="font-mono text-lg sm:text-2xl font-bold text-gold block">100%</span>
-                <p className="text-[10px] sm:text-xs text-sand/70">Certified Formulas</p>
+                <p className="text-[10px] sm:text-xs text-sand/80 font-medium">Certified Formulas</p>
               </div>
               <div>
                 <span className="font-mono text-lg sm:text-2xl font-bold text-gold block">24/7</span>
-                <p className="text-[10px] sm:text-xs text-sand/70">Vet Consultation</p>
+                <p className="text-[10px] sm:text-xs text-sand/80 font-medium">Vet Consultation</p>
               </div>
               <div>
                 <span className="font-mono text-lg sm:text-2xl font-bold text-gold block">GCC</span>
-                <p className="text-[10px] sm:text-xs text-sand/70">Express Delivery</p>
+                <p className="text-[10px] sm:text-xs text-sand/80 font-medium">Express Delivery</p>
               </div>
             </div>
           </div>
 
-          {/* Hero Visual Badge Card */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-md bg-surface/10 backdrop-blur-md border border-white/10 p-6 sm:p-8 rounded-3xl space-y-6 shadow-2xl">
+          {/* Hero Visual Species Badge Card */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center space-y-4">
+            <div className="relative w-full max-w-md bg-charcoal/80 backdrop-blur-md border border-white/20 p-6 sm:p-8 rounded-3xl space-y-6 shadow-2xl">
               <div className="text-center space-y-1">
                 <span className="text-[10px] font-extrabold text-gold uppercase tracking-widest block">Species Specialty</span>
                 <h3 className="font-display font-bold text-white text-lg sm:text-xl">Omani Desert Livestock</h3>
               </div>
 
               <div className="grid grid-cols-3 gap-3">
-                <Link to="/shop?category=camel" className="flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors">
+                <Link to="/shop?category=camel" className="flex flex-col items-center gap-2 group p-2.5 rounded-2xl hover:bg-white/10 transition-colors">
                   <PetroglyphIcon species="camel" size="md" />
                   <span className="text-xs font-bold text-white group-hover:text-gold transition-colors">{t('camel')}</span>
                 </Link>
-                <Link to="/shop?category=horse" className="flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors">
+                <Link to="/shop?category=horse" className="flex flex-col items-center gap-2 group p-2.5 rounded-2xl hover:bg-white/10 transition-colors">
                   <PetroglyphIcon species="horse" size="md" />
                   <span className="text-xs font-bold text-white group-hover:text-gold transition-colors">{t('horse')}</span>
                 </Link>
-                <Link to="/shop?category=cow" className="flex flex-col items-center gap-2 group p-2 rounded-xl hover:bg-white/5 transition-colors">
+                <Link to="/shop?category=cow" className="flex flex-col items-center gap-2 group p-2.5 rounded-2xl hover:bg-white/10 transition-colors">
                   <PetroglyphIcon species="cow" size="md" />
                   <span className="text-xs font-bold text-white group-hover:text-gold transition-colors">{t('cow')}</span>
                 </Link>
               </div>
 
-              <div className="bg-charcoal/80 p-3.5 rounded-2xl border border-gold/20 text-xs text-sand/90 flex items-center gap-3">
+              <div className="bg-charcoal/90 p-3.5 rounded-2xl border border-gold/30 text-xs text-sand flex items-center gap-3">
                 <Award className="w-6 h-6 text-gold shrink-0" />
                 <span>Formulated for Arabian Peninsula climate and racing season endurance.</span>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Hero Slideshow Navigation Controls & Dots */}
+        <div className="absolute bottom-4 left-6 right-6 z-20 flex items-center justify-between pointer-events-none">
+          <div className="flex items-center gap-2 pointer-events-auto">
+            {heroSlides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveSlide(i)}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  i === activeSlide ? 'w-8 bg-gold' : 'w-2.5 bg-white/40 hover:bg-white/70'
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 pointer-events-auto">
+            <button
+              onClick={prevSlide}
+              className="p-2 rounded-full bg-charcoal/70 border border-white/20 text-white hover:bg-clay transition-colors shadow-md active:scale-95"
+              aria-label="Previous Hero Slide"
+            >
+              {isRtl ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={nextSlide}
+              className="p-2 rounded-full bg-charcoal/70 border border-white/20 text-white hover:bg-clay transition-colors shadow-md active:scale-95"
+              aria-label="Next Hero Slide"
+            >
+              {isRtl ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+            </button>
           </div>
         </div>
       </section>
