@@ -60,12 +60,17 @@ export const Footer = () => {
             <div className="flex items-center gap-3">
               <img
                 src="/images/logo.jpg"
-                alt="Al Namoos Vet Clinic Logo"
-                className="w-12 h-12 rounded-full object-cover border-2 border-gold/40 shadow-md"
+                alt="AL-NAMOOS VET CLINIC Logo"
+                className="w-14 h-14 rounded-full object-cover border-2 border-gold shadow-md"
               />
-              <span className="font-display font-black text-xl text-white">
-                {language === 'ar' ? 'صيدلية الناموس' : 'Al Namoos Vet'}
-              </span>
+              <div className="flex flex-col text-start">
+                <span className="font-display font-black text-xl text-white">
+                  {language === 'ar' ? 'عيادة الناموس البيطرية' : 'AL-NAMOOS VET CLINIC'}
+                </span>
+                <span className="text-[10px] text-gold font-bold uppercase tracking-widest">
+                  {language === 'ar' ? 'رعاية • إلتزام • تميز' : 'CARE • COMPASSION • COMMITMENT'}
+                </span>
+              </div>
             </div>
             <p className="text-xs text-sand/80 leading-relaxed">
               {t('aboutFooter')}

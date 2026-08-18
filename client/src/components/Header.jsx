@@ -12,6 +12,7 @@ import {
   Sparkles,
   ChevronRight,
   ChevronLeft,
+  ShieldCheck,
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
@@ -51,18 +52,18 @@ export const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full font-body">
+    <header className="sticky top-0 z-40 w-full font-body text-start">
       {/* 1. TOP UTILITY ANNOUNCEMENT BAR */}
-      <div className="bg-charcoal text-sand text-xs py-2 px-3 sm:px-6 border-b border-charcoal-light">
+      <div className="bg-charcoal text-sand text-xs py-2 px-4 sm:px-8 border-b border-charcoal-light">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
           {/* Promo Announcement */}
-          <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-sand">
+          <div className="flex items-center gap-2 text-[11px] sm:text-xs font-semibold text-sand">
             <Sparkles className="w-3.5 h-3.5 text-gold shrink-0" />
-            <span className="truncate max-w-[240px] sm:max-w-none">{t('freeShippingNotice')}</span>
+            <span className="truncate max-w-[280px] sm:max-w-none">{t('freeShippingNotice')}</span>
           </div>
 
           {/* Right Utility Actions */}
-          <div className="flex items-center gap-2 sm:gap-4 text-[11px] sm:text-xs text-sand/80 ms-auto">
+          <div className="flex items-center gap-3 sm:gap-5 text-[11px] sm:text-xs text-sand/90 ms-auto">
             <Link
               to="/consultation"
               className="hidden md:flex items-center gap-1.5 text-gold hover:text-white transition-colors font-bold"
@@ -82,7 +83,7 @@ export const Header = () => {
             {/* Currency Switcher Pill */}
             <button
               onClick={toggleCurrency}
-              className="px-2 py-0.5 rounded bg-charcoal-light hover:bg-teal transition-colors font-mono text-gold font-bold text-[11px] flex items-center gap-1"
+              className="px-2.5 py-0.5 rounded-lg bg-charcoal-light hover:bg-teal transition-colors font-mono text-gold font-bold text-[11px] flex items-center gap-1 border border-gold/20"
               title="Switch Currency (OMR / AED)"
             >
               <span>{currency === 'OMR' ? '🇴🇲 OMR' : '🇦🇪 AED'}</span>
@@ -91,50 +92,50 @@ export const Header = () => {
             {/* Language Switcher Button */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1 px-2.5 py-0.5 rounded bg-charcoal-light hover:bg-teal transition-colors text-white text-[11px] font-bold"
+              className="flex items-center gap-1.5 px-3 py-0.5 rounded-lg bg-charcoal-light hover:bg-teal transition-colors text-white text-[11px] font-bold border border-sand/20"
             >
-              <Globe className="w-3 h-3 text-teal" />
+              <Globe className="w-3.5 h-3.5 text-teal" />
               <span>{language === 'ar' ? 'English' : 'العربية'}</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* 2. MAIN HEADER NAVBAR */}
+      {/* 2. MAIN HEADER NAVBAR (With Large Logo & Official AL-NAMOOS VET CLINIC Branding) */}
       <div
         className={`bg-surface transition-all duration-300 border-b border-surface-bordered ${
-          scrolled ? 'shadow-warm py-2 sm:py-3' : 'py-3 sm:py-4'
+          scrolled ? 'shadow-warm py-2.5 sm:py-3' : 'py-3 sm:py-4'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-3">
-          {/* Logo & Brand Name */}
-          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
+          {/* Official Large Logo & Brand Name */}
+          <Link to="/" className="flex items-center gap-3 sm:gap-4 group shrink-0">
             <img
               src="/images/logo.jpg"
-              alt="Al Namoos Vet Clinic Logo"
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-clay/30 shadow-md group-hover:scale-105 transition-transform"
+              alt="AL-NAMOOS VET CLINIC Logo"
+              className="w-13 h-13 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full object-cover border-2 border-gold shadow-md group-hover:scale-105 transition-transform"
             />
             <div className="flex flex-col text-start">
-              <span className="font-display font-extrabold text-base sm:text-xl text-charcoal tracking-tight group-hover:text-clay transition-colors leading-tight">
-                {language === 'ar' ? 'صيدلية الناموس البيطرية' : 'Al Namoos Vet Pharmacy'}
+              <span className="font-display font-black text-lg sm:text-2xl lg:text-3xl text-charcoal tracking-tight group-hover:text-clay transition-colors leading-tight">
+                {language === 'ar' ? 'عيادة الناموس البيطرية' : 'AL-NAMOOS VET CLINIC'}
               </span>
-              <span className="text-[10px] text-bodytext-muted font-medium tracking-wide uppercase leading-tight">
-                {t('tagline')}
+              <span className="text-[10px] sm:text-xs text-gold font-extrabold tracking-wider uppercase leading-tight font-display">
+                {language === 'ar' ? 'رعاية • إلتزام • تميز | عمان والخليج' : 'CARE • COMPASSION • COMMITMENT'}
               </span>
             </div>
           </Link>
 
-          {/* Desktop Search Input */}
+          {/* Desktop Centered Search Input */}
           <form
             onSubmit={handleSearchSubmit}
-            className="hidden md:flex flex-1 max-w-md mx-4 relative"
+            className="hidden md:flex flex-1 max-w-lg lg:max-w-xl mx-4 relative"
           >
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t('searchPlaceholder')}
-              className={`w-full bg-sand/50 border border-surface-bordered rounded-full py-2 text-xs text-bodytext placeholder-bodytext-muted focus:bg-white focus:border-clay focus:ring-1 focus:ring-clay transition-all ${
+              className={`w-full bg-sand/60 border border-surface-bordered rounded-full py-2.5 text-xs text-bodytext placeholder-bodytext-muted focus:bg-white focus:border-clay focus:ring-1 focus:ring-clay transition-all ${
                 isRtl ? 'ps-4 pe-10' : 'ps-4 pe-10'
               }`}
             />
@@ -149,7 +150,7 @@ export const Header = () => {
             </button>
           </form>
 
-          {/* Header Action Buttons */}
+          {/* Header Right Actions Cluster */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <Link
               to="/account"
@@ -162,7 +163,7 @@ export const Header = () => {
 
             <Link
               to="/admin"
-              className="hidden sm:inline-flex text-[11px] font-bold px-2.5 py-1.5 rounded-xl border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-sand transition-colors"
+              className="hidden sm:inline-flex text-[11px] font-bold px-3 py-1.5 rounded-xl border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-gold transition-colors"
             >
               {t('adminPanel')}
             </Link>
@@ -170,7 +171,7 @@ export const Header = () => {
             {/* Cart Drawer Trigger */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative flex items-center gap-2 p-2.5 bg-clay text-white rounded-full hover:bg-clay-hover transition-transform active:scale-95 shadow-sm"
+              className="relative flex items-center gap-2 p-2.5 sm:p-3 bg-clay text-white rounded-full hover:bg-clay-hover transition-transform active:scale-95 shadow-md"
               aria-label="View Cart"
             >
               <ShoppingBag className="w-5 h-5" />
@@ -218,25 +219,25 @@ export const Header = () => {
             {/* Species Quick Links */}
             <Link
               to="/shop?category=camel"
-              className="flex items-center gap-1.5 py-3 px-3 hover:text-gold transition-colors font-medium text-sand/90"
+              className="flex items-center gap-2 py-3 px-3 hover:text-gold transition-colors font-medium text-sand/90"
             >
-              <PetroglyphIcon species="camel" size="sm" badge={false} className="w-4 h-4" />
+              <PetroglyphIcon species="camel" size="sm" badge={false} className="w-5 h-5" />
               <span>{t('camel')}</span>
             </Link>
 
             <Link
               to="/shop?category=horse"
-              className="flex items-center gap-1.5 py-3 px-3 hover:text-gold transition-colors font-medium text-sand/90"
+              className="flex items-center gap-2 py-3 px-3 hover:text-gold transition-colors font-medium text-sand/90"
             >
-              <PetroglyphIcon species="horse" size="sm" badge={false} className="w-4 h-4" />
+              <PetroglyphIcon species="horse" size="sm" badge={false} className="w-5 h-5" />
               <span>{t('horse')}</span>
             </Link>
 
             <Link
               to="/shop?category=cow"
-              className="flex items-center gap-1.5 py-3 px-3 hover:text-gold transition-colors font-medium text-sand/90"
+              className="flex items-center gap-2 py-3 px-3 hover:text-gold transition-colors font-medium text-sand/90"
             >
-              <PetroglyphIcon species="cow" size="sm" badge={false} className="w-4 h-4" />
+              <PetroglyphIcon species="cow" size="sm" badge={false} className="w-5 h-5" />
               <span>{t('cow')}</span>
             </Link>
 
@@ -263,7 +264,7 @@ export const Header = () => {
           </div>
 
           <div className="text-xs text-sand/70 flex items-center gap-2 dir-ltr">
-            <span>🇴🇲 Oman Helpline:</span>
+            <span>🇴🇲 Helpline:</span>
             <a href="tel:+96895266144" className="text-gold font-mono font-bold hover:underline">
               +968 9526 6144
             </a>
@@ -307,7 +308,7 @@ export const Header = () => {
               onClick={() => setMobileMenuOpen(false)}
               className="py-2 text-charcoal font-bold hover:text-clay text-sm flex items-center justify-between"
             >
-              <span>{t('shop')} (All Products)</span>
+              <span>{t('shop')}</span>
               {isRtl ? <ChevronLeft className="w-4 h-4 text-bodytext-muted" /> : <ChevronRight className="w-4 h-4 text-bodytext-muted" />}
             </Link>
 
@@ -368,14 +369,6 @@ export const Header = () => {
                 className="py-2 text-bodytext-muted hover:text-charcoal font-semibold"
               >
                 {t('contactUs')}
-              </Link>
-
-              <Link
-                to="/delivery-policy"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-2 text-bodytext-muted hover:text-charcoal font-semibold"
-              >
-                {t('deliveryPolicy')}
               </Link>
 
               <Link

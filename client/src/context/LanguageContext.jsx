@@ -5,8 +5,9 @@ const LanguageContext = createContext();
 export const dictionary = {
   ar: {
     // Header & Global
-    storeName: "صيدلية ومتجر الناموس البيطرية",
-    tagline: "الخبير البيطري الموثوق لإبل وهجن وجياد الخليج",
+    storeName: "عيادة وصيدلية الناموس البيطرية",
+    brandName: "AL-NAMOOS VET CLINIC",
+    tagline: "رعاية • إلتزام • تميز | سلطنة عُمان والخليج",
     home: "الرئيسية",
     shop: "المتجر البيطري",
     categories: "الفئات والحيوانات",
@@ -114,8 +115,9 @@ export const dictionary = {
   },
   en: {
     // Header & Global
-    storeName: "Al Namoos Veterinary Store & Pharmacy",
-    tagline: "Trusted Desert Veterinary Specialist | Delivery Across GCC",
+    storeName: "AL-NAMOOS VET CLINIC",
+    brandName: "AL-NAMOOS VET CLINIC",
+    tagline: "Care • Compassion • Commitment | Oman & GCC",
     home: "Home",
     shop: "Veterinary Shop",
     categories: "Categories & Species",
