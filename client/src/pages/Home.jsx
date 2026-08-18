@@ -58,7 +58,7 @@ export const Home = () => {
       });
   }, []);
 
-  // Hero Background Slideshow Timer (Switch slide every 5 seconds)
+  // Hero Background Slideshow Timer
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % heroSlides.length);
@@ -190,7 +190,7 @@ export const Home = () => {
           </div>
         </div>
 
-        {/* Hero Slideshow Navigation Controls & Dots */}
+        {/* Hero Slideshow Controls */}
         <div className="absolute bottom-4 left-6 right-6 z-20 flex items-center justify-between pointer-events-none">
           <div className="flex items-center gap-2 pointer-events-auto">
             {heroSlides.map((_, i) => (
@@ -224,7 +224,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 2. SPECIES CATEGORY PETROGLYPH TILES SECTION */}
+      {/* 2. REAL ANIMAL PHOTOGRAPHY SPECIES CARDS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center space-y-2 mb-8 sm:mb-10">
           <span className="text-[11px] font-extrabold text-clay uppercase tracking-widest block">Target Livestock</span>
@@ -236,65 +236,92 @@ export const Home = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
-          {/* Camel Tile */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Camel Photo Card */}
           <Link
             to="/shop?category=camel"
-            className="group relative bg-surface border border-surface-bordered p-6 sm:p-8 rounded-3xl shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col items-center text-center space-y-4 hover:-translate-y-1"
+            className="group relative h-72 sm:h-80 rounded-3xl overflow-hidden shadow-warm hover:shadow-2xl transition-all duration-500 flex flex-col justify-end p-6 border border-surface-bordered"
           >
-            <PetroglyphIcon species="camel" size="lg" />
-            <div className="space-y-1">
-              <h3 className="font-display font-extrabold text-lg sm:text-xl text-charcoal group-hover:text-clay transition-colors">
+            <img
+              src="/images/species/camel.jpg"
+              alt="Racing Camel"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/60 to-transparent" />
+
+            <div className="relative z-10 space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-gold/90 text-charcoal rounded-full text-[11px] font-extrabold uppercase tracking-wide">
+                <span>Camel Pharmacy</span>
+              </div>
+              <h3 className="font-display font-black text-2xl text-white group-hover:text-gold transition-colors">
                 {t('camel')}
               </h3>
-              <p className="text-xs text-bodytext-muted">
+              <p className="text-xs text-sand/90 line-clamp-2">
                 {language === 'ar' ? 'هجن السباق، المزاينة، والإبل الأصيلة' : 'Racing camels, breeding, & endurance supplements'}
               </p>
+              <div className="pt-1 flex items-center gap-1.5 text-xs font-bold text-gold group-hover:underline">
+                <span>{t('viewDetails')}</span>
+                {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
+              </div>
             </div>
-            <span className="text-xs font-bold text-clay group-hover:underline flex items-center gap-1">
-              <span>{t('viewDetails')}</span>
-              {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
-            </span>
           </Link>
 
-          {/* Horse Tile */}
+          {/* Horse Photo Card */}
           <Link
             to="/shop?category=horse"
-            className="group relative bg-surface border border-surface-bordered p-6 sm:p-8 rounded-3xl shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col items-center text-center space-y-4 hover:-translate-y-1"
+            className="group relative h-72 sm:h-80 rounded-3xl overflow-hidden shadow-warm hover:shadow-2xl transition-all duration-500 flex flex-col justify-end p-6 border border-surface-bordered"
           >
-            <PetroglyphIcon species="horse" size="lg" />
-            <div className="space-y-1">
-              <h3 className="font-display font-extrabold text-lg sm:text-xl text-charcoal group-hover:text-clay transition-colors">
+            <img
+              src="/images/species/horse.jpg"
+              alt="Arabian Horse"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/60 to-transparent" />
+
+            <div className="relative z-10 space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-clay text-white rounded-full text-[11px] font-extrabold uppercase tracking-wide">
+                <span>Equine Care</span>
+              </div>
+              <h3 className="font-display font-black text-2xl text-white group-hover:text-gold transition-colors">
                 {t('horse')}
               </h3>
-              <p className="text-xs text-bodytext-muted">
+              <p className="text-xs text-sand/90 line-clamp-2">
                 {language === 'ar' ? 'الخيل العربية، القدرة والتحمل، والفروسية' : 'Arabian horses, endurance, & farrier care'}
               </p>
+              <div className="pt-1 flex items-center gap-1.5 text-xs font-bold text-gold group-hover:underline">
+                <span>{t('viewDetails')}</span>
+                {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
+              </div>
             </div>
-            <span className="text-xs font-bold text-clay group-hover:underline flex items-center gap-1">
-              <span>{t('viewDetails')}</span>
-              {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
-            </span>
           </Link>
 
-          {/* Cow Tile */}
+          {/* Cow Photo Card */}
           <Link
             to="/shop?category=cow"
-            className="group relative bg-surface border border-surface-bordered p-6 sm:p-8 rounded-3xl shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col items-center text-center space-y-4 hover:-translate-y-1"
+            className="group relative h-72 sm:h-80 rounded-3xl overflow-hidden shadow-warm hover:shadow-2xl transition-all duration-500 flex flex-col justify-end p-6 border border-surface-bordered"
           >
-            <PetroglyphIcon species="cow" size="lg" />
-            <div className="space-y-1">
-              <h3 className="font-display font-extrabold text-lg sm:text-xl text-charcoal group-hover:text-clay transition-colors">
+            <img
+              src="/images/species/cow.jpg"
+              alt="Dairy Cattle"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/60 to-transparent" />
+
+            <div className="relative z-10 space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-teal text-white rounded-full text-[11px] font-extrabold uppercase tracking-wide">
+                <span>Cattle Livestock</span>
+              </div>
+              <h3 className="font-display font-black text-2xl text-white group-hover:text-gold transition-colors">
                 {t('cow')}
               </h3>
-              <p className="text-xs text-bodytext-muted">
+              <p className="text-xs text-sand/90 line-clamp-2">
                 {language === 'ar' ? 'الأبقار، الماشية، وإدرار الحليب' : 'Dairy cattle, rumen health, & livestock equipment'}
               </p>
+              <div className="pt-1 flex items-center gap-1.5 text-xs font-bold text-gold group-hover:underline">
+                <span>{t('viewDetails')}</span>
+                {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
+              </div>
             </div>
-            <span className="text-xs font-bold text-clay group-hover:underline flex items-center gap-1">
-              <span>{t('viewDetails')}</span>
-              {isRtl ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
-            </span>
           </Link>
         </div>
       </section>
