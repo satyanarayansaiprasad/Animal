@@ -5,7 +5,7 @@ const LanguageContext = createContext();
 export const dictionary = {
   ar: {
     // Header & Global
-    storeName: "عيادة وصيدلية الناموس البيطرية",
+    storeName: "AL-NAMOOS VET CLINIC",
     brandName: "AL-NAMOOS VET CLINIC",
     tagline: "رعاية • إلتزام • تميز | سلطنة عُمان والخليج",
     home: "الرئيسية",
@@ -28,9 +28,9 @@ export const dictionary = {
     logout: "تسجيل الخروج",
     
     // Species
-    camel: "الإبل والهجن",
+    camel: "الهجن والإبل",
     horse: "الخيل والفروسية",
-    cow: "الأبقار والمواشي",
+    cow: "الأبقار والماشية",
     allSpecies: "جميع الحيوانات",
     
     // Product Types
@@ -108,26 +108,26 @@ export const dictionary = {
     chatWhatsapp: "محادثة واتساب",
 
     // Footer
-    aboutFooter: "صيدلية ومتجر الناموس البيطرية — اسم عريق في عمان ودول الخليج متخصص في أدوية ومكملات وأعلاف الهجن والخيل والمواشي.",
+    aboutFooter: "AL-NAMOOS VET CLINIC — اسم عريق في عمان ودول الخليج متخصص في أدوية ومكملات وأعلاف الهجن والخيل والمواشي.",
     quickLinks: "روابط سريعة",
-    contactInfo: "معلومات التواصل والروع",
-    rightsReserved: "جميع الحقوق محفوظة © 2026 صيدلية ومتجر الناموس البيطرية.",
+    contactInfo: "معلومات التواصل والفروع",
+    rightsReserved: "جميع الحقوق محفوظة © 2026 AL-NAMOOS VET CLINIC.",
   },
   en: {
     // Header & Global
     storeName: "AL-NAMOOS VET CLINIC",
     brandName: "AL-NAMOOS VET CLINIC",
-    tagline: "Care • Compassion • Commitment | Oman & GCC",
+    tagline: "CARE • COMPASSION • COMMITMENT",
     home: "Home",
-    shop: "Veterinary Shop",
+    shop: "Veterinary Store",
     categories: "Categories & Species",
     consultation: "Ask a Doctor",
-    aboutUs: "About Us",
+    aboutUs: "About Al-Namoos",
     contactUs: "Contact Us",
     deliveryPolicy: "Delivery Policy & Cold Chain",
     termsPrivacy: "Terms & Privacy",
     adminPanel: "Admin Panel",
-    searchPlaceholder: "Search medicine, vitamins, feed, or SKU...",
+    searchPlaceholder: "Search medicine, vitamins, feed, or SKU number...",
     cart: "Cart",
     account: "My Account",
     myOrders: "My Orders",
@@ -138,8 +138,8 @@ export const dictionary = {
     logout: "Logout",
     
     // Species
-    camel: "Camels & Racing Camels",
-    horse: "Horses & Equestrian",
+    camel: "Camels",
+    horse: "Horses",
     cow: "Cows & Cattle",
     allSpecies: "All Animals",
     
@@ -205,24 +205,24 @@ export const dictionary = {
     accountNumber: "Account Number:",
     accountHolder: "Account Name:",
     placeOrder: "Confirm & Place Order",
-    orderConfirmed: "Order Received Successfully!",
+    orderConfirmed: "Your Order Has Been Received!",
     orderNumber: "Order Number:",
-    notifyWhatsapp: "Send Order to WhatsApp",
+    notifyWhatsapp: "Send Order Confirmation to WhatsApp Direct",
 
     // Consultation
-    askDoctorTitle: "Veterinary Consultation — Speak with Specialists",
-    askDoctorSubtitle: "Our team of veterinary doctors is available to assist with treatment advice, camel race dosages, and equine nutrition.",
-    doctor1Name: "Dr. Ahmed Al-Hinaai — Camel & Racing Specialist",
-    doctor2Name: "Dr. Sarah Al-Hashimi — Equine & Livestock Vet",
-    callNow: "Call Doctor",
-    chatWhatsapp: "WhatsApp Doctor",
+    askDoctorTitle: "Veterinary Consultation — Talk to Licensed Doctors",
+    askDoctorSubtitle: "Our veterinary team is available for treatment advice, camel race injection schedules, and equine feeding protocols.",
+    doctor1Name: "Dr. Ahmed Al Hinai — Camel Specialist",
+    doctor2Name: "Dr. Sarah Al Hashimi — Equine & Livestock Specialist",
+    callNow: "Call Directly",
+    chatWhatsapp: "WhatsApp Chat",
 
     // Footer
-    aboutFooter: "Al Namoos Veterinary Store & Pharmacy — A premier name in Oman and the GCC for camel, horse, and livestock health products.",
+    aboutFooter: "AL-NAMOOS VET CLINIC — Trusted veterinary pharmacy and livestock supplies specialist in Oman and the GCC.",
     quickLinks: "Quick Links",
     contactInfo: "Contact & Branches",
-    rightsReserved: "All rights reserved © 2026 Al Namoos Veterinary Store & Pharmacy.",
-  }
+    rightsReserved: "All rights reserved © 2026 AL-NAMOOS VET CLINIC.",
+  },
 };
 
 export const LanguageProvider = ({ children }) => {
@@ -230,25 +230,33 @@ export const LanguageProvider = ({ children }) => {
     return localStorage.getItem('alnamoos_lang') || 'ar';
   });
 
+  const isRtl = language === 'ar';
+
   useEffect(() => {
     localStorage.setItem('alnamoos_lang', language);
-    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
     document.documentElement.lang = language;
-  }, [language]);
+  }, [language, isRtl]);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === 'ar' ? 'en' : 'ar'));
   };
 
   const t = (key) => {
-    return dictionary[language]?.[key] || dictionary.en[key] || key;
+    return dictionary[language]?.[key] || dictionary.en?.[key] || key;
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, isRtl: language === 'ar', t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, isRtl, t }}>
       {children}
     </LanguageContext.Provider>
   );
 };
 
-export const useLanguage = () => useContext(LanguageContext);
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+};

@@ -12,7 +12,6 @@ import {
   Sparkles,
   ChevronRight,
   ChevronLeft,
-  ShieldCheck,
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
@@ -66,7 +65,7 @@ export const Header = () => {
           <div className="flex items-center gap-3 sm:gap-5 text-[11px] sm:text-xs text-sand/90 ms-auto">
             <Link
               to="/consultation"
-              className="hidden md:flex items-center gap-1.5 text-gold hover:text-white transition-colors font-bold"
+              className="hidden md:flex items-center gap-1.5 text-gold hover:text-white transition-colors font-bold whitespace-nowrap"
             >
               <Stethoscope className="w-3.5 h-3.5 text-gold" />
               <span>{t('askDoctor')}</span>
@@ -74,7 +73,7 @@ export const Header = () => {
 
             <a
               href="tel:+96895266144"
-              className="hidden lg:flex items-center gap-1 hover:text-white transition-colors dir-ltr font-mono"
+              className="hidden lg:flex items-center gap-1 hover:text-white transition-colors dir-ltr font-mono whitespace-nowrap"
             >
               <PhoneCall className="w-3 h-3 text-clay" />
               <span>+968 9526 6144</span>
@@ -83,7 +82,7 @@ export const Header = () => {
             {/* Currency Switcher Pill */}
             <button
               onClick={toggleCurrency}
-              className="px-2.5 py-0.5 rounded-lg bg-charcoal-light hover:bg-teal transition-colors font-mono text-gold font-bold text-[11px] flex items-center gap-1 border border-gold/20"
+              className="px-2.5 py-0.5 rounded-lg bg-charcoal-light hover:bg-teal transition-colors font-mono text-gold font-bold text-[11px] flex items-center gap-1 border border-gold/20 whitespace-nowrap"
               title="Switch Currency (OMR / AED)"
             >
               <span>{currency === 'OMR' ? '🇴🇲 OMR' : '🇦🇪 AED'}</span>
@@ -92,7 +91,7 @@ export const Header = () => {
             {/* Language Switcher Button */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-3 py-0.5 rounded-lg bg-charcoal-light hover:bg-teal transition-colors text-white text-[11px] font-bold border border-sand/20"
+              className="flex items-center gap-1.5 px-3 py-0.5 rounded-lg bg-charcoal-light hover:bg-teal transition-colors text-white text-[11px] font-bold border border-sand/20 whitespace-nowrap"
             >
               <Globe className="w-3.5 h-3.5 text-teal" />
               <span>{language === 'ar' ? 'English' : 'العربية'}</span>
@@ -101,14 +100,14 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* 2. MAIN HEADER NAVBAR (With Large Logo & Official AL-NAMOOS VET CLINIC Branding) */}
+      {/* 2. MAIN HEADER NAVBAR (AL-NAMOOS VET CLINIC Branding) */}
       <div
         className={`bg-surface transition-all duration-300 border-b border-surface-bordered ${
           scrolled ? 'shadow-warm py-2.5 sm:py-3' : 'py-3 sm:py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
-          {/* Official Large Logo & Brand Name */}
+          {/* Official Large Logo & Brand Name (AL-NAMOOS VET CLINIC) */}
           <Link to="/" className="flex items-center gap-3 sm:gap-4 group shrink-0">
             <img
               src="/images/logo.jpg"
@@ -117,10 +116,10 @@ export const Header = () => {
             />
             <div className="flex flex-col text-start">
               <span className="font-display font-black text-lg sm:text-2xl lg:text-3xl text-charcoal tracking-tight group-hover:text-clay transition-colors leading-tight">
-                {language === 'ar' ? 'عيادة الناموس البيطرية' : 'AL-NAMOOS VET CLINIC'}
+                AL-NAMOOS VET CLINIC
               </span>
               <span className="text-[10px] sm:text-xs text-gold font-extrabold tracking-wider uppercase leading-tight font-display">
-                {language === 'ar' ? 'رعاية • إلتزام • تميز | عمان والخليج' : 'CARE • COMPASSION • COMMITMENT'}
+                CARE • COMPASSION • COMMITMENT
               </span>
             </div>
           </Link>
@@ -154,7 +153,7 @@ export const Header = () => {
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <Link
               to="/account"
-              className="hidden sm:flex items-center gap-1.5 text-charcoal hover:text-clay p-2 rounded-full hover:bg-sand transition-colors"
+              className="hidden sm:flex items-center gap-1.5 text-charcoal hover:text-clay p-2 rounded-full hover:bg-sand transition-colors whitespace-nowrap"
               title={t('account')}
             >
               <User className="w-5 h-5" />
@@ -163,7 +162,7 @@ export const Header = () => {
 
             <Link
               to="/admin"
-              className="hidden sm:inline-flex text-[11px] font-bold px-3 py-1.5 rounded-xl border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-gold transition-colors"
+              className="hidden sm:inline-flex text-[11px] font-bold px-3 py-1.5 rounded-xl border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-gold transition-colors whitespace-nowrap"
             >
               {t('adminPanel')}
             </Link>
@@ -171,7 +170,7 @@ export const Header = () => {
             {/* Cart Drawer Trigger */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative flex items-center gap-2 p-2.5 sm:p-3 bg-clay text-white rounded-full hover:bg-clay-hover transition-transform active:scale-95 shadow-md"
+              className="relative flex items-center gap-2 p-2.5 sm:p-3 bg-clay text-white rounded-full hover:bg-clay-hover transition-transform active:scale-95 shadow-md shrink-0"
               aria-label="View Cart"
             >
               <ShoppingBag className="w-5 h-5" />
@@ -194,13 +193,13 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* 3. DESKTOP NAVIGATION BAR */}
+      {/* 3. DESKTOP NAVIGATION BAR (All Link Names Displayed On ONE SINGLE LINE) */}
       <nav className="bg-charcoal text-sand text-xs sm:text-sm hidden md:block border-t border-charcoal-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 sm:gap-2">
             <Link
               to="/"
-              className={`py-3 px-4 font-bold transition-colors border-b-2 ${
+              className={`py-3 px-3 sm:px-4 font-bold transition-colors border-b-2 whitespace-nowrap ${
                 location.pathname === '/' ? 'border-clay text-gold' : 'border-transparent hover:text-gold'
               }`}
             >
@@ -209,7 +208,7 @@ export const Header = () => {
 
             <Link
               to="/shop"
-              className={`py-3 px-4 font-bold transition-colors border-b-2 ${
+              className={`py-3 px-3 sm:px-4 font-bold transition-colors border-b-2 whitespace-nowrap ${
                 location.pathname === '/shop' ? 'border-clay text-gold' : 'border-transparent hover:text-gold'
               }`}
             >
@@ -219,51 +218,51 @@ export const Header = () => {
             {/* Species Quick Links */}
             <Link
               to="/shop?category=camel"
-              className="flex items-center gap-2 py-3 px-3 hover:text-gold transition-colors font-medium text-sand/90"
+              className="flex items-center gap-1.5 py-3 px-2 sm:px-3 hover:text-gold transition-colors font-semibold text-sand/90 whitespace-nowrap"
             >
-              <PetroglyphIcon species="camel" size="sm" badge={false} className="w-5 h-5" />
+              <PetroglyphIcon species="camel" size="sm" badge={false} className="w-4 h-4 shrink-0" />
               <span>{t('camel')}</span>
             </Link>
 
             <Link
               to="/shop?category=horse"
-              className="flex items-center gap-2 py-3 px-3 hover:text-gold transition-colors font-medium text-sand/90"
+              className="flex items-center gap-1.5 py-3 px-2 sm:px-3 hover:text-gold transition-colors font-semibold text-sand/90 whitespace-nowrap"
             >
-              <PetroglyphIcon species="horse" size="sm" badge={false} className="w-5 h-5" />
+              <PetroglyphIcon species="horse" size="sm" badge={false} className="w-4 h-4 shrink-0" />
               <span>{t('horse')}</span>
             </Link>
 
             <Link
               to="/shop?category=cow"
-              className="flex items-center gap-2 py-3 px-3 hover:text-gold transition-colors font-medium text-sand/90"
+              className="flex items-center gap-1.5 py-3 px-2 sm:px-3 hover:text-gold transition-colors font-semibold text-sand/90 whitespace-nowrap"
             >
-              <PetroglyphIcon species="cow" size="sm" badge={false} className="w-5 h-5" />
+              <PetroglyphIcon species="cow" size="sm" badge={false} className="w-4 h-4 shrink-0" />
               <span>{t('cow')}</span>
             </Link>
 
             <Link
               to="/consultation"
-              className="py-3 px-4 font-bold text-gold hover:text-white transition-colors"
+              className="py-3 px-3 sm:px-4 font-bold text-gold hover:text-white transition-colors whitespace-nowrap"
             >
               {t('consultation')}
             </Link>
 
             <Link
               to="/about"
-              className="py-3 px-3 text-sand/80 hover:text-gold transition-colors"
+              className="py-3 px-2 sm:px-3 text-sand/80 hover:text-gold transition-colors font-medium whitespace-nowrap"
             >
               {t('aboutUs')}
             </Link>
 
             <Link
               to="/contact"
-              className="py-3 px-3 text-sand/80 hover:text-gold transition-colors"
+              className="py-3 px-2 sm:px-3 text-sand/80 hover:text-gold transition-colors font-medium whitespace-nowrap"
             >
               {t('contactUs')}
             </Link>
           </div>
 
-          <div className="text-xs text-sand/70 flex items-center gap-2 dir-ltr">
+          <div className="text-xs text-sand/80 flex items-center gap-2 dir-ltr whitespace-nowrap ms-2">
             <span>🇴🇲 Helpline:</span>
             <a href="tel:+96895266144" className="text-gold font-mono font-bold hover:underline">
               +968 9526 6144
