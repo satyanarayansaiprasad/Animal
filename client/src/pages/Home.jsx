@@ -5,21 +5,21 @@ import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { PetroglyphIcon } from '../components/PetroglyphIcon';
 import { ProductCard } from '../components/ProductCard';
+import { ProductSlider } from '../components/ProductSlider';
 import { apiFetch } from '../services/api';
 
 export const Home = () => {
   const { language, isRtl, t } = useLanguage();
   const { formatPrice } = useCurrency();
-  const [featuredProducts, setFeaturedProducts] = useState([]);
-  const [bestSellers, setBestSellers] = useState([]);
+
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     apiFetch('/api/products')
       .then((data) => {
         if (data && data.success && data.data) {
-          setFeaturedProducts(data.data.filter((p) => p.is_featured).slice(0, 8));
-          setBestSellers(data.data.filter((p) => p.is_best_seller).slice(0, 8));
+          setProducts(data.data);
         }
         setLoading(false);
       })
@@ -27,6 +27,11 @@ export const Home = () => {
         setLoading(false);
       });
   }, []);
+
+  const topProducts = products.filter((p) => p.is_featured);
+  const camelProducts = products.filter((p) => p.category === 'camel');
+  const horseProducts = products.filter((p) => p.category === 'horse');
+  const cowProducts = products.filter((p) => p.category === 'cow');
 
   return (
     <div className="space-y-12 sm:space-y-16 pb-16 font-body text-start">
@@ -60,7 +65,7 @@ export const Home = () => {
 
               <Link
                 to="/consultation"
-                className="px-6 py-3.5 bg-charcoal-light hover:bg-teal text-white border border-sand/20 font-display font-bold rounded-2xl transition-all text-xs sm:text-sm flex items-center justify-center gap-2 touch-target"
+                className="px-6 py-4 bg-charcoal-light hover:bg-teal text-white border border-sand/20 font-display font-bold rounded-2xl transition-all text-xs sm:text-sm flex items-center justify-center gap-2 touch-target"
               >
                 <Stethoscope className="w-4 h-4 text-gold" />
                 <span>{t('askDoctor')}</span>
@@ -191,40 +196,30 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 3. FEATURED VETERINARY PRODUCTS GRID */}
+      {/* 3. SLIDER SECTION 1: TOP FEATURED PRODUCTS CAROUSEL */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
-          <div>
-            <span className="text-[11px] font-extrabold text-teal uppercase tracking-widest block">Pharmacy Highlights</span>
-            <h2 className="font-display font-black text-2xl sm:text-3xl text-charcoal">
-              {language === 'ar' ? 'أبرز الأدوية والمكملات المعتمدة' : 'Featured Certified Medicines'}
-            </h2>
-          </div>
-          <Link
-            to="/shop"
-            className="text-xs font-bold text-clay hover:underline flex items-center gap-1"
-          >
-            <span>{t('startShopping')}</span>
-            {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
-          </Link>
-        </div>
-
-        {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-80 bg-surface rounded-2xl animate-pulse border border-surface-bordered" />
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        )}
+        <ProductSlider
+          title={language === 'ar' ? 'أبرز الأدوية والمكملات المعتمدة' : 'Top Featured Veterinary Formulas'}
+          subtitle={language === 'ar' ? 'أكثر الأدوية والفيتامينات طلباً في الهجن والخيل' : 'High potency medicines and performance supplements'}
+          viewAllLink="/shop?sort=rating"
+          products={topProducts}
+          loading={loading}
+        />
       </section>
 
-      {/* 4. ASK A DOCTOR VETERINARY CONSULTATION SECTION */}
+      {/* 4. SLIDER SECTION 2: CAMEL PHARMACY & RACING CAROUSEL */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6">
+        <ProductSlider
+          title={language === 'ar' ? 'مستلزمات وأدوية الإبل والهجن' : 'Racing Camel Pharmacy & Supplements'}
+          subtitle={language === 'ar' ? 'فيتامينات التحمل، وأملاح التعويض، وأعلاف السباق' : 'Pre-race ATP injections, electrolytes, and racing pellets'}
+          species="camel"
+          viewAllLink="/shop?category=camel"
+          products={camelProducts}
+          loading={loading}
+        />
+      </section>
+
+      {/* 5. ASK A DOCTOR VETERINARY CONSULTATION BANNER */}
       <section className="bg-sand-dark py-12 sm:py-14 border-y border-surface-bordered">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
@@ -282,20 +277,28 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 5. BEST SELLERS GRID */}
+      {/* 6. SLIDER SECTION 3: HORSE & EQUESTRIAN CAROUSEL */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="mb-6 sm:mb-8">
-          <span className="text-[11px] font-extrabold text-gold uppercase tracking-widest block">Most Requested</span>
-          <h2 className="font-display font-black text-2xl sm:text-3xl text-charcoal">
-            {language === 'ar' ? 'الأكثر طلبًا في المزارع والعزب' : 'Best-Selling Farm Supplies'}
-          </h2>
-        </div>
+        <ProductSlider
+          title={language === 'ar' ? 'مستلزمات الخيل العربي والفروسية' : 'Arabian Horse & Equestrian Supplies'}
+          subtitle={language === 'ar' ? 'علاج المفاصل، مكملات الحوافر، وأعلاف سباقات القدرة' : 'Joint solutions, biotin hoof powder, and farrier tools'}
+          species="horse"
+          viewAllLink="/shop?category=horse"
+          products={horseProducts}
+          loading={loading}
+        />
+      </section>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {bestSellers.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+      {/* 7. SLIDER SECTION 4: COWS & LIVESTOCK CAROUSEL */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6">
+        <ProductSlider
+          title={language === 'ar' ? 'مستلزمات الأبقار والماشية' : 'Cattle & Dairy Livestock Supplies'}
+          subtitle={language === 'ar' ? 'مضادات حيوية، منشطات الكرش، وأعلاف زيادة إدرار الحليب' : 'Broad-spectrum antibiotics, bloat tonics, and milk concentrates'}
+          species="cow"
+          viewAllLink="/shop?category=cow"
+          products={cowProducts}
+          loading={loading}
+        />
       </section>
     </div>
   );
