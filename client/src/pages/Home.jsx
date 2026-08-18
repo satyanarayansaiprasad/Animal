@@ -53,7 +53,7 @@ export const Home = () => {
       {/* 1. CINEMATIC FULL-WIDTH HERO BANNER (Camel Racing / سباقات الهجن) */}
       <section className="relative w-full bg-charcoal text-sand overflow-hidden min-h-[420px] sm:min-h-[540px] flex items-center justify-center border-b border-surface-bordered shadow-2xl">
         <img
-          src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1920&q=80"
+          src="https://images.unsplash.com/photo-1542332213-31f87348057f?auto=format&fit=crop&w=1920&q=80"
           alt="Camel Racing Desert"
           className="absolute inset-0 w-full h-full object-cover object-center transform scale-105"
         />
