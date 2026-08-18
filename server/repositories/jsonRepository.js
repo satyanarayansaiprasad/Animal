@@ -6,15 +6,18 @@ export class JsonRepository extends BaseRepository {
   constructor(filePath) {
     super();
     this.filePath = path.resolve(filePath);
+    this.memoryCache = null;
   }
 
   async _readData() {
+    if (this.memoryCache) return this.memoryCache;
     try {
       const content = await fs.readFile(this.filePath, 'utf-8');
-      return JSON.parse(content || '[]');
+      this.memoryCache = JSON.parse(content || '[]');
+      return this.memoryCache;
     } catch (error) {
       if (error.code === 'ENOENT') {
-        await fs.writeFile(this.filePath, JSON.stringify([]));
+        this.memoryCache = [];
         return [];
       }
       throw error;
@@ -22,7 +25,13 @@ export class JsonRepository extends BaseRepository {
   }
 
   async _writeData(data) {
-    await fs.writeFile(this.filePath, JSON.stringify(data, null, 2), 'utf-8');
+    this.memoryCache = data;
+    try {
+      await fs.writeFile(this.filePath, JSON.stringify(data, null, 2), 'utf-8');
+    } catch (error) {
+      // In Serverless environments (e.g. Vercel read-only filesystem), fallback to memory cache
+      console.warn('Serverless read-only filesystem detected, writing to memory cache:', error.message);
+    }
   }
 
   async findAll(filterFn = null) {
