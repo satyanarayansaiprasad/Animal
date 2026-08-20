@@ -4,25 +4,24 @@
 
 @layer base {
   :root {
-    --color-sand: #F6F1E7;
-    --color-surface: #FFFDF9;
-    --color-charcoal: #16302B;
-    --color-clay: #B85C2E;
-    --color-teal: #2E6F63;
-    --color-bodytext: #2A241E;
-    --color-muted: #8B8175;
-    --color-gold: #B8862E;
+    --color-brown-dark: #351809;
+    --color-brown-header: #4A230F;
+    --color-orange: #E87722;
+    --color-orange-hover: #D66611;
+    --color-cream: #FBF8F3;
+    --color-surface: #FFFFFF;
+    --color-bodytext: #2A1F19;
+    --color-muted: #7A6B63;
   }
 
   html {
     scroll-behavior: smooth;
-    background-color: var(--color-sand);
+    background-color: var(--color-cream);
     color: var(--color-bodytext);
-    font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', sans-serif;
+    font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Arabic vs English Line Height & Breathing Room */
   html[dir="rtl"] {
     line-height: 1.65;
   }
@@ -37,24 +36,18 @@
     letter-spacing: -0.01em;
   }
 
-  html[dir="ltr"] h1, html[dir="ltr"] h2, html[dir="ltr"] h3 {
-    letter-spacing: -0.02em;
-  }
-
   .font-mono-price {
     font-family: 'IBM Plex Mono', monospace;
     font-variant-numeric: tabular-nums;
   }
 
-  /* Accessible focus states */
   a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-    outline: 2px solid #B85C2E;
+    outline: 2px solid #E87722;
     outline-offset: 2px;
   }
 }
 
 @layer utilities {
-  /* Directional Text Alignment Helpers */
   .text-start-dir {
     text-align: start;
   }
@@ -69,29 +62,16 @@
   height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #F6F1E7;
+  background: #FBF8F3;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2E6F63;
+  background: #E87722;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #16302B;
+  background: #351809;
 }
 
-/* Petroglyph Circle Badge Styling */
-.petroglyph-badge {
-  background: radial-gradient(circle, #FAF6EE 0%, #EAE3D2 100%);
-  border: 1px solid #DED5C3;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.petroglyph-badge:hover {
-  border-color: #B85C2E;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(184, 92, 46, 0.15);
-}
-
-/* Touch Friendly Targets on Mobile */
 @media (max-width: 640px) {
   button, input, select, a {
     min-height: 40px;
@@ -101,7 +81,6 @@
   }
 }
 
-/* Keyframe Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }

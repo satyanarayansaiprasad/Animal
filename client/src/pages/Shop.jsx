@@ -57,11 +57,11 @@ export const Shop = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 font-body space-y-6 sm:space-y-8 text-start">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 font-body space-y-6 sm:space-y-8 text-start bg-brand-cream">
       {/* Header & Page Title */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surface-bordered pb-4 sm:pb-6">
         <div>
-          <h1 className="font-display font-black text-2xl sm:text-4xl text-charcoal">
+          <h1 className="font-display font-black text-2xl sm:text-4xl text-brown-dark">
             {t('shop')}
           </h1>
           <p className="text-xs sm:text-sm text-bodytext-muted mt-1">
@@ -73,9 +73,9 @@ export const Shop = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMobileFilterOpen(true)}
-            className="md:hidden flex items-center gap-2 px-4 py-2.5 bg-surface border border-surface-bordered rounded-xl text-xs font-bold text-charcoal shadow-sm touch-target"
+            className="md:hidden flex items-center gap-2 px-4 py-2.5 bg-white border border-surface-bordered rounded-xl text-xs font-bold text-brown-dark shadow-sm touch-target"
           >
-            <Filter className="w-4 h-4 text-clay" />
+            <Filter className="w-4 h-4 text-brand-orange" />
             <span>Filters</span>
           </button>
 
@@ -84,7 +84,7 @@ export const Shop = () => {
             <select
               value={sortParam}
               onChange={(e) => updateFilter('sort', e.target.value)}
-              className="bg-surface border border-surface-bordered rounded-xl py-2 px-3 text-xs font-semibold text-charcoal focus:outline-none focus:border-clay"
+              className="bg-white border border-surface-bordered rounded-xl py-2 px-3 text-xs font-semibold text-brown-dark focus:outline-none focus:border-brand-orange"
             >
               <option value="newest">Newest Arrivals</option>
               <option value="price_asc">Price: Low to High</option>
@@ -97,36 +97,36 @@ export const Shop = () => {
 
       {/* Active Filter Pills Bar */}
       {(categoryParam || typeParam || searchParam || inStockParam || maxPriceParam) && (
-        <div className="flex flex-wrap items-center gap-2 bg-sand-dark p-3 rounded-2xl border border-surface-bordered">
+        <div className="flex flex-wrap items-center gap-2 bg-white p-3 rounded-2xl border border-surface-bordered shadow-sm">
           <span className="text-xs font-bold text-bodytext-muted">Active Filters:</span>
           {categoryParam && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface border border-surface-bordered rounded-full text-xs font-semibold text-charcoal">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-cream border border-surface-bordered rounded-full text-xs font-semibold text-brown-dark">
               <span>Species: {categoryParam}</span>
-              <button onClick={() => updateFilter('category', '')}><X className="w-3 h-3 hover:text-clay" /></button>
+              <button onClick={() => updateFilter('category', '')}><X className="w-3 h-3 hover:text-brand-orange" /></button>
             </span>
           )}
           {typeParam && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface border border-surface-bordered rounded-full text-xs font-semibold text-charcoal">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-cream border border-surface-bordered rounded-full text-xs font-semibold text-brown-dark">
               <span>Type: {typeParam}</span>
-              <button onClick={() => updateFilter('type', '')}><X className="w-3 h-3 hover:text-clay" /></button>
+              <button onClick={() => updateFilter('type', '')}><X className="w-3 h-3 hover:text-brand-orange" /></button>
             </span>
           )}
           {searchParam && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface border border-surface-bordered rounded-full text-xs font-semibold text-charcoal">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-cream border border-surface-bordered rounded-full text-xs font-semibold text-brown-dark">
               <span>Search: "{searchParam}"</span>
-              <button onClick={() => updateFilter('search', '')}><X className="w-3 h-3 hover:text-clay" /></button>
+              <button onClick={() => updateFilter('search', '')}><X className="w-3 h-3 hover:text-brand-orange" /></button>
             </span>
           )}
           {inStockParam && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface border border-surface-bordered rounded-full text-xs font-semibold text-charcoal">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-cream border border-surface-bordered rounded-full text-xs font-semibold text-brown-dark">
               <span>In Stock Only</span>
-              <button onClick={() => updateFilter('in_stock', '')}><X className="w-3 h-3 hover:text-clay" /></button>
+              <button onClick={() => updateFilter('in_stock', '')}><X className="w-3 h-3 hover:text-brand-orange" /></button>
             </span>
           )}
 
           <button
             onClick={clearAllFilters}
-            className="text-xs font-bold text-clay hover:underline flex items-center gap-1 ms-auto"
+            className="text-xs font-bold text-brand-orange hover:underline flex items-center gap-1 ms-auto"
           >
             <RotateCcw className="w-3 h-3" />
             <span>Reset All</span>
@@ -138,17 +138,17 @@ export const Shop = () => {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
         {/* DESKTOP SIDEBAR FILTERS */}
         <aside className="hidden md:block md:col-span-3 space-y-6">
-          <div className="bg-surface border border-surface-bordered p-6 rounded-3xl shadow-warm space-y-6">
+          <div className="bg-white border border-surface-bordered p-6 rounded-3xl shadow-warm space-y-6">
             <div className="flex items-center justify-between border-b border-surface-bordered pb-4">
-              <h3 className="font-display font-bold text-charcoal text-base flex items-center gap-2">
-                <SlidersHorizontal className="w-4 h-4 text-clay" />
+              <h3 className="font-display font-bold text-brown-dark text-base flex items-center gap-2">
+                <SlidersHorizontal className="w-4 h-4 text-brand-orange" />
                 <span>Filter Catalog</span>
               </h3>
             </div>
 
             {/* Filter 1: Animal Species */}
             <div className="space-y-3">
-              <h4 className="font-display font-bold text-xs text-charcoal uppercase tracking-wider">
+              <h4 className="font-display font-bold text-xs text-brown-dark uppercase tracking-wider">
                 {t('categories')}
               </h4>
               <div className="space-y-1 text-xs">
@@ -163,8 +163,8 @@ export const Shop = () => {
                     onClick={() => updateFilter('category', item.id)}
                     className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-start transition-colors font-semibold ${
                       categoryParam === item.id
-                        ? 'bg-clay text-white'
-                        : 'hover:bg-sand text-bodytext'
+                        ? 'bg-brand-orange text-white'
+                        : 'hover:bg-brand-cream text-bodytext'
                     }`}
                   >
                     <PetroglyphIcon species={item.icon || 'camel'} size="sm" badge={false} className="w-4 h-4 shrink-0" />
@@ -176,7 +176,7 @@ export const Shop = () => {
 
             {/* Filter 2: Product Type */}
             <div className="space-y-3 border-t border-surface-bordered pt-4">
-              <h4 className="font-display font-bold text-xs text-charcoal uppercase tracking-wider">
+              <h4 className="font-display font-bold text-xs text-brown-dark uppercase tracking-wider">
                 Product Type
               </h4>
               <div className="space-y-1 text-xs">
@@ -192,8 +192,8 @@ export const Shop = () => {
                     onClick={() => updateFilter('type', item.id)}
                     className={`w-full text-start px-3 py-2.5 rounded-xl transition-colors font-semibold ${
                       typeParam === item.id
-                        ? 'bg-teal text-white'
-                        : 'hover:bg-sand text-bodytext'
+                        ? 'bg-brown-dark text-white'
+                        : 'hover:bg-brand-cream text-bodytext'
                     }`}
                   >
                     {item.label}
@@ -204,7 +204,7 @@ export const Shop = () => {
 
             {/* Filter 3: In Stock Only Toggle */}
             <div className="border-t border-surface-bordered pt-4 flex items-center justify-between">
-              <label htmlFor="inStockToggle" className="text-xs font-bold text-charcoal cursor-pointer">
+              <label htmlFor="inStockToggle" className="text-xs font-bold text-brown-dark cursor-pointer">
                 {t('inStock')} Only
               </label>
               <input
@@ -212,7 +212,7 @@ export const Shop = () => {
                 type="checkbox"
                 checked={inStockParam}
                 onChange={(e) => updateFilter('in_stock', e.target.checked ? 'true' : '')}
-                className="w-4 h-4 text-clay focus:ring-clay border-surface-bordered rounded cursor-pointer"
+                className="w-4 h-4 text-brand-orange focus:ring-brand-orange border-surface-bordered rounded cursor-pointer"
               />
             </div>
           </div>
@@ -223,19 +223,19 @@ export const Shop = () => {
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="h-80 bg-surface rounded-2xl animate-pulse border border-surface-bordered" />
+                <div key={i} className="h-80 bg-white rounded-3xl animate-pulse border border-surface-bordered" />
               ))}
             </div>
           ) : products.length === 0 ? (
-            <div className="bg-surface border border-surface-bordered rounded-3xl p-8 sm:p-12 text-center space-y-4">
+            <div className="bg-white border border-surface-bordered rounded-3xl p-8 sm:p-12 text-center space-y-4 shadow-warm">
               <PetroglyphIcon species="camel" size="xl" className="mx-auto" />
-              <h3 className="font-display font-bold text-charcoal text-xl">No Products Found</h3>
+              <h3 className="font-display font-bold text-brown-dark text-xl">No Products Found</h3>
               <p className="text-xs sm:text-sm text-bodytext-muted max-w-md mx-auto">
                 No items matched your active search and species filters. Try clearing your filters or searching for generic terms like "vitamin" or "feed".
               </p>
               <button
                 onClick={clearAllFilters}
-                className="px-6 py-2.5 bg-clay hover:bg-clay-hover text-white font-bold rounded-xl text-xs transition-colors touch-target"
+                className="px-6 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-bold rounded-xl text-xs transition-colors touch-target shadow-md"
               >
                 Reset Catalog Filters
               </button>
@@ -253,15 +253,15 @@ export const Shop = () => {
       {/* MOBILE DRAWER FILTERS */}
       {mobileFilterOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden font-body md:hidden">
-          <div className="fixed inset-0 bg-charcoal/60 backdrop-blur-sm" onClick={() => setMobileFilterOpen(false)} />
-          <div className={`fixed inset-y-0 ${isRtl ? 'left-0' : 'right-0'} max-w-xs w-full bg-surface p-6 shadow-2xl space-y-6 overflow-y-auto`}>
+          <div className="fixed inset-0 bg-brown-dark/70 backdrop-blur-sm" onClick={() => setMobileFilterOpen(false)} />
+          <div className={`fixed inset-y-0 ${isRtl ? 'left-0' : 'right-0'} max-w-xs w-full bg-white p-6 shadow-2xl space-y-6 overflow-y-auto`}>
             <div className="flex items-center justify-between border-b border-surface-bordered pb-4">
-              <h3 className="font-display font-bold text-charcoal text-base">Filter Catalog</h3>
-              <button onClick={() => setMobileFilterOpen(false)}><X className="w-6 h-6 text-charcoal" /></button>
+              <h3 className="font-display font-bold text-brown-dark text-base">Filter Catalog</h3>
+              <button onClick={() => setMobileFilterOpen(false)}><X className="w-6 h-6 text-brown-dark" /></button>
             </div>
 
             <div className="space-y-3 text-start">
-              <h4 className="font-display font-bold text-xs uppercase tracking-wider text-charcoal">{t('categories')}</h4>
+              <h4 className="font-display font-bold text-xs uppercase tracking-wider text-brown-dark">{t('categories')}</h4>
               {[
                 { id: '', label: 'All Species' },
                 { id: 'camel', label: t('camel') },
@@ -271,7 +271,7 @@ export const Shop = () => {
                 <button
                   key={item.id}
                   onClick={() => { updateFilter('category', item.id); setMobileFilterOpen(false); }}
-                  className={`w-full text-start py-2.5 px-3 rounded-xl text-xs font-semibold ${categoryParam === item.id ? 'bg-clay text-white' : 'bg-sand text-bodytext'}`}
+                  className={`w-full text-start py-2.5 px-3 rounded-xl text-xs font-semibold ${categoryParam === item.id ? 'bg-brand-orange text-white' : 'bg-brand-cream text-bodytext'}`}
                 >
                   {item.label}
                 </button>
@@ -279,7 +279,7 @@ export const Shop = () => {
             </div>
 
             <div className="space-y-3 border-t border-surface-bordered pt-4 text-start">
-              <h4 className="font-display font-bold text-xs uppercase tracking-wider text-charcoal">Product Type</h4>
+              <h4 className="font-display font-bold text-xs uppercase tracking-wider text-brown-dark">Product Type</h4>
               {[
                 { id: '', label: 'All Types' },
                 { id: 'medicine', label: t('medicine') },
@@ -290,7 +290,7 @@ export const Shop = () => {
                 <button
                   key={item.id}
                   onClick={() => { updateFilter('type', item.id); setMobileFilterOpen(false); }}
-                  className={`w-full text-start py-2.5 px-3 rounded-xl text-xs font-semibold ${typeParam === item.id ? 'bg-teal text-white' : 'bg-sand text-bodytext'}`}
+                  className={`w-full text-start py-2.5 px-3 rounded-xl text-xs font-semibold ${typeParam === item.id ? 'bg-brown-dark text-white' : 'bg-brand-cream text-bodytext'}`}
                 >
                   {item.label}
                 </button>
@@ -299,7 +299,7 @@ export const Shop = () => {
 
             <button
               onClick={() => { clearAllFilters(); setMobileFilterOpen(false); }}
-              className="w-full py-3.5 bg-charcoal text-sand rounded-xl font-bold text-xs shadow-md"
+              className="w-full py-3.5 bg-brand-orange text-white rounded-xl font-bold text-xs shadow-md"
             >
               Reset Filters
             </button>

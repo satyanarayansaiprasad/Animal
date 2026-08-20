@@ -26,24 +26,24 @@ export const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="group relative bg-surface-card border border-surface-bordered rounded-2xl sm:rounded-3xl overflow-hidden shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col h-full text-start">
+    <div className="group relative bg-white border border-surface-bordered rounded-2xl sm:rounded-3xl overflow-hidden shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col h-full text-start">
       {/* Top Badges Overlay */}
       <div className="absolute top-3 left-3 right-3 z-10 flex items-center justify-between pointer-events-none">
-        {/* Animal Species Petroglyph Badge */}
+        {/* Animal Species Photo Avatar Badge */}
         <div className="pointer-events-auto shadow-sm">
           <PetroglyphIcon species={product.category} size="sm" />
         </div>
 
-        {/* Sale / Discount Gold Badge */}
+        {/* Sale / Discount Orange Pill Badge */}
         {hasDiscount && (
-          <span className="pointer-events-auto bg-gold text-charcoal font-display font-black text-[10px] sm:text-[11px] px-2.5 py-0.5 sm:py-1 rounded-full shadow-sm">
+          <span className="pointer-events-auto bg-brand-orange text-white font-display font-black text-[10px] sm:text-[11px] px-2.5 py-0.5 sm:py-1 rounded-full shadow-sm">
             SALE
           </span>
         )}
       </div>
 
       {/* Product Image Container */}
-      <Link to={`/product/${product.id}`} className="relative block aspect-square bg-sand/30 overflow-hidden p-4">
+      <Link to={`/product/${product.id}`} className="relative block aspect-square bg-brand-cream/50 overflow-hidden p-4">
         {!imgError && product.image ? (
           <img
             src={product.image}
@@ -53,15 +53,15 @@ export const ProductCard = ({ product }) => {
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-sand-light text-bodytext-muted">
+          <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-brand-sand text-bodytext-muted">
             <PetroglyphIcon species={product.category} size="lg" />
             <span className="text-[10px] mt-2 font-mono">{product.sku}</span>
           </div>
         )}
 
-        {/* Hover Quick Action Layer */}
-        <div className="absolute inset-0 bg-charcoal/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
-          <span className="bg-surface text-charcoal p-2.5 rounded-full shadow-md hover:bg-clay hover:text-white transition-colors">
+        {/* Quick View Hover Overlay */}
+        <div className="absolute inset-0 bg-brown-dark/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+          <span className="bg-white text-brown-dark p-2.5 rounded-full shadow-md hover:bg-brand-orange hover:text-white transition-colors">
             <Eye className="w-4 h-4" />
           </span>
         </div>
@@ -72,34 +72,34 @@ export const ProductCard = ({ product }) => {
         <div className="space-y-1.5">
           {/* Category Pill & Stock Status */}
           <div className="flex items-center justify-between text-[11px] sm:text-xs">
-            <span className="text-teal font-bold capitalize tracking-wide">
+            <span className="text-brand-orange font-bold capitalize tracking-wide">
               {product.type}
             </span>
             <span
               className={`font-semibold ${
-                product.in_stock ? 'text-teal' : 'text-clay font-bold'
+                product.in_stock ? 'text-teal-700' : 'text-brand-orange font-bold'
               }`}
             >
               {product.in_stock ? t('inStock') : t('outOfStock')}
             </span>
           </div>
 
-          {/* Title - Fixed height container for perfect grid row alignment */}
+          {/* Title */}
           <Link to={`/product/${product.id}`} className="block">
-            <h3 className="font-display font-bold text-charcoal text-xs sm:text-sm line-clamp-2 hover:text-clay transition-colors leading-snug min-h-[2.5rem]">
+            <h3 className="font-display font-bold text-bodytext text-xs sm:text-sm line-clamp-2 hover:text-brand-orange transition-colors leading-snug min-h-[2.5rem]">
               {title}
             </h3>
           </Link>
 
           {/* Rating */}
-          <div className="flex items-center gap-1 text-gold text-xs pt-0.5">
-            <Star className="w-3.5 h-3.5 fill-gold text-gold" />
-            <span className="font-mono font-bold text-charcoal">{product.rating || 4.9}</span>
+          <div className="flex items-center gap-1 text-brand-orange text-xs pt-0.5">
+            <Star className="w-3.5 h-3.5 fill-brand-orange text-brand-orange" />
+            <span className="font-mono font-bold text-bodytext">{product.rating || 4.9}</span>
             <span className="text-bodytext-muted text-[10px]">({product.reviews_count || 12})</span>
           </div>
         </div>
 
-        {/* Price & Add to Cart Action */}
+        {/* Price & Add to Cart Action Button */}
         <div className="pt-3 border-t border-surface-bordered flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
           <div className="flex flex-col text-start">
             {hasDiscount && (
@@ -107,7 +107,7 @@ export const ProductCard = ({ product }) => {
                 {formatPrice(product.price_omr)}
               </span>
             )}
-            <span className="font-mono-price font-bold text-sm sm:text-base text-clay leading-tight">
+            <span className="font-mono-price font-bold text-sm sm:text-base text-brand-orange leading-tight">
               {formatPrice(priceOmr)}
             </span>
           </div>
@@ -115,12 +115,12 @@ export const ProductCard = ({ product }) => {
           <button
             onClick={handleQuickAdd}
             disabled={!product.in_stock}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all active:scale-95 shadow-sm touch-target ${
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all active:scale-95 shadow-sm touch-target ${
               added
-                ? 'bg-teal text-white'
+                ? 'bg-brown-dark text-white'
                 : product.in_stock
-                ? 'bg-clay hover:bg-clay-hover text-white'
-                : 'bg-sand text-bodytext-muted cursor-not-allowed'
+                ? 'bg-brand-orange hover:bg-brand-orange-hover text-white'
+                : 'bg-brand-sand text-bodytext-muted cursor-not-allowed'
             }`}
           >
             {added ? (
