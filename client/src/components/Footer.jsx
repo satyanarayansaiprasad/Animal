@@ -1,62 +1,61 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Instagram, ShieldCheck, Truck, CreditCard, Stethoscope } from 'lucide-react';
+import { Instagram, Youtube, Video, Phone, Mail, MapPin } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import { PetroglyphIcon } from './PetroglyphIcon';
 
 export const Footer = () => {
   const { language, t } = useLanguage();
 
   return (
-    <footer className="bg-brown-dark text-white pt-12 pb-8 border-t-4 border-brand-orange font-body text-start">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Top Feature Badges Bar */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-10 mb-10 border-b border-brown-border">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-brown-header text-brand-orange rounded-2xl shrink-0 border border-brand-orange/20">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="font-display font-bold text-white text-sm">{t('trustedSpecialist')}</h4>
-              <p className="text-xs text-white/70">Certified veterinary formulas</p>
-            </div>
+    <footer className="w-full font-body text-start">
+      {/* 1. SUB-FOOTER BRAND RIBBON (Light Sand Background - Screenshot 3) */}
+      <div className="bg-[#F9F6F0] py-6 px-4 sm:px-8 border-t border-surface-bordered">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="space-y-0.5 text-center sm:text-start">
+            <span className="text-xs text-bodytext-muted block">It's all with you</span>
+            <span className="font-display font-black text-xl sm:text-2xl text-brand-orange">
+              AL-NAMOOS VET CLINIC
+            </span>
           </div>
 
+          {/* Social Icons */}
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-brown-header text-brand-orange rounded-2xl shrink-0 border border-brand-orange/20">
-              <Truck className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="font-display font-bold text-white text-sm">{t('expressGccDelivery')}</h4>
-              <p className="text-xs text-white/70">Oman, UAE, KSA, Qatar, Kuwait & Bahrain</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-brown-header text-brand-orange rounded-2xl shrink-0 border border-brand-orange/20">
-              <Stethoscope className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="font-display font-bold text-white text-sm">Doctor Consultation</h4>
-              <p className="text-xs text-white/70">+968 9469 4666 / +968 7964 4471</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-brown-header text-brand-orange rounded-2xl shrink-0 border border-brand-orange/20">
-              <CreditCard className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="font-display font-bold text-white text-sm">Apple Pay & Bank Transfer</h4>
-              <p className="text-xs text-white/70">Bank Muscat & ADIB</p>
-            </div>
+            <a
+              href="https://instagram.com/alnamoos.c"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 bg-white border border-surface-bordered rounded-xl text-bodytext hover:text-brand-orange hover:border-brand-orange transition-colors shadow-sm"
+              aria-label="Instagram"
+            >
+              <Instagram className="w-4 h-4" />
+            </a>
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 bg-white border border-surface-bordered rounded-xl text-bodytext hover:text-brand-orange hover:border-brand-orange transition-colors shadow-sm"
+              aria-label="YouTube"
+            >
+              <Youtube className="w-4 h-4" />
+            </a>
+            <a
+              href="https://tiktok.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 bg-white border border-surface-bordered rounded-xl text-bodytext hover:text-brand-orange hover:border-brand-orange transition-colors shadow-sm font-bold text-xs"
+              aria-label="TikTok"
+            >
+              <Video className="w-4 h-4" />
+            </a>
           </div>
         </div>
+      </div>
 
-        {/* Main Footer Links */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-brown-border">
-          {/* Col 1: Brand Info */}
-          <div className="space-y-4">
+      {/* 2. MAIN DARK BROWN FOOTER (#4A230F - Screenshot 3) */}
+      <div className="bg-[#4A230F] text-white py-12 px-4 sm:px-8 border-t border-[#5C2D15]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+          {/* Column 1: Brand Info & Branch Contacts */}
+          <div className="md:col-span-6 space-y-4">
             <div className="flex items-center gap-3">
               <img
                 src="/images/logo.jpg"
@@ -67,131 +66,93 @@ export const Footer = () => {
                 <span className="font-display font-black text-xl text-white">
                   AL-NAMOOS VET CLINIC
                 </span>
-                <span className="text-[10px] text-brand-orange font-bold uppercase tracking-widest">
+                <span className="text-[10px] text-brand-orange font-bold uppercase tracking-widest font-display">
                   CARE • COMPASSION • COMMITMENT
                 </span>
               </div>
             </div>
-            <p className="text-xs text-white/80 leading-relaxed">
-              {t('aboutFooter')}
+
+            <p className="text-xs text-white/80 leading-relaxed max-w-lg">
+              The most extensive and specialized website dedicated to camel and horse racing, featuring comprehensive treatment solutions and the latest news to support camel trainers across the Arab Gulf.
             </p>
-            <div className="pt-2 flex items-center gap-3">
-              <a
-                href="https://instagram.com/alnamoos.c"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 bg-brown-header hover:bg-brand-orange text-white rounded-xl transition-colors flex items-center gap-2 text-xs font-semibold border border-brand-orange/30"
-              >
-                <Instagram className="w-4 h-4 text-brand-orange" />
-                <span>@alnamoos.c</span>
-              </a>
+
+            <div className="space-y-2 pt-2 text-xs text-white/90">
+              <div className="flex items-center gap-2 font-mono">
+                <span className="text-base">🇴🇲</span>
+                <span className="font-bold text-white/70">OMAN</span>
+                <a href="tel:+96895266144" className="hover:text-brand-orange transition-colors">
+                  +968 9526 6144
+                </a>
+              </div>
+              <div className="flex items-center gap-2 font-mono">
+                <span className="text-base">🇦🇪</span>
+                <span className="font-bold text-white/70">UAE</span>
+                <a href="tel:+971562973007" className="hover:text-brand-orange transition-colors">
+                  +971 56 297 3007
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Col 2: Quick Links */}
-          <div className="space-y-3">
-            <h4 className="font-display font-bold text-brand-orange text-sm uppercase tracking-wider">{t('quickLinks')}</h4>
+          {/* Column 2: Quick Links */}
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="font-display font-bold text-xs text-white uppercase tracking-wider">
+              QUICK LINKS
+            </h4>
             <ul className="space-y-2 text-xs text-white/80">
               <li>
-                <Link to="/" className="hover:text-brand-orange transition-colors">{t('home')}</Link>
+                <Link to="/" className="hover:text-brand-orange transition-colors">Home</Link>
               </li>
               <li>
-                <Link to="/shop" className="hover:text-brand-orange transition-colors">{t('shop')}</Link>
+                <Link to="/about" className="hover:text-brand-orange transition-colors">About us</Link>
               </li>
               <li>
-                <Link to="/consultation" className="hover:text-brand-orange transition-colors">{t('consultation')}</Link>
+                <Link to="/shop?type=medicine" className="hover:text-brand-orange transition-colors">Doping Test</Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-brand-orange transition-colors">{t('aboutUs')}</Link>
+                <Link to="/shop" className="hover:text-brand-orange transition-colors">Veterinary Shop</Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-brand-orange transition-colors">{t('contactUs')}</Link>
-              </li>
-              <li>
-                <Link to="/delivery-policy" className="hover:text-brand-orange transition-colors">{t('deliveryPolicy')}</Link>
-              </li>
-              <li>
-                <Link to="/terms-privacy" className="hover:text-brand-orange transition-colors">{t('termsPrivacy')}</Link>
-              </li>
-              <li>
-                <Link to="/admin" className="hover:text-brand-orange transition-colors font-bold">{t('adminPanel')}</Link>
+                <Link to="/consultation" className="hover:text-brand-orange transition-colors">Ask a Doctor</Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Species Categories */}
-          <div className="space-y-3">
-            <h4 className="font-display font-bold text-brand-orange text-sm uppercase tracking-wider">{t('categories')}</h4>
-            <ul className="space-y-2.5 text-xs text-white/80">
+          {/* Column 3: Legal */}
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="font-display font-bold text-xs text-white uppercase tracking-wider">
+              LEGAL
+            </h4>
+            <ul className="space-y-2 text-xs text-white/80">
               <li>
-                <Link to="/shop?category=camel" className="flex items-center gap-2 hover:text-brand-orange transition-colors">
-                  <PetroglyphIcon species="camel" size="sm" badge={false} className="w-4 h-4 shrink-0" />
-                  <span>{t('camel')}</span>
-                </Link>
+                <Link to="/terms-privacy" className="hover:text-brand-orange transition-colors">Privacy Policy</Link>
               </li>
               <li>
-                <Link to="/shop?category=horse" className="flex items-center gap-2 hover:text-brand-orange transition-colors">
-                  <PetroglyphIcon species="horse" size="sm" badge={false} className="w-4 h-4 shrink-0" />
-                  <span>{t('horse')}</span>
-                </Link>
+                <Link to="/delivery-policy" className="hover:text-brand-orange transition-colors">Shipping Policy</Link>
               </li>
               <li>
-                <Link to="/shop?category=cow" className="flex items-center gap-2 hover:text-brand-orange transition-colors">
-                  <PetroglyphIcon species="cow" size="sm" badge={false} className="w-4 h-4 shrink-0" />
-                  <span>{t('cow')}</span>
-                </Link>
+                <Link to="/terms-privacy" className="hover:text-brand-orange transition-colors">Return Policy</Link>
               </li>
               <li>
-                <Link to="/shop?type=medicine" className="hover:text-brand-orange transition-colors">{t('medicine')}</Link>
-              </li>
-              <li>
-                <Link to="/shop?type=supplements" className="hover:text-brand-orange transition-colors">{t('supplements')}</Link>
-              </li>
-              <li>
-                <Link to="/shop?type=feed" className="hover:text-brand-orange transition-colors">{t('feed')}</Link>
-              </li>
-              <li>
-                <Link to="/shop?type=equipment" className="hover:text-brand-orange transition-colors">{t('equipment')}</Link>
+                <Link to="/admin" className="hover:text-brand-orange transition-colors font-bold text-brand-orange">Admin Panel</Link>
               </li>
             </ul>
-          </div>
-
-          {/* Col 4: Contact & Locations */}
-          <div className="space-y-3">
-            <h4 className="font-display font-bold text-brand-orange text-sm uppercase tracking-wider">{t('contactInfo')}</h4>
-            <div className="space-y-2 text-xs text-white/80">
-              <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-brand-orange shrink-0 mt-0.5" />
-                <span>Muscat Central & Sohar Livestock Hub, Oman</span>
-              </div>
-              <div className="flex items-center gap-2 dir-ltr">
-                <Phone className="w-4 h-4 text-brand-orange shrink-0" />
-                <a href="tel:+96895266144" className="hover:text-brand-orange font-mono">+968 9526 6144</a>
-              </div>
-              <div className="flex items-center gap-2 dir-ltr">
-                <Phone className="w-4 h-4 text-brand-orange shrink-0" />
-                <a href="tel:+96899519155" className="hover:text-brand-orange font-mono">+968 9951 9155</a>
-              </div>
-              <div className="flex items-center gap-2 dir-ltr">
-                <Phone className="w-4 h-4 text-brand-orange shrink-0" />
-                <a href="tel:+971562973007" className="hover:text-brand-orange font-mono">+971 56 297 3007</a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-brand-orange shrink-0" />
-                <a href="mailto:ysalhajri20006@gmail.com" className="hover:text-brand-orange">ysalhajri20006@gmail.com</a>
-              </div>
-            </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar: Copyright & Payment Badges */}
-        <div className="pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/60">
-          <p className="text-center sm:text-start">{t('rightsReserved')}</p>
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="text-[11px] text-white/50 me-1">Accepted Payments:</span>
-            <span className="px-2.5 py-1 bg-brown-header rounded-lg text-white font-mono font-bold text-[10px] border border-white/10">Apple Pay</span>
-            <span className="px-2.5 py-1 bg-brown-header rounded-lg text-brand-orange font-mono font-bold text-[10px] border border-brand-orange/20">Bank Muscat</span>
-            <span className="px-2.5 py-1 bg-brown-header rounded-lg text-brand-gold font-mono font-bold text-[10px] border border-brand-gold/20">ADIB</span>
+      {/* 3. BOTTOM COPYRIGHT & PAYMENT BADGES STRIP (White Background - Screenshot 3) */}
+      <div className="bg-white text-bodytext-muted py-4 px-4 sm:px-8 border-t border-surface-bordered">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+          <p className="text-center sm:text-start">
+            All Rights Reserved © 2026 AL-NAMOOS VET CLINIC
+          </p>
+
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 bg-blue-600 text-white rounded text-[10px] font-bold">AMEX</span>
+            <span className="px-2 py-0.5 bg-black text-white rounded text-[10px] font-bold"> Pay</span>
+            <span className="px-2 py-0.5 bg-red-600 text-white rounded text-[10px] font-bold">MasterCard</span>
+            <span className="px-2.5 py-0.5 bg-blue-800 text-white rounded text-[10px] font-bold">VISA</span>
           </div>
         </div>
       </div>
