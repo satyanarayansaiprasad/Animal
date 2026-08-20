@@ -21,22 +21,16 @@ const heroSlides = [
     image: '/images/hero_camel_racing.jpg',
     title_en: "AL-NAMOOS VET CLINIC — Camel Racing & Performance Medicine",
     title_ar: "سباقات الهجن والفروسية — عيادة الناموس البيطرية",
-    subtitle_en: "Certified injectable medicines, performance supplements, specialized feed, and equipment for racing dromedary camels.",
-    subtitle_ar: "أدوية بيطرية معتمدة، مكملات الأداء، أعلاف تخصصية ومعدات عالية الجودة للإبل والخيل والمواشي.",
   },
   {
     image: '/images/hero_equine_medicine.jpg',
     title_en: "Equine Joint & Endurance Performance Solutions",
     title_ar: "تركيبات مفاصل الخيل وأدوية سباقات القدرة والفروسية",
-    subtitle_en: "Hyaluronic acid injections, biotin hoof powders, anti-ulcer pastes, and endurance feeds for Arabian racehorses.",
-    subtitle_ar: "تركيبات مفاصل صيدلانية، بودرة البيوتين للحوافر، وأعلاف طاقة مخصصة لجياد القدرة والفروسية.",
   },
   {
     image: '/images/hero_dog_cat_care.jpg',
     title_en: "Small Animal & Pet Veterinary Care",
     title_ar: "رعاية شاملة للكلاب والقطط والحيوانات الأليفة",
-    subtitle_en: "Flea & tick control sprays, joint syrups, multi-vitamin chews, and specialized diets for pets.",
-    subtitle_ar: "بخاخات الحشرات، شراب المفاصل، مكملات الفيتامينات، والتغذية المتكاملة للحيوانات الأليفة.",
   },
 ];
 
@@ -79,9 +73,6 @@ export const Home = () => {
     setActiveSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   };
 
-  const currentSlideData = heroSlides[activeSlide];
-  const heroTitle = language === 'ar' ? currentSlideData.title_ar : currentSlideData.title_en;
-
   // Filtered Product Lists for Homepage Carousels (Matching Screenshots 3, 4 & 5)
   const bestSellers = products.slice(0, 4);
   const dexaCamel = products.filter((p) => p.category === 'camel').slice(0, 4);
@@ -100,8 +91,8 @@ export const Home = () => {
 
   return (
     <div className="space-y-12 sm:space-y-16 pb-16 font-body text-start bg-[#F9F6F0]">
-      {/* 1. CINEMATIC HERO BANNER + 4 ORANGE DOT INDICATORS (Screenshot 1 & 2) */}
-      <section className="relative w-full bg-[#351809] text-white overflow-hidden min-h-[440px] sm:min-h-[560px] flex items-center justify-center border-b border-[#5C2D15] shadow-2xl">
+      {/* 1. CLEAN FULL-WIDTH HERO SLIDER (Exact Al Zaafran Banner - Screenshot 1) */}
+      <section className="relative w-full bg-[#351809] text-white overflow-hidden min-h-[380px] sm:min-h-[480px] lg:min-h-[540px] flex items-end justify-center border-b border-[#5C2D15] shadow-2xl">
         {heroSlides.map((slide, idx) => (
           <div
             key={idx}
@@ -111,43 +102,23 @@ export const Home = () => {
           >
             <img
               src={slide.image}
-              alt="Hero Background"
-              className="w-full h-full object-cover object-center transform transition-transform duration-10000 ease-out"
+              alt="Hero Banner Slide"
+              className="w-full h-full object-cover object-center"
             />
           </div>
         ))}
 
-        {/* Desert Warm Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#351809]/95 via-[#351809]/40 to-[#351809]/20 z-0" />
-
-        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center space-y-4 sm:space-y-6 py-16">
-          <span className="text-brand-orange text-xs sm:text-sm font-extrabold uppercase tracking-widest block font-display bg-black/30 backdrop-blur-sm px-4 py-1 rounded-full w-fit mx-auto border border-brand-orange/40">
-            AL-NAMOOS VET CLINIC
-          </span>
-
-          <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-7xl text-white tracking-tight leading-tight drop-shadow-lg">
-            {heroTitle}
-          </h1>
-
-          <div className="pt-3 flex justify-center">
-            <Link
-              to="/shop"
-              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-brand-orange hover:bg-brand-orange-hover text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform border-2 border-white/20"
-              title="Explore Store Catalog"
-            >
-              <Plus className="w-6 h-6 sm:w-8 sm:h-8" />
-            </Link>
-          </div>
-        </div>
+        {/* Subtle Dark Bottom Gradient for Dots */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-10" />
 
         {/* 4 Orange Indicator Dots (Exact Al Zaafran Style - Screenshot 2) */}
-        <div className="absolute bottom-6 left-0 right-0 z-20 flex items-center justify-center gap-3">
+        <div className="relative z-20 pb-6 flex items-center justify-center gap-3">
           {heroSlides.map((_, i) => (
             <button
               key={i}
               onClick={() => setActiveSlide(i)}
               className={`h-3.5 rounded-full transition-all duration-300 ${
-                i === activeSlide ? 'w-8 bg-brand-orange' : 'w-3.5 bg-white/50 hover:bg-white/80'
+                i === activeSlide ? 'w-8 bg-brand-orange' : 'w-3.5 bg-white/60 hover:bg-white'
               }`}
               aria-label={`Go to slide ${i + 1}`}
             />
