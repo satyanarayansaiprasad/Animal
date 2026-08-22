@@ -1,65 +1,73 @@
 import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { LanguageProvider } from './context/LanguageContext';
+import { CurrencyProvider } from './context/CurrencyContext';
+import { CartProvider } from './context/CartContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { CartDrawer } from './components/CartDrawer';
-import { WhatsAppBubble } from './components/WhatsAppBubble';
-
 import { Home } from './pages/Home';
 import { Shop } from './pages/Shop';
+import { CategoryDetail } from './pages/CategoryDetail';
 import { ProductDetail } from './pages/ProductDetail';
 import { Cart } from './pages/Cart';
 import { Checkout } from './pages/Checkout';
 import { OrderConfirmation } from './pages/OrderConfirmation';
-import { Account } from './pages/Account';
 import { Consultation } from './pages/Consultation';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { DeliveryPolicy } from './pages/DeliveryPolicy';
 import { TermsPrivacy } from './pages/TermsPrivacy';
-import { NotFound } from './pages/NotFound';
+import { Account } from './pages/Account';
+
+// Admin Routes
 import { AdminLayout } from './pages/admin/AdminLayout';
+import { AdminDashboard } from './pages/admin/AdminDashboard';
+import { AdminProducts } from './pages/admin/AdminProducts';
+import { AdminOrders } from './pages/admin/AdminOrders';
+import { AdminSettings } from './pages/admin/AdminSettings';
 
 export function App() {
-  const location = useLocation();
-  const isAdminPath = location.pathname.startsWith('/admin');
-
   return (
-    <div className="min-h-screen flex flex-col bg-sand text-bodytext font-body selection:bg-clay selection:text-white">
-      {/* Hide standard store header/footer/bubble if inside Admin Portal */}
-      {!isAdminPath && <Header />}
-      
-      <main className="flex-1">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/consultation" element={<Consultation />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/delivery-policy" element={<DeliveryPolicy />} />
-          <Route path="/terms-privacy" element={<TermsPrivacy />} />
-          
-          {/* Admin Panel */}
-          <Route path="/admin/*" element={<AdminLayout />} />
-          
-          {/* 404 Fallback */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
+    <LanguageProvider>
+      <CurrencyProvider>
+        <CartProvider>
+          <Router>
+            <div className="min-h-screen flex flex-col bg-[#F9F6F0] text-bodytext antialiased">
+              <Header />
+              <CartDrawer />
+              <main className="flex-1">
+                <Routes>
+                  {/* Public Storefront Routes */}
+                  <Route path="/" element={<Home />} />
+                  <Route path="/shop" element={<Shop />} />
+                  <Route path="/category/:categoryId" element={<CategoryDetail />} />
+                  <Route path="/product/:id" element={<ProductDetail />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/order-success" element={<OrderConfirmation />} />
+                  <Route path="/consultation" element={<Consultation />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/delivery-policy" element={<DeliveryPolicy />} />
+                  <Route path="/terms-privacy" element={<TermsPrivacy />} />
+                  <Route path="/account" element={<Account />} />
 
-      {!isAdminPath && (
-        <>
-          <Footer />
-          <CartDrawer />
-          <WhatsAppBubble />
-        </>
-      )}
-    </div>
+                  {/* Admin Portal Routes */}
+                  <Route path="/admin" element={<AdminLayout />}>
+                    <Route index element={<AdminDashboard />} />
+                    <Route path="products" element={<AdminProducts />} />
+                    <Route path="orders" element={<AdminOrders />} />
+                    <Route path="settings" element={<AdminSettings />} />
+                  </Route>
+                </Routes>
+              </main>
+              <Footer />
+            </div>
+          </Router>
+        </CartProvider>
+      </CurrencyProvider>
+    </LanguageProvider>
   );
 }
 

@@ -91,8 +91,8 @@ export const Home = () => {
 
   return (
     <div className="w-full pb-16 font-body text-start bg-[#F9F6F0]">
-      {/* 1. FLUSH HERO SLIDER — Starts DIRECTLY below navbar with zero gap */}
-      <section className="relative w-full bg-[#351809] text-white overflow-hidden min-h-[380px] sm:min-h-[480px] lg:min-h-[560px] flex items-end justify-center border-b border-[#5C2D15] shadow-2xl mt-0 pt-0">
+      {/* 1. CLEAN FULL-WIDTH HERO SLIDER — Fits perfectly 16:9 ratio below sticky navbar */}
+      <section className="relative w-full bg-[#351809] text-white overflow-hidden aspect-[16/9] max-h-[580px] min-h-[320px] sm:min-h-[420px] lg:min-h-[520px] flex items-end justify-center border-b border-[#5C2D15] shadow-2xl mt-0 pt-0">
         {heroSlides.map((slide, idx) => (
           <div
             key={idx}
@@ -109,10 +109,10 @@ export const Home = () => {
         ))}
 
         {/* Subtle Dark Bottom Gradient for Dots */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-10" />
 
         {/* 4 Orange Indicator Dots (Exact Al Zaafran Style - Screenshot 2) */}
-        <div className="relative z-20 pb-6 flex items-center justify-center gap-3">
+        <div className="relative z-20 pb-4 sm:pb-6 flex items-center justify-center gap-3">
           {heroSlides.map((_, i) => (
             <button
               key={i}
