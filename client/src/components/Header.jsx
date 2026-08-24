@@ -49,7 +49,7 @@ export const Header = () => {
       {/* 1. TOP UTILITY BAR (Exact Al Zaafran Style) */}
       <div className="bg-[#3A1E0E] text-white/80 text-xs py-1.5 px-4 sm:px-8 border-b border-[#4A2511]">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Top Left Utility Links */}
+          {/* Top Utility Links */}
           <div className="flex items-center gap-4 text-[11px] font-medium text-white/70">
             <Link to="/about" className="hover:text-white transition-colors">
               About us
@@ -86,7 +86,7 @@ export const Header = () => {
       {/* 2. MAIN NAVBAR (Exact Al Zaafran Brown Navigation Bar) */}
       <div className="bg-[#4A230F] text-white py-3 px-4 sm:px-8 border-b border-[#5C2D15] shadow-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          {/* Far Left: Official AL-NAMOOS VET CLINIC Logo & Brand */}
+          {/* Logo & Brand Name */}
           <Link to="/" className="flex items-center gap-3 group shrink-0">
             <img
               src="/images/logo.jpg"
@@ -103,7 +103,7 @@ export const Header = () => {
             </div>
           </Link>
 
-          {/* Left-Center Navigation Links */}
+          {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-6 text-xs font-extrabold tracking-wider text-white/90 uppercase">
             <Link to="/category/camel-race" className="hover:text-brand-orange transition-colors whitespace-nowrap">
               CAMEL RACE
@@ -111,15 +111,12 @@ export const Header = () => {
             <Link to="/category/horse-race" className="hover:text-brand-orange transition-colors whitespace-nowrap">
               HORSE RACE
             </Link>
-            <Link to="/category/dog" className="hover:text-brand-orange transition-colors whitespace-nowrap">
-              DOG & PETS
-            </Link>
-            <Link to="/category/cow" className="hover:text-brand-orange transition-colors whitespace-nowrap">
+            <Link to="/category/cow-cattle" className="hover:text-brand-orange transition-colors whitespace-nowrap">
               COW & CATTLE
             </Link>
           </div>
 
-          {/* Right-Center Search Input */}
+          {/* Search Input */}
           <form onSubmit={handleSearchSubmit} className="hidden lg:flex flex-1 max-w-sm mx-4 relative">
             <input
               type="text"
@@ -139,9 +136,8 @@ export const Header = () => {
             </button>
           </form>
 
-          {/* Far Right Action Icons (Wishlist + Shopping Bag) */}
+          {/* Right Action Icons (Wishlist + Cart) */}
           <div className="flex items-center gap-4 shrink-0">
-            {/* Wishlist Icon */}
             <Link to="/account" className="relative p-1.5 text-white/80 hover:text-brand-orange transition-colors" title="Wishlist">
               <Heart className="w-5 h-5" />
               <span className="absolute -top-1 -right-1 bg-brand-orange text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
@@ -149,7 +145,6 @@ export const Header = () => {
               </span>
             </Link>
 
-            {/* Shopping Bag Icon */}
             <button
               onClick={() => setIsCartOpen(true)}
               className="relative p-1.5 text-white/80 hover:text-brand-orange transition-colors"
@@ -161,7 +156,6 @@ export const Header = () => {
               </span>
             </button>
 
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-1.5 text-white hover:text-brand-orange"
@@ -195,10 +189,7 @@ export const Header = () => {
             <Link to="/category/horse-race" className="hover:text-brand-orange py-1">
               HORSE RACE
             </Link>
-            <Link to="/category/dog" className="hover:text-brand-orange py-1">
-              DOG & PETS
-            </Link>
-            <Link to="/category/cow" className="hover:text-brand-orange py-1">
+            <Link to="/category/cow-cattle" className="hover:text-brand-orange py-1">
               COW & CATTLE
             </Link>
             <Link to="/consultation" className="text-brand-orange py-1">
