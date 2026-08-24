@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -21,12 +21,22 @@ import { TermsPrivacy } from './pages/TermsPrivacy';
 import { NotFound } from './pages/NotFound';
 import { AdminLayout } from './pages/admin/AdminLayout';
 
+// ScrollToTop Helper Component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname]);
+  return null;
+}
+
 export function App() {
   const location = useLocation();
   const isAdminPath = location.pathname.startsWith('/admin');
 
   return (
     <div className="min-h-screen flex flex-col bg-sand text-bodytext font-body selection:bg-brand-orange selection:text-white">
+      <ScrollToTop />
       {/* Hide standard store header/footer/bubble if inside Admin Portal */}
       {!isAdminPath && <Header />}
       
