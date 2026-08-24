@@ -1,38 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Filter, SlidersHorizontal, Search, RotateCcw, X } from 'lucide-react';
+import { useSearchParams, Link } from 'react-router-dom';
+import { Search } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { ProductCard } from '../components/ProductCard';
-import { PetroglyphIcon } from '../components/PetroglyphIcon';
 import { apiFetch } from '../services/api';
+
+const healthIssueIcons = [
+  { id: 'breathing-oxygen', title_en: 'Breathing & Oxygen', title_ar: 'علاجات النسم والتنفس', icon: '🫁' },
+  { id: 'bones-joints', title_en: 'Bones & Joints', title_ar: 'مفاصل و اوتار', icon: '🦴' },
+  { id: 'pain-relievers', title_en: 'Pain Relievers', title_ar: 'مسكنات الألم', icon: '⚡' },
+  { id: 'dexamethasone', title_en: 'Dexamethasone', title_ar: 'دكسا الهجن', icon: '🫀' },
+  { id: 'energy-power', title_en: 'Energy & Power', title_ar: 'طاقة ونشاط', icon: '💥' },
+  { id: 'diuretics', title_en: 'Diuretics', title_ar: 'إدرار وتصريف', icon: '💧' },
+  { id: 'protectors-recovery', title_en: 'Protectors & Recovery', title_ar: 'حماية واستشفاء', icon: '🩹' },
+];
 
 export const Shop = () => {
   const { language, isRtl, t } = useLanguage();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-  // Active Filter States
   const categoryParam = searchParams.get('category') || '';
-  const typeParam = searchParams.get('type') || '';
   const searchParam = searchParams.get('search') || '';
-  const sortParam = searchParams.get('sort') || 'newest';
-  const inStockParam = searchParams.get('in_stock') === 'true';
-  const maxPriceParam = searchParams.get('max_price') || '';
 
   useEffect(() => {
     setLoading(true);
+    let url = '/api/products';
     const query = new URLSearchParams();
     if (categoryParam) query.append('category', categoryParam);
-    if (typeParam) query.append('type', typeParam);
     if (searchParam) query.append('search', searchParam);
-    if (sortParam) query.append('sort', sortParam);
-    if (inStockParam) query.append('in_stock', 'true');
-    if (maxPriceParam) query.append('maxPrice', maxPriceParam);
+    
+    if (query.toString()) {
+      url += `?${query.toString()}`;
+    }
 
-    apiFetch(`/api/products?${query.toString()}`)
+    apiFetch(url)
       .then((data) => {
         if (data && data.success && data.data) {
           setProducts(data.data);
@@ -40,272 +44,80 @@ export const Shop = () => {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [categoryParam, typeParam, searchParam, sortParam, inStockParam, maxPriceParam]);
-
-  const updateFilter = (key, value) => {
-    const newParams = new URLSearchParams(searchParams);
-    if (value) {
-      newParams.set(key, value);
-    } else {
-      newParams.delete(key);
-    }
-    setSearchParams(newParams);
-  };
-
-  const clearAllFilters = () => {
-    setSearchParams(new URLSearchParams());
-  };
+  }, [categoryParam, searchParam]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 font-body space-y-6 sm:space-y-8 text-start bg-brand-cream">
-      {/* Header & Page Title */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surface-bordered pb-4 sm:pb-6">
-        <div>
-          <h1 className="font-display font-black text-2xl sm:text-4xl text-brown-dark">
-            {t('shop')}
-          </h1>
-          <p className="text-xs sm:text-sm text-bodytext-muted mt-1">
-            Browse complete desert veterinary catalog for camels, horses, and cattle across GCC.
-          </p>
-        </div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 font-body space-y-8 text-start bg-brand-cream min-h-screen">
+      {/* Header Title */}
+      <div className="text-center space-y-2 border-b border-surface-bordered pb-6">
+        <h1 className="font-display font-black text-3xl sm:text-5xl text-brown-dark">
+          {t('shop')}
+        </h1>
+        <p className="text-xs sm:text-sm text-bodytext-muted max-w-xl mx-auto">
+          Complete veterinary medicine catalog for race camels, Arabian horses, cattle, and pets.
+        </p>
+      </div>
 
-        {/* Top Controls: Mobile Filter Button & Desktop Sorting Selector */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setMobileFilterOpen(true)}
-            className="md:hidden flex items-center gap-2 px-4 py-2.5 bg-white border border-surface-bordered rounded-xl text-xs font-bold text-brown-dark shadow-sm touch-target"
+      {/* Categories Bar */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {[
+          { label: 'CAMEL RACE', slug: 'camel-race', img: '/images/species/camel_card.jpg' },
+          { label: 'HORSE RACE', slug: 'horse-race', img: '/images/species/horse_card.jpg' },
+          { label: 'DOG & PETS', slug: 'dog-pets', img: '/images/species/dog_card.jpg' },
+          { label: 'COW & CATTLE', slug: 'cow-cattle', img: '/images/species/cat_card.jpg' },
+        ].map((item, i) => (
+          <Link
+            key={i}
+            to={`/category/${item.slug}`}
+            className="flex items-center gap-3 p-4 bg-white border border-surface-bordered rounded-2xl shadow-sm hover:shadow-warm-hover hover:border-brand-orange transition-all group"
           >
-            <Filter className="w-4 h-4 text-brand-orange" />
-            <span>Filters</span>
-          </button>
+            <img src={item.img} alt={item.label} className="w-12 h-12 rounded-full object-cover border-2 border-brand-orange" />
+            <span className="font-display font-black text-xs sm:text-sm text-brown-dark group-hover:text-brand-orange transition-colors">
+              {item.label}
+            </span>
+          </Link>
+        ))}
+      </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-bodytext-muted hidden sm:inline">Sort by:</span>
-            <select
-              value={sortParam}
-              onChange={(e) => updateFilter('sort', e.target.value)}
-              className="bg-white border border-surface-bordered rounded-xl py-2 px-3 text-xs font-semibold text-brown-dark focus:outline-none focus:border-brand-orange"
+      {/* Body Part & Symptoms Icons Bar */}
+      <div className="bg-white border border-surface-bordered p-6 rounded-3xl space-y-4 shadow-warm">
+        <h3 className="font-display font-bold text-brown-dark text-sm sm:text-base text-center">
+          {language === 'ar' ? 'علاجات الأعضاء والأعراض البيطرية' : 'Body Part & Symptoms Veterinary Solutions'}
+        </h3>
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+          {healthIssueIcons.map((issue) => (
+            <Link
+              key={issue.id}
+              to={`/category/camel-race/${issue.id}`}
+              className="flex flex-col items-center p-3 rounded-2xl bg-brand-cream hover:bg-brand-orange hover:text-white transition-all text-center space-y-2 border border-surface-bordered group shadow-sm"
             >
-              <option value="newest">Newest Arrivals</option>
-              <option value="price_asc">Price: Low to High</option>
-              <option value="price_desc">Price: High to Low</option>
-              <option value="rating">Customer Rating</option>
-            </select>
-          </div>
+              <div className="w-12 h-12 rounded-2xl bg-white border border-brand-orange/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform shadow-inner">
+                {issue.icon}
+              </div>
+              <span className="text-[11px] font-bold leading-tight">
+                {language === 'ar' ? issue.title_ar : issue.title_en}
+              </span>
+            </Link>
+          ))}
         </div>
       </div>
 
-      {/* Active Filter Pills Bar */}
-      {(categoryParam || typeParam || searchParam || inStockParam || maxPriceParam) && (
-        <div className="flex flex-wrap items-center gap-2 bg-white p-3 rounded-2xl border border-surface-bordered shadow-sm">
-          <span className="text-xs font-bold text-bodytext-muted">Active Filters:</span>
-          {categoryParam && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-cream border border-surface-bordered rounded-full text-xs font-semibold text-brown-dark">
-              <span>Species: {categoryParam}</span>
-              <button onClick={() => updateFilter('category', '')}><X className="w-3 h-3 hover:text-brand-orange" /></button>
-            </span>
-          )}
-          {typeParam && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-cream border border-surface-bordered rounded-full text-xs font-semibold text-brown-dark">
-              <span>Type: {typeParam}</span>
-              <button onClick={() => updateFilter('type', '')}><X className="w-3 h-3 hover:text-brand-orange" /></button>
-            </span>
-          )}
-          {searchParam && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-cream border border-surface-bordered rounded-full text-xs font-semibold text-brown-dark">
-              <span>Search: "{searchParam}"</span>
-              <button onClick={() => updateFilter('search', '')}><X className="w-3 h-3 hover:text-brand-orange" /></button>
-            </span>
-          )}
-          {inStockParam && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-cream border border-surface-bordered rounded-full text-xs font-semibold text-brown-dark">
-              <span>In Stock Only</span>
-              <button onClick={() => updateFilter('in_stock', '')}><X className="w-3 h-3 hover:text-brand-orange" /></button>
-            </span>
-          )}
-
-          <button
-            onClick={clearAllFilters}
-            className="text-xs font-bold text-brand-orange hover:underline flex items-center gap-1 ms-auto"
-          >
-            <RotateCcw className="w-3 h-3" />
-            <span>Reset All</span>
-          </button>
-        </div>
-      )}
-
-      {/* Main Layout: Sidebar Filters + Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
-        {/* DESKTOP SIDEBAR FILTERS */}
-        <aside className="hidden md:block md:col-span-3 space-y-6">
-          <div className="bg-white border border-surface-bordered p-6 rounded-3xl shadow-warm space-y-6">
-            <div className="flex items-center justify-between border-b border-surface-bordered pb-4">
-              <h3 className="font-display font-bold text-brown-dark text-base flex items-center gap-2">
-                <SlidersHorizontal className="w-4 h-4 text-brand-orange" />
-                <span>Filter Catalog</span>
-              </h3>
-            </div>
-
-            {/* Filter 1: Animal Species */}
-            <div className="space-y-3">
-              <h4 className="font-display font-bold text-xs text-brown-dark uppercase tracking-wider">
-                {t('categories')}
-              </h4>
-              <div className="space-y-1 text-xs">
-                {[
-                  { id: '', label: t('allSpecies'), icon: 'camel' },
-                  { id: 'camel', label: t('camel'), icon: 'camel' },
-                  { id: 'horse', label: t('horse'), icon: 'horse' },
-                  { id: 'cow', label: t('cow'), icon: 'cow' },
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => updateFilter('category', item.id)}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-start transition-colors font-semibold ${
-                      categoryParam === item.id
-                        ? 'bg-brand-orange text-white'
-                        : 'hover:bg-brand-cream text-bodytext'
-                    }`}
-                  >
-                    <PetroglyphIcon species={item.icon || 'camel'} size="sm" badge={false} className="w-4 h-4 shrink-0" />
-                    <span>{item.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Filter 2: Product Type */}
-            <div className="space-y-3 border-t border-surface-bordered pt-4">
-              <h4 className="font-display font-bold text-xs text-brown-dark uppercase tracking-wider">
-                Product Type
-              </h4>
-              <div className="space-y-1 text-xs">
-                {[
-                  { id: '', label: t('allTypes') },
-                  { id: 'medicine', label: t('medicine') },
-                  { id: 'supplements', label: t('supplements') },
-                  { id: 'feed', label: t('feed') },
-                  { id: 'equipment', label: t('equipment') },
-                ].map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => updateFilter('type', item.id)}
-                    className={`w-full text-start px-3 py-2.5 rounded-xl transition-colors font-semibold ${
-                      typeParam === item.id
-                        ? 'bg-brown-dark text-white'
-                        : 'hover:bg-brand-cream text-bodytext'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Filter 3: In Stock Only Toggle */}
-            <div className="border-t border-surface-bordered pt-4 flex items-center justify-between">
-              <label htmlFor="inStockToggle" className="text-xs font-bold text-brown-dark cursor-pointer">
-                {t('inStock')} Only
-              </label>
-              <input
-                id="inStockToggle"
-                type="checkbox"
-                checked={inStockParam}
-                onChange={(e) => updateFilter('in_stock', e.target.checked ? 'true' : '')}
-                className="w-4 h-4 text-brand-orange focus:ring-brand-orange border-surface-bordered rounded cursor-pointer"
-              />
-            </div>
+      {/* Clean 4-Column Product Grid (NO SIDEBAR FILTERS) */}
+      <div className="space-y-6 pt-2">
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="h-80 bg-white rounded-3xl animate-pulse border border-surface-bordered" />
+            ))}
           </div>
-        </aside>
-
-        {/* PRODUCTS GRID AREA */}
-        <main className="md:col-span-9 space-y-6">
-          {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="h-80 bg-white rounded-3xl animate-pulse border border-surface-bordered" />
-              ))}
-            </div>
-          ) : products.length === 0 ? (
-            <div className="bg-white border border-surface-bordered rounded-3xl p-8 sm:p-12 text-center space-y-4 shadow-warm">
-              <PetroglyphIcon species="camel" size="xl" className="mx-auto" />
-              <h3 className="font-display font-bold text-brown-dark text-xl">No Products Found</h3>
-              <p className="text-xs sm:text-sm text-bodytext-muted max-w-md mx-auto">
-                No items matched your active search and species filters. Try clearing your filters or searching for generic terms like "vitamin" or "feed".
-              </p>
-              <button
-                onClick={clearAllFilters}
-                className="px-6 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-bold rounded-xl text-xs transition-colors touch-target shadow-md"
-              >
-                Reset Catalog Filters
-              </button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          )}
-        </main>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </div>
-
-      {/* MOBILE DRAWER FILTERS */}
-      {mobileFilterOpen && (
-        <div className="fixed inset-0 z-50 overflow-hidden font-body md:hidden">
-          <div className="fixed inset-0 bg-brown-dark/70 backdrop-blur-sm" onClick={() => setMobileFilterOpen(false)} />
-          <div className={`fixed inset-y-0 ${isRtl ? 'left-0' : 'right-0'} max-w-xs w-full bg-white p-6 shadow-2xl space-y-6 overflow-y-auto`}>
-            <div className="flex items-center justify-between border-b border-surface-bordered pb-4">
-              <h3 className="font-display font-bold text-brown-dark text-base">Filter Catalog</h3>
-              <button onClick={() => setMobileFilterOpen(false)}><X className="w-6 h-6 text-brown-dark" /></button>
-            </div>
-
-            <div className="space-y-3 text-start">
-              <h4 className="font-display font-bold text-xs uppercase tracking-wider text-brown-dark">{t('categories')}</h4>
-              {[
-                { id: '', label: 'All Species' },
-                { id: 'camel', label: t('camel') },
-                { id: 'horse', label: t('horse') },
-                { id: 'cow', label: t('cow') },
-              ].map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => { updateFilter('category', item.id); setMobileFilterOpen(false); }}
-                  className={`w-full text-start py-2.5 px-3 rounded-xl text-xs font-semibold ${categoryParam === item.id ? 'bg-brand-orange text-white' : 'bg-brand-cream text-bodytext'}`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="space-y-3 border-t border-surface-bordered pt-4 text-start">
-              <h4 className="font-display font-bold text-xs uppercase tracking-wider text-brown-dark">Product Type</h4>
-              {[
-                { id: '', label: 'All Types' },
-                { id: 'medicine', label: t('medicine') },
-                { id: 'supplements', label: t('supplements') },
-                { id: 'feed', label: t('feed') },
-                { id: 'equipment', label: t('equipment') },
-              ].map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => { updateFilter('type', item.id); setMobileFilterOpen(false); }}
-                  className={`w-full text-start py-2.5 px-3 rounded-xl text-xs font-semibold ${typeParam === item.id ? 'bg-brown-dark text-white' : 'bg-brand-cream text-bodytext'}`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-
-            <button
-              onClick={() => { clearAllFilters(); setMobileFilterOpen(false); }}
-              className="w-full py-3.5 bg-brand-orange text-white rounded-xl font-bold text-xs shadow-md"
-            >
-              Reset Filters
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
