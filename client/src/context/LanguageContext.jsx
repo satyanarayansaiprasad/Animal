@@ -26,29 +26,43 @@ export const dictionary = {
     profile: "الملف الشخصي",
     login: "تسجيل الدخول",
     logout: "تسجيل الخروج",
-    
-    // Species
+
+    // Species & Navigation
     camel: "الهجن والإبل",
     horse: "الخيل والفروسية",
     cow: "الأبقار والماشية",
+    dog: "الكلاب والأليفة",
+    falcon: "الصقور والطيور",
     allSpecies: "جميع الحيوانات",
-    
-    // Product Types
-    medicine: "الأدوية البيطرية",
-    supplements: "المكملات والفيتامينات",
-    feed: "الأعلاف والتغذية",
-    equipment: "المعدات والمستلزمات",
-    allTypes: "جميع الفئات",
 
-    // Banner & Hero
-    heroTitle: "الخبير البيطري الموثوق لإبل وهجن وجياد الخليج",
-    heroSubtitle: "أدوية بيطرية معتمدة، مكملات الأداء، أعلاف تخصصية ومعدات عالية الجودة للإبل والخيل والمواشي.",
-    exploreStore: "تصفّح المتجر",
-    askDoctor: "استشر الطبيب البيطري",
-    freeShippingNotice: "⚡ شحن مجاني لكافة دول الخليج للطلبات أكثر من 50 ر.ع (~477 د.إ)",
-    trustedSpecialist: "صيدلية بيطرية مرخصة بعمان ودول الخليج",
-    veterinaryFormulas: "تركيبات صيدلانية معتمدة ومبرّدة",
-    expressGccDelivery: "توصيل مبرّد وسريع لكافة دول الخليج",
+    // Homepage Section Headers
+    shopByCategories: "تسوق حسب الفئات",
+    bestSellers: "الأكثر طلباً",
+    bestSellersSub: "Best Sellers",
+    dexaCamel: "دكسا الهجن",
+    dexaCamelSub: "Dexa Camel Race",
+    boneJoint: "مفاصل و اوتار",
+    boneJointSub: "Bone & Joint",
+    breathTreatments: "علاجات النسم والتنفس",
+    breathSub: "Breath Treatments",
+    muscleProblems: "مشاكل العضلات",
+    muscleSub: "Muscle Problems",
+    trustedPartners: "استكشف شركاؤنا الموثوقون",
+    trustedPartnersSub: "Explore Our Trusted Veterinary Partners",
+    equineTreadmill: "ماكينة مشي الخيول",
+    equineTreadmillSub: "مقاسات متنوعة وتصاميم متينة تناسب جميع الإسطبلات",
+    upvcFencing: "أسوار UPVC",
+    upvcFencingSub: "لإسطبلات الخيول",
+    viewAll: "عرض الكل",
+    joinNewsletterTitle: "انضم إلى عيادة الناموس البيطرية",
+    joinNewsletterSub: "اشترك للحصول على أحدث المنتجات والعروض الترويجية والنصائح البيطرية",
+    yourEmailPlaceholder: "أدخل بريدك الإلكتروني",
+    subscribeSuccess: "تم الاشتراك بنجاح!",
+
+    // Value Props
+    originalFromSource: "منتجات أصيلة من المصدر",
+    offersFreeShipping: "عروض شحن مجاني للخليج",
+    securePayments: "دفع آمن ومتعدد الخيارات",
 
     // Product Card & Details
     inStock: "متوفر بالمخزون",
@@ -108,8 +122,13 @@ export const dictionary = {
     chatWhatsapp: "محادثة واتساب",
 
     // Footer
-    aboutFooter: "AL-NAMOOS VET CLINIC — اسم عريق في عمان ودول الخليج متخصص في أدوية ومكملات وأعلاف الهجن والخيل والمواشي.",
+    itsAllWithYou: "كل شيء معك",
+    aboutFooter: "AL-NAMOOS VET CLINIC — الاسم الموثوق في سلطنة عمان ودول الخليج لأدوية ومكملات وأعلاف الهجن والخيل والمواشي.",
     quickLinks: "روابط سريعة",
+    legal: "الشروط والسياسات",
+    privacyPolicy: "سياسة الخصوصية",
+    shippingPolicy: "سياسة الشحن والتوصيل",
+    returnPolicy: "سياسة الإرجاع والاستبدال",
     contactInfo: "معلومات التواصل والفروع",
     rightsReserved: "جميع الحقوق محفوظة © 2026 AL-NAMOOS VET CLINIC.",
   },
@@ -136,29 +155,43 @@ export const dictionary = {
     profile: "Profile",
     login: "Login",
     logout: "Logout",
-    
-    // Species
+
+    // Species & Navigation
     camel: "Camels",
     horse: "Horses",
     cow: "Cows & Cattle",
+    dog: "Dogs & Pets",
+    falcon: "Falcons & Birds",
     allSpecies: "All Animals",
-    
-    // Product Types
-    medicine: "Veterinary Medicine",
-    supplements: "Supplements & Vitamins",
-    feed: "Feed & Nutrition",
-    equipment: "Equipment & Supplies",
-    allTypes: "All Categories",
 
-    // Banner & Hero
-    heroTitle: "Oman's Trusted Desert Veterinary Specialist",
-    heroSubtitle: "Certified medicines, performance supplements, specialized feed, and equipment for camels, horses, and livestock.",
-    exploreStore: "Explore Store",
-    askDoctor: "Ask a Doctor",
-    freeShippingNotice: "⚡ FREE GCC SHIPPING ON ORDERS OVER 50 OMR (~477 AED)",
-    trustedSpecialist: "Licensed Oman & GCC Veterinary Pharmacy",
-    veterinaryFormulas: "Cold-Chain Certified Pharmaceutical Formulas",
-    expressGccDelivery: "Express Temperature-Controlled GCC Delivery",
+    // Homepage Section Headers
+    shopByCategories: "Shop by categories",
+    bestSellers: "Best Sellers",
+    bestSellersSub: "Most Requested Products",
+    dexaCamel: "Dexa Camel Race",
+    dexaCamelSub: "Camel Racing Performance",
+    boneJoint: "Bone & Joint",
+    boneJointSub: "Equine & Camel Joint Care",
+    breathTreatments: "Breath & Respiratory",
+    breathSub: "Breathing & Oxygen Formulas",
+    muscleProblems: "Muscle Care & Fatigue",
+    muscleSub: "Muscle Endurance Solutions",
+    trustedPartners: "Explore Our Trusted Partners",
+    trustedPartnersSub: "Leading Global Veterinary Pharmaceutical Brands",
+    equineTreadmill: "Equine Treadmill Walker",
+    equineTreadmillSub: "Various Sizes & Durable Specifications for All Stables",
+    upvcFencing: "UPVC Stable Fencing",
+    upvcFencingSub: "For Premium Horse Stables & Paddock Runs",
+    viewAll: "View All",
+    joinNewsletterTitle: "Join AL-NAMOOS VET CLINIC",
+    joinNewsletterSub: "Sign up to receive updates about new arrivals, race seasonal specials, and veterinary guidelines.",
+    yourEmailPlaceholder: "Your email address",
+    subscribeSuccess: "Subscribed successfully!",
+
+    // Value Props
+    originalFromSource: "ORIGINAL FROM THE SOURCE",
+    offersFreeShipping: "OFFERS FREE GCC SHIPPING",
+    securePayments: "SECURE & FLEXIBLE PAYMENTS",
 
     // Product Card & Details
     inStock: "In Stock",
@@ -218,8 +251,13 @@ export const dictionary = {
     chatWhatsapp: "WhatsApp Chat",
 
     // Footer
+    itsAllWithYou: "It's all with you",
     aboutFooter: "AL-NAMOOS VET CLINIC — Trusted veterinary pharmacy and livestock supplies specialist in Oman and the GCC.",
     quickLinks: "Quick Links",
+    legal: "Legal Policies",
+    privacyPolicy: "Privacy Policy",
+    shippingPolicy: "Shipping Policy",
+    returnPolicy: "Return & Refund Policy",
     contactInfo: "Contact & Branches",
     rightsReserved: "All rights reserved © 2026 AL-NAMOOS VET CLINIC.",
   },
@@ -230,7 +268,6 @@ export const LanguageProvider = ({ children }) => {
     return localStorage.getItem('alnamoos_lang') || 'ar';
   });
 
-  // Fixed LTR layout direction for BOTH English & Arabic as requested by user
   const isRtl = false;
 
   useEffect(() => {

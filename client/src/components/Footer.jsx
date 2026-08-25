@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Youtube, Video, Phone, Mail, MapPin } from 'lucide-react';
+import { Instagram, Youtube, Video } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export const Footer = () => {
@@ -8,11 +8,11 @@ export const Footer = () => {
 
   return (
     <footer className="w-full font-body text-start">
-      {/* 1. SUB-FOOTER BRAND RIBBON (Light Sand Background - Screenshot 3) */}
+      {/* 1. SUB-FOOTER BRAND RIBBON */}
       <div className="bg-[#F9F6F0] py-6 px-4 sm:px-8 border-t border-surface-bordered">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-0.5 text-center sm:text-start">
-            <span className="text-xs text-bodytext-muted block">It's all with you</span>
+            <span className="text-xs text-bodytext-muted block">{t('itsAllWithYou')}</span>
             <span className="font-display font-black text-xl sm:text-2xl text-brand-orange">
               AL-NAMOOS VET CLINIC
             </span>
@@ -51,7 +51,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      {/* 2. MAIN DARK BROWN FOOTER (#4A230F - Screenshot 3) */}
+      {/* 2. MAIN DARK BROWN FOOTER */}
       <div className="bg-[#4A230F] text-white py-12 px-4 sm:px-8 border-t border-[#5C2D15]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
           {/* Column 1: Brand Info & Branch Contacts */}
@@ -73,7 +73,7 @@ export const Footer = () => {
             </div>
 
             <p className="text-xs text-white/80 leading-relaxed max-w-lg">
-              The most extensive and specialized website dedicated to camel and horse racing, featuring comprehensive treatment solutions and the latest news to support camel trainers across the Arab Gulf.
+              {t('aboutFooter')}
             </p>
 
             <div className="space-y-2 pt-2 text-xs text-white/90">
@@ -97,23 +97,23 @@ export const Footer = () => {
           {/* Column 2: Quick Links */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="font-display font-bold text-xs text-white uppercase tracking-wider">
-              QUICK LINKS
+              {t('quickLinks')}
             </h4>
             <ul className="space-y-2 text-xs text-white/80">
               <li>
-                <Link to="/" className="hover:text-brand-orange transition-colors">Home</Link>
+                <Link to="/" className="hover:text-brand-orange transition-colors">{t('home')}</Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-brand-orange transition-colors">About us</Link>
+                <Link to="/about" className="hover:text-brand-orange transition-colors">{t('aboutUs')}</Link>
               </li>
               <li>
                 <Link to="/shop?type=medicine" className="hover:text-brand-orange transition-colors">Doping Test</Link>
               </li>
               <li>
-                <Link to="/shop" className="hover:text-brand-orange transition-colors">Veterinary Shop</Link>
+                <Link to="/shop" className="hover:text-brand-orange transition-colors">{t('shop')}</Link>
               </li>
               <li>
-                <Link to="/consultation" className="hover:text-brand-orange transition-colors">Ask a Doctor</Link>
+                <Link to="/consultation" className="hover:text-brand-orange transition-colors">{t('consultation')}</Link>
               </li>
             </ul>
           </div>
@@ -121,31 +121,31 @@ export const Footer = () => {
           {/* Column 3: Legal */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="font-display font-bold text-xs text-white uppercase tracking-wider">
-              LEGAL
+              {t('legal')}
             </h4>
             <ul className="space-y-2 text-xs text-white/80">
               <li>
-                <Link to="/terms-privacy" className="hover:text-brand-orange transition-colors">Privacy Policy</Link>
+                <Link to="/terms-privacy" className="hover:text-brand-orange transition-colors">{t('privacyPolicy')}</Link>
               </li>
               <li>
-                <Link to="/delivery-policy" className="hover:text-brand-orange transition-colors">Shipping Policy</Link>
+                <Link to="/delivery-policy" className="hover:text-brand-orange transition-colors">{t('shippingPolicy')}</Link>
               </li>
               <li>
-                <Link to="/terms-privacy" className="hover:text-brand-orange transition-colors">Return Policy</Link>
+                <Link to="/terms-privacy" className="hover:text-brand-orange transition-colors">{t('returnPolicy')}</Link>
               </li>
               <li>
-                <Link to="/admin" className="hover:text-brand-orange transition-colors font-bold text-brand-orange">Admin Panel</Link>
+                <Link to="/admin" className="hover:text-brand-orange transition-colors font-bold text-brand-orange">{t('adminPanel')}</Link>
               </li>
             </ul>
           </div>
         </div>
       </div>
 
-      {/* 3. BOTTOM COPYRIGHT & PAYMENT BADGES STRIP (White Background - Screenshot 3) */}
+      {/* 3. BOTTOM COPYRIGHT & PAYMENT BADGES STRIP */}
       <div className="bg-white text-bodytext-muted py-4 px-4 sm:px-8 border-t border-surface-bordered">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
           <p className="text-center sm:text-start">
-            All Rights Reserved © 2026 AL-NAMOOS VET CLINIC
+            {t('rightsReserved')}
           </p>
 
           <div className="flex items-center gap-2">

@@ -4,12 +4,7 @@ import {
   ShieldCheck,
   Package,
   CreditCard,
-  ArrowRight,
-  ArrowLeft,
-  Plus,
   Mail,
-  ChevronLeft,
-  ChevronRight,
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
@@ -35,7 +30,7 @@ const heroSlides = [
 ];
 
 export const Home = () => {
-  const { language, isRtl, t } = useLanguage();
+  const { language, t } = useLanguage();
   const { formatPrice } = useCurrency();
 
   const [products, setProducts] = useState([]);
@@ -65,14 +60,6 @@ export const Home = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const nextSlide = () => {
-    setActiveSlide((prev) => (prev + 1) % heroSlides.length);
-  };
-
-  const prevSlide = () => {
-    setActiveSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-  };
-
   // Filtered Product Lists for Homepage Carousels
   const bestSellers = products.slice(0, 4);
   const dexaCamel = products.filter((p) => p.category === 'camel').slice(0, 4);
@@ -91,7 +78,7 @@ export const Home = () => {
 
   return (
     <div className="w-full pb-16 font-body text-start bg-[#F9F6F0]">
-      {/* 1. CLEAN FULL-WIDTH HERO SLIDER — Starts DIRECTLY below navbar */}
+      {/* 1. CLEAN FULL-WIDTH HERO SLIDER */}
       <section className="relative w-full bg-[#351809] text-white overflow-hidden aspect-[16/9] max-h-[580px] min-h-[320px] sm:min-h-[420px] lg:min-h-[520px] flex items-end justify-center border-b border-[#5C2D15] shadow-2xl mt-0 pt-0">
         {heroSlides.map((slide, idx) => (
           <div
@@ -128,16 +115,16 @@ export const Home = () => {
 
       {/* SECTIONS BELOW HERO SLIDER */}
       <div className="space-y-12 sm:space-y-16 pt-10">
-        {/* 2. "Shop by categories" SECTION — ALL 5 MAIN CATEGORIES (Camel, Horse, Cow, Dog, Falcon) */}
+        {/* 2. "Shop by categories" SECTION */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 bg-white p-6 sm:p-8 rounded-3xl border border-surface-bordered shadow-warm">
             {/* Title on Left: Shop by categories */}
             <div className="space-y-1 text-center lg:text-start shrink-0 lg:pe-8 lg:border-e border-surface-bordered">
               <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
-                Shop by
+                {language === 'ar' ? 'تسوق حسب' : 'Shop by'}
               </h2>
               <h3 className="font-display font-black text-2xl sm:text-3xl text-bodytext">
-                categories
+                {language === 'ar' ? 'الفئات' : 'categories'}
               </h3>
             </div>
 
@@ -155,7 +142,7 @@ export const Home = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="relative z-10 bg-brand-orange py-2 text-center text-white font-bold text-xs sm:text-sm">
-                  {language === 'ar' ? 'الهجن والإبل' : 'Camel'}
+                  {t('camel')}
                 </div>
               </Link>
 
@@ -171,7 +158,7 @@ export const Home = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="relative z-10 bg-brand-orange py-2 text-center text-white font-bold text-xs sm:text-sm">
-                  {language === 'ar' ? 'الخيل والفروسية' : 'Horse'}
+                  {t('horse')}
                 </div>
               </Link>
 
@@ -187,7 +174,7 @@ export const Home = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="relative z-10 bg-brand-orange py-2 text-center text-white font-bold text-xs sm:text-sm">
-                  {language === 'ar' ? 'الأبقار والماشية' : 'Cow'}
+                  {t('cow')}
                 </div>
               </Link>
 
@@ -203,7 +190,7 @@ export const Home = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="relative z-10 bg-brand-orange py-2 text-center text-white font-bold text-xs sm:text-sm">
-                  {language === 'ar' ? 'الكلاب والأليفة' : 'Dog'}
+                  {t('dog')}
                 </div>
               </Link>
 
@@ -219,14 +206,14 @@ export const Home = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="relative z-10 bg-brand-orange py-2 text-center text-white font-bold text-xs sm:text-sm">
-                  {language === 'ar' ? 'الصقور والطيور' : 'Falcon'}
+                  {t('falcon')}
                 </div>
               </Link>
             </div>
           </div>
         </section>
 
-        {/* 3. PANORAMIC BANNER BREAK 1 ("ماكينة مشي الخيول") */}
+        {/* 3. PANORAMIC BANNER BREAK 1 ("Equine Treadmill") */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="relative rounded-3xl overflow-hidden bg-[#3A1E0E] text-white p-8 sm:p-12 shadow-2xl border border-brown-border flex flex-col items-center justify-center text-center space-y-3 min-h-[200px]">
             <img
@@ -236,20 +223,20 @@ export const Home = () => {
             />
             <div className="relative z-10 space-y-2 max-w-2xl">
               <h2 className="font-display font-black text-2xl sm:text-4xl text-white">
-                ماكينة مشي الخيول
+                {t('equineTreadmill')}
               </h2>
               <p className="text-xs sm:text-sm text-white/90 font-medium">
-                مقاسات متنوعة وتصاميم متينة تناسب جميع الإسطبلات
+                {t('equineTreadmillSub')}
               </p>
             </div>
           </div>
         </section>
 
-        {/* 4. SECTION 1: "الأكثر طلباً" / "Best Sellers" Product Grid */}
+        {/* 4. SECTION 1: "Best Sellers" Product Grid */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
           <div className="text-center">
             <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
-              الأكثر طلباً
+              {t('bestSellers')}
             </h2>
           </div>
 
@@ -267,13 +254,13 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 5. SECTION 2: "دكسا الهجن" / "Dexa Camel Race" */}
+        {/* 5. SECTION 2: "Dexa Camel Race" */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
           <div className="text-center space-y-1">
             <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
-              دكسا الهجن
+              {t('dexaCamel')}
             </h2>
-            <p className="text-xs text-bodytext-muted">Dexa Camel Race</p>
+            <p className="text-xs text-bodytext-muted">{t('dexaCamelSub')}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -282,7 +269,6 @@ export const Home = () => {
             ))}
           </div>
 
-          {/* 3 Orange Pagination Dots + View All Button */}
           <div className="flex flex-col items-center gap-4 pt-2">
             <div className="flex justify-center gap-2">
               <span className="w-2.5 h-2.5 rounded bg-brand-orange" />
@@ -294,32 +280,32 @@ export const Home = () => {
               to="/category/camel/camel-race"
               className="px-8 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-xs shadow-md transition-all touch-target"
             >
-              View All
+              {t('viewAll')}
             </Link>
           </div>
         </section>
 
-        {/* 6. PANORAMIC BANNER BREAK 2 ("أسوار UPVC") */}
+        {/* 6. PANORAMIC BANNER BREAK 2 ("UPVC Fencing") */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="relative rounded-3xl overflow-hidden bg-[#3A1E0E] text-white p-8 sm:p-12 shadow-2xl border border-brown-border flex flex-col items-center justify-center text-center space-y-3 min-h-[200px]">
             <div className="relative z-10 space-y-2 max-w-2xl">
               <h2 className="font-display font-black text-3xl sm:text-5xl text-white">
-                أسوار UPVC
+                {t('upvcFencing')}
               </h2>
               <p className="text-sm sm:text-base text-white/90 font-medium">
-                لإسطبلات خيول
+                {t('upvcFencingSub')}
               </p>
             </div>
           </div>
         </section>
 
-        {/* 7. SECTION 3: "مفاصل و اوتار" / "Bone & Joint" */}
+        {/* 7. SECTION 3: "Bone & Joint" */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
           <div className="text-center space-y-1">
             <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
-              مفاصل و اوتار
+              {t('boneJoint')}
             </h2>
-            <p className="text-xs text-bodytext-muted">Bone & Joint</p>
+            <p className="text-xs text-bodytext-muted">{t('boneJointSub')}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -333,18 +319,18 @@ export const Home = () => {
               to="/category/camel/camel-race/bones-joints"
               className="px-8 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-xs shadow-md transition-all touch-target"
             >
-              View All
+              {t('viewAll')}
             </Link>
           </div>
         </section>
 
-        {/* 8. SECTION 4: "علاجات النسم والتنفس" / "Breath" */}
+        {/* 8. SECTION 4: "Breath Treatments" */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
           <div className="text-center space-y-1">
             <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
-              علاجات النسم والتنفس
+              {t('breathTreatments')}
             </h2>
-            <p className="text-xs text-bodytext-muted">Breath</p>
+            <p className="text-xs text-bodytext-muted">{t('breathSub')}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -364,18 +350,18 @@ export const Home = () => {
               to="/category/camel/camel-race/breathing-oxygen"
               className="px-8 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-xs shadow-md transition-all touch-target"
             >
-              View All
+              {t('viewAll')}
             </Link>
           </div>
         </section>
 
-        {/* 9. SECTION 5: "مشاكل العضلات" / "Muscle Problems" */}
+        {/* 9. SECTION 5: "Muscle Problems" */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
           <div className="text-center space-y-1">
             <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
-              مشاكل العضلات
+              {t('muscleProblems')}
             </h2>
-            <p className="text-xs text-bodytext-muted">Muscle Problems</p>
+            <p className="text-xs text-bodytext-muted">{t('muscleSub')}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -389,19 +375,19 @@ export const Home = () => {
               to="/category/camel/camel-problems/muscle-fatigue"
               className="px-8 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-xs shadow-md transition-all touch-target"
             >
-              View All
+              {t('viewAll')}
             </Link>
           </div>
         </section>
 
-        {/* 10. DIRECTORY TABLE: "استكشف شركاؤنا الموثوقون" */}
+        {/* 10. DIRECTORY TABLE: "Explore Our Trusted Partners" */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
           <div className="bg-white border border-surface-bordered p-6 sm:p-8 rounded-3xl space-y-6 shadow-warm">
             <div className="text-center space-y-1">
               <h3 className="font-display font-black text-xl sm:text-2xl text-bodytext">
-                استكشف شركاؤنا الموثوقون
+                {t('trustedPartners')}
               </h3>
-              <p className="text-xs text-bodytext-muted">Explore Our Trusted Veterinary Partners</p>
+              <p className="text-xs text-bodytext-muted">{t('trustedPartnersSub')}</p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs text-center">
@@ -434,7 +420,7 @@ export const Home = () => {
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <h4 className="font-display font-bold text-xs sm:text-sm text-bodytext uppercase tracking-wider">
-                ORIGINAL FROM THE SOURCE
+                {t('originalFromSource')}
               </h4>
             </div>
 
@@ -443,7 +429,7 @@ export const Home = () => {
                 <Package className="w-6 h-6" />
               </div>
               <h4 className="font-display font-bold text-xs sm:text-sm text-bodytext uppercase tracking-wider">
-                OFFERS FREE SHIPPING
+                {t('offersFreeShipping')}
               </h4>
             </div>
 
@@ -452,7 +438,7 @@ export const Home = () => {
                 <CreditCard className="w-6 h-6" />
               </div>
               <h4 className="font-display font-bold text-xs sm:text-sm text-bodytext uppercase tracking-wider">
-                SECURE & FLEXIBLE PAYMENTS
+                {t('securePayments')}
               </h4>
             </div>
           </div>
@@ -462,10 +448,10 @@ export const Home = () => {
         <section className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="bg-brand-orange text-white rounded-3xl p-8 sm:p-12 shadow-2xl flex flex-col items-center text-center space-y-4 max-w-4xl mx-auto">
             <h3 className="font-display font-black text-2xl sm:text-3xl">
-              Join for AL-NAMOOS VET
+              {t('joinNewsletterTitle')}
             </h3>
             <p className="text-xs sm:text-sm text-white/95 leading-relaxed max-w-xl">
-              Sign up for AL-NAMOOS VET updates to receive information about new arrivals, future events and specials
+              {t('joinNewsletterSub')}
             </p>
 
             <form onSubmit={handleSubscribe} className="w-full max-w-md relative pt-2">
@@ -474,7 +460,7 @@ export const Home = () => {
                 required
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
-                placeholder="Your email address"
+                placeholder={t('yourEmailPlaceholder')}
                 className="w-full bg-transparent text-white placeholder-white/80 border-b-2 border-white py-2 ps-2 pe-10 focus:outline-none text-xs"
               />
               <button
@@ -485,7 +471,11 @@ export const Home = () => {
                 <Mail className="w-5 h-5" />
               </button>
             </form>
-            {subscribed && <span className="text-xs font-bold text-white bg-white/20 px-3 py-1 rounded-full">Subscribed successfully!</span>}
+            {subscribed && (
+              <span className="text-xs font-bold text-white bg-white/20 px-3 py-1 rounded-full">
+                {t('subscribeSuccess')}
+              </span>
+            )}
           </div>
         </section>
       </div>
