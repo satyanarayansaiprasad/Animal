@@ -73,7 +73,7 @@ export const Home = () => {
     setActiveSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   };
 
-  // Filtered Product Lists for Homepage Carousels (Matching Screenshots 3, 4 & 5)
+  // Filtered Product Lists for Homepage Carousels
   const bestSellers = products.slice(0, 4);
   const dexaCamel = products.filter((p) => p.category === 'camel').slice(0, 4);
   const jointAndBone = products.filter((p) => p.type === 'supplements' || p.category === 'horse').slice(0, 4);
@@ -91,7 +91,7 @@ export const Home = () => {
 
   return (
     <div className="w-full pb-16 font-body text-start bg-[#F9F6F0]">
-      {/* 1. CLEAN FULL-WIDTH HERO SLIDER — Fits perfectly 16:9 ratio below sticky navbar */}
+      {/* 1. CLEAN FULL-WIDTH HERO SLIDER — Starts DIRECTLY below navbar */}
       <section className="relative w-full bg-[#351809] text-white overflow-hidden aspect-[16/9] max-h-[580px] min-h-[320px] sm:min-h-[420px] lg:min-h-[520px] flex items-end justify-center border-b border-[#5C2D15] shadow-2xl mt-0 pt-0">
         {heroSlides.map((slide, idx) => (
           <div
@@ -108,10 +108,10 @@ export const Home = () => {
           </div>
         ))}
 
-        {/* Subtle Dark Bottom Gradient for Dots */}
+        {/* Bottom Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-10" />
 
-        {/* 4 Orange Indicator Dots (Exact Al Zaafran Style - Screenshot 2) */}
+        {/* 4 Orange Indicator Dots */}
         <div className="relative z-20 pb-4 sm:pb-6 flex items-center justify-center gap-3">
           {heroSlides.map((_, i) => (
             <button
@@ -128,11 +128,11 @@ export const Home = () => {
 
       {/* SECTIONS BELOW HERO SLIDER */}
       <div className="space-y-12 sm:space-y-16 pt-10">
-        {/* 2. "Shop by categories" SECTION (Exact Al Zaafran Style - Screenshot 2) */}
+        {/* 2. "Shop by categories" SECTION — ALL 5 MAIN CATEGORIES (Camel, Horse, Cow, Dog, Falcon) */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8 bg-white p-6 sm:p-8 rounded-3xl border border-surface-bordered shadow-warm">
+          <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 bg-white p-6 sm:p-8 rounded-3xl border border-surface-bordered shadow-warm">
             {/* Title on Left: Shop by categories */}
-            <div className="space-y-1 text-center md:text-start shrink-0 md:pe-8 md:border-e border-surface-bordered">
+            <div className="space-y-1 text-center lg:text-start shrink-0 lg:pe-8 lg:border-e border-surface-bordered">
               <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
                 Shop by
               </h2>
@@ -141,12 +141,12 @@ export const Home = () => {
               </h3>
             </div>
 
-            {/* 4 Vertical Species Cards Grid (Exact Al Zaafran Cards: Camel, Horse, Dog, Cat) */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 flex-1 w-full">
+            {/* 5 Vertical Species Cards Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 flex-1 w-full">
               {/* Card 1: Camel */}
               <Link
-                to="/shop?category=camel"
-                className="group relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm hover:shadow-warm-hover transition-all duration-500 flex flex-col justify-end border border-surface-bordered"
+                to="/category/camel"
+                className="group relative h-56 sm:h-64 rounded-2xl overflow-hidden shadow-sm hover:shadow-warm-hover transition-all duration-500 flex flex-col justify-end border border-surface-bordered"
               >
                 <img
                   src="/images/species/camel_card.jpg"
@@ -155,14 +155,14 @@ export const Home = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="relative z-10 bg-brand-orange py-2 text-center text-white font-bold text-xs sm:text-sm">
-                  Camel
+                  {language === 'ar' ? 'الهجن والإبل' : 'Camel'}
                 </div>
               </Link>
 
               {/* Card 2: Horse */}
               <Link
-                to="/shop?category=horse"
-                className="group relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm hover:shadow-warm-hover transition-all duration-500 flex flex-col justify-end border border-surface-bordered"
+                to="/category/horse"
+                className="group relative h-56 sm:h-64 rounded-2xl overflow-hidden shadow-sm hover:shadow-warm-hover transition-all duration-500 flex flex-col justify-end border border-surface-bordered"
               >
                 <img
                   src="/images/species/horse_card.jpg"
@@ -171,14 +171,30 @@ export const Home = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="relative z-10 bg-brand-orange py-2 text-center text-white font-bold text-xs sm:text-sm">
-                  Horse
+                  {language === 'ar' ? 'الخيل والفروسية' : 'Horse'}
                 </div>
               </Link>
 
-              {/* Card 3: Dog */}
+              {/* Card 3: Cow */}
               <Link
-                to="/shop?category=cow"
-                className="group relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm hover:shadow-warm-hover transition-all duration-500 flex flex-col justify-end border border-surface-bordered"
+                to="/category/cow"
+                className="group relative h-56 sm:h-64 rounded-2xl overflow-hidden shadow-sm hover:shadow-warm-hover transition-all duration-500 flex flex-col justify-end border border-surface-bordered"
+              >
+                <img
+                  src="/images/species/cow_card.jpg"
+                  alt="Cow"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="relative z-10 bg-brand-orange py-2 text-center text-white font-bold text-xs sm:text-sm">
+                  {language === 'ar' ? 'الأبقار والماشية' : 'Cow'}
+                </div>
+              </Link>
+
+              {/* Card 4: Dog */}
+              <Link
+                to="/category/dog"
+                className="group relative h-56 sm:h-64 rounded-2xl overflow-hidden shadow-sm hover:shadow-warm-hover transition-all duration-500 flex flex-col justify-end border border-surface-bordered"
               >
                 <img
                   src="/images/species/dog_card.jpg"
@@ -187,30 +203,30 @@ export const Home = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="relative z-10 bg-brand-orange py-2 text-center text-white font-bold text-xs sm:text-sm">
-                  Dog
+                  {language === 'ar' ? 'الكلاب والأليفة' : 'Dog'}
                 </div>
               </Link>
 
-              {/* Card 4: Cat */}
+              {/* Card 5: Falcon */}
               <Link
-                to="/shop?type=supplements"
-                className="group relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm hover:shadow-warm-hover transition-all duration-500 flex flex-col justify-end border border-surface-bordered"
+                to="/category/falcon"
+                className="group relative h-56 sm:h-64 rounded-2xl overflow-hidden shadow-sm hover:shadow-warm-hover transition-all duration-500 flex flex-col justify-end border border-surface-bordered col-span-2 sm:col-span-1"
               >
                 <img
-                  src="/images/species/cat_card.jpg"
-                  alt="Cat"
+                  src="/images/species/falcon_card.jpg"
+                  alt="Falcon"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 <div className="relative z-10 bg-brand-orange py-2 text-center text-white font-bold text-xs sm:text-sm">
-                  Cat
+                  {language === 'ar' ? 'الصقور والطيور' : 'Falcon'}
                 </div>
               </Link>
             </div>
           </div>
         </section>
 
-        {/* 3. PANORAMIC BANNER BREAK 1 ("ماكينة مشي الخيول" - Screenshot 2) */}
+        {/* 3. PANORAMIC BANNER BREAK 1 ("ماكينة مشي الخيول") */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="relative rounded-3xl overflow-hidden bg-[#3A1E0E] text-white p-8 sm:p-12 shadow-2xl border border-brown-border flex flex-col items-center justify-center text-center space-y-3 min-h-[200px]">
             <img
@@ -229,7 +245,7 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 4. SECTION 1: "الأكثر طلباً" / "Best Sellers" Product Grid (Screenshot 3) */}
+        {/* 4. SECTION 1: "الأكثر طلباً" / "Best Sellers" Product Grid */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
           <div className="text-center">
             <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
@@ -251,7 +267,7 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 5. SECTION 2: "دكسا الهجن" / "Dexa Camel Race" (Screenshot 3) */}
+        {/* 5. SECTION 2: "دكسا الهجن" / "Dexa Camel Race" */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
           <div className="text-center space-y-1">
             <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
@@ -275,7 +291,7 @@ export const Home = () => {
             </div>
 
             <Link
-              to="/shop?category=camel"
+              to="/category/camel/camel-race"
               className="px-8 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-xs shadow-md transition-all touch-target"
             >
               View All
@@ -283,7 +299,7 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 6. PANORAMIC BANNER BREAK 2 ("أسوار UPVC" - Screenshot 4) */}
+        {/* 6. PANORAMIC BANNER BREAK 2 ("أسوار UPVC") */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="relative rounded-3xl overflow-hidden bg-[#3A1E0E] text-white p-8 sm:p-12 shadow-2xl border border-brown-border flex flex-col items-center justify-center text-center space-y-3 min-h-[200px]">
             <div className="relative z-10 space-y-2 max-w-2xl">
@@ -297,7 +313,7 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 7. SECTION 3: "مفاصل و اوتار" / "Bone & Joint" (Screenshot 4) */}
+        {/* 7. SECTION 3: "مفاصل و اوتار" / "Bone & Joint" */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
           <div className="text-center space-y-1">
             <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
@@ -314,7 +330,7 @@ export const Home = () => {
 
           <div className="flex justify-center pt-2">
             <Link
-              to="/shop?type=supplements"
+              to="/category/camel/camel-race/bones-joints"
               className="px-8 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-xs shadow-md transition-all touch-target"
             >
               View All
@@ -322,7 +338,7 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 8. SECTION 4: "علاجات النسم والتنفس" / "Breath" (Screenshot 5) */}
+        {/* 8. SECTION 4: "علاجات النسم والتنفس" / "Breath" */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
           <div className="text-center space-y-1">
             <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
@@ -345,7 +361,7 @@ export const Home = () => {
             </div>
 
             <Link
-              to="/shop?type=medicine"
+              to="/category/camel/camel-race/breathing-oxygen"
               className="px-8 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-xs shadow-md transition-all touch-target"
             >
               View All
@@ -353,7 +369,7 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 9. SECTION 5: "مشاكل العضلات" / "Muscle Problems" (Screenshot 5) */}
+        {/* 9. SECTION 5: "مشاكل العضلات" / "Muscle Problems" */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
           <div className="text-center space-y-1">
             <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
@@ -370,7 +386,7 @@ export const Home = () => {
 
           <div className="flex justify-center pt-2">
             <Link
-              to="/shop"
+              to="/category/camel/camel-problems/muscle-fatigue"
               className="px-8 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-xs shadow-md transition-all touch-target"
             >
               View All
@@ -378,7 +394,7 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 10. DIRECTORY TABLE: "استكشف شركاؤنا الموثوقون" (Screenshots 1 & 2) */}
+        {/* 10. DIRECTORY TABLE: "استكشف شركاؤنا الموثوقون" */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
           <div className="bg-white border border-surface-bordered p-6 sm:p-8 rounded-3xl space-y-6 shadow-warm">
             <div className="text-center space-y-1">
@@ -410,7 +426,7 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 11. VALUE PROPOSITION FEATURE RIBBON (Screenshot 2) */}
+        {/* 11. VALUE PROPOSITION FEATURE RIBBON */}
         <section className="bg-[#FAF7F2] py-8 border-y border-surface-bordered">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div className="flex flex-col items-center space-y-2">
@@ -442,7 +458,7 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 12. BRIGHT ORANGE NEWSLETTER SUBSCRIPTION BOX (Screenshot 3) */}
+        {/* 12. BRIGHT ORANGE NEWSLETTER SUBSCRIPTION BOX */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="bg-brand-orange text-white rounded-3xl p-8 sm:p-12 shadow-2xl flex flex-col items-center text-center space-y-4 max-w-4xl mx-auto">
             <h3 className="font-display font-black text-2xl sm:text-3xl">
