@@ -230,13 +230,14 @@ export const LanguageProvider = ({ children }) => {
     return localStorage.getItem('alnamoos_lang') || 'ar';
   });
 
-  const isRtl = language === 'ar';
+  // Fixed LTR layout direction for BOTH English & Arabic as requested by user
+  const isRtl = false;
 
   useEffect(() => {
     localStorage.setItem('alnamoos_lang', language);
-    document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+    document.documentElement.dir = 'ltr';
     document.documentElement.lang = language;
-  }, [language, isRtl]);
+  }, [language]);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === 'ar' ? 'en' : 'ar'));
