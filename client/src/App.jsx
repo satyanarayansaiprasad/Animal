@@ -21,7 +21,6 @@ import { TermsPrivacy } from './pages/TermsPrivacy';
 import { NotFound } from './pages/NotFound';
 import { AdminLayout } from './pages/admin/AdminLayout';
 
-// ScrollToTop Helper Component
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -37,15 +36,18 @@ export function App() {
   return (
     <div className="min-h-screen flex flex-col bg-sand text-bodytext font-body selection:bg-brand-orange selection:text-white">
       <ScrollToTop />
-      {/* Hide standard store header/footer/bubble if inside Admin Portal */}
       {!isAdminPath && <Header />}
       
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
+          
+          {/* 3-Tier Taxonomy Routes */}
           <Route path="/category/:categorySlug" element={<CategoryDetail />} />
-          <Route path="/category/:categorySlug/:subcategorySlug" element={<CategoryDetail />} />
+          <Route path="/category/:categorySlug/:subSlug" element={<CategoryDetail />} />
+          <Route path="/category/:categorySlug/:subSlug/:level2Slug" element={<CategoryDetail />} />
+
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />

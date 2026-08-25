@@ -83,7 +83,7 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* 2. MAIN NAVBAR (Exact Al Zaafran Brown Navigation Bar) */}
+      {/* 2. MAIN NAVBAR (Dark Brown Navigation Bar) */}
       <div className="bg-[#4A230F] text-white py-3 px-4 sm:px-8 border-b border-[#5C2D15] shadow-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           {/* Logo & Brand Name */}
@@ -103,21 +103,27 @@ export const Header = () => {
             </div>
           </Link>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center gap-6 text-xs font-extrabold tracking-wider text-white/90 uppercase">
-            <Link to="/category/camel-race" className="hover:text-brand-orange transition-colors whitespace-nowrap">
-              CAMEL RACE
+          {/* 5 Main Category Navigation Links */}
+          <div className="hidden md:flex items-center gap-5 text-xs font-extrabold tracking-wider text-white/90 uppercase">
+            <Link to="/category/camel" className="hover:text-brand-orange transition-colors whitespace-nowrap">
+              {language === 'ar' ? 'الهجن والإبل' : 'CAMEL'}
             </Link>
-            <Link to="/category/horse-race" className="hover:text-brand-orange transition-colors whitespace-nowrap">
-              HORSE RACE
+            <Link to="/category/horse" className="hover:text-brand-orange transition-colors whitespace-nowrap">
+              {language === 'ar' ? 'الخيل' : 'HORSE'}
             </Link>
-            <Link to="/category/cow-cattle" className="hover:text-brand-orange transition-colors whitespace-nowrap">
-              COW & CATTLE
+            <Link to="/category/cow" className="hover:text-brand-orange transition-colors whitespace-nowrap">
+              {language === 'ar' ? 'الأبقار' : 'COW'}
+            </Link>
+            <Link to="/category/dog" className="hover:text-brand-orange transition-colors whitespace-nowrap">
+              {language === 'ar' ? 'الكلاب' : 'DOG'}
+            </Link>
+            <Link to="/category/falcon" className="hover:text-brand-orange transition-colors whitespace-nowrap">
+              {language === 'ar' ? 'الصقور' : 'FALCON'}
             </Link>
           </div>
 
           {/* Search Input */}
-          <form onSubmit={handleSearchSubmit} className="hidden lg:flex flex-1 max-w-sm mx-4 relative">
+          <form onSubmit={handleSearchSubmit} className="hidden lg:flex flex-1 max-w-xs mx-4 relative">
             <input
               type="text"
               value={searchQuery}
@@ -183,14 +189,20 @@ export const Header = () => {
           </form>
 
           <div className="flex flex-col space-y-3 font-bold text-xs">
-            <Link to="/category/camel-race" className="hover:text-brand-orange py-1">
-              CAMEL RACE
+            <Link to="/category/camel" className="hover:text-brand-orange py-1">
+              CAMEL
             </Link>
-            <Link to="/category/horse-race" className="hover:text-brand-orange py-1">
-              HORSE RACE
+            <Link to="/category/horse" className="hover:text-brand-orange py-1">
+              HORSE
             </Link>
-            <Link to="/category/cow-cattle" className="hover:text-brand-orange py-1">
-              COW & CATTLE
+            <Link to="/category/cow" className="hover:text-brand-orange py-1">
+              COW
+            </Link>
+            <Link to="/category/dog" className="hover:text-brand-orange py-1">
+              DOG
+            </Link>
+            <Link to="/category/falcon" className="hover:text-brand-orange py-1">
+              FALCON
             </Link>
             <Link to="/consultation" className="text-brand-orange py-1">
               DOCTOR CONSULTATION

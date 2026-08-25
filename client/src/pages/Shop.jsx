@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Search } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { ProductCard } from '../components/ProductCard';
+import { taxonomy } from '../data/taxonomy';
 import { apiFetch } from '../services/api';
-
-const healthIssueIcons = [
-  { id: 'breathing-oxygen', title_en: 'Breathing & Oxygen', title_ar: 'علاجات النسم والتنفس', icon: '🫁' },
-  { id: 'bones-joints', title_en: 'Bones & Joints', title_ar: 'مفاصل و اوتار', icon: '🦴' },
-  { id: 'pain-relievers', title_en: 'Pain Relievers', title_ar: 'مسكنات الألم', icon: '⚡' },
-  { id: 'dexamethasone', title_en: 'Dexamethasone', title_ar: 'دكسا الهجن', icon: '🫀' },
-  { id: 'energy-power', title_en: 'Energy & Power', title_ar: 'طاقة ونشاط', icon: '💥' },
-  { id: 'diuretics', title_en: 'Diuretics', title_ar: 'إدرار وتصريف', icon: '💧' },
-  { id: 'protectors-recovery', title_en: 'Protectors & Recovery', title_ar: 'حماية واستشفاء', icon: '🩹' },
-];
 
 export const Shop = () => {
   const { language, isRtl, t } = useLanguage();
@@ -54,55 +44,55 @@ export const Shop = () => {
           {t('shop')}
         </h1>
         <p className="text-xs sm:text-sm text-bodytext-muted max-w-xl mx-auto">
-          Complete veterinary medicine catalog for race camels, Arabian horses, cattle, and pets.
+          Complete veterinary medicine catalog for race camels, Arabian horses, cattle, dogs, and falcons.
         </p>
       </div>
 
-      {/* Categories Bar */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        {[
-          { label: 'CAMEL RACE', slug: 'camel-race', img: '/images/species/camel_card.jpg' },
-          { label: 'HORSE RACE', slug: 'horse-race', img: '/images/species/horse_card.jpg' },
-          { label: 'DOG & PETS', slug: 'dog-pets', img: '/images/species/dog_card.jpg' },
-          { label: 'COW & CATTLE', slug: 'cow-cattle', img: '/images/species/cat_card.jpg' },
-        ].map((item, i) => (
-          <Link
-            key={i}
-            to={`/category/${item.slug}`}
-            className="flex items-center gap-3 p-4 bg-white border border-surface-bordered rounded-2xl shadow-sm hover:shadow-warm-hover hover:border-brand-orange transition-all group"
-          >
-            <img src={item.img} alt={item.label} className="w-12 h-12 rounded-full object-cover border-2 border-brand-orange" />
-            <span className="font-display font-black text-xs sm:text-sm text-brown-dark group-hover:text-brand-orange transition-colors">
-              {item.label}
-            </span>
-          </Link>
-        ))}
+      {/* 5 Main Species Categories Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        {Object.keys(taxonomy).map((key) => {
+          const item = taxonomy[key];
+          return (
+            <Link
+              key={key}
+              to={`/category/${item.slug}`}
+              className="flex items-center gap-3 p-4 bg-white border border-surface-bordered rounded-2xl shadow-sm hover:shadow-warm-hover hover:border-brand-orange transition-all group"
+            >
+              <div className="w-10 h-10 rounded-full bg-brand-orange text-white flex items-center justify-center font-bold text-base shrink-0 shadow">
+                {item.name_en[0]}
+              </div>
+              <span className="font-display font-black text-xs sm:text-sm text-brown-dark group-hover:text-brand-orange transition-colors">
+                {language === 'ar' ? item.name_ar : item.name_en}
+              </span>
+            </Link>
+          );
+        })}
       </div>
 
-      {/* Body Part & Symptoms Icons Bar */}
+      {/* Level-1 Subcategories Quick Index Bar for Camel */}
       <div className="bg-white border border-surface-bordered p-6 rounded-3xl space-y-4 shadow-warm">
         <h3 className="font-display font-bold text-brown-dark text-sm sm:text-base text-center">
-          {language === 'ar' ? 'علاجات الأعضاء والأعراض البيطرية' : 'Body Part & Symptoms Veterinary Solutions'}
+          {language === 'ar' ? 'تصفح حسب أقسام الهجن والخيل' : 'Explore Camel & Horse Categories'}
         </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
-          {healthIssueIcons.map((issue) => (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {taxonomy.camel.subcategories.map((sub) => (
             <Link
-              key={issue.id}
-              to={`/category/camel-race/${issue.id}`}
-              className="flex flex-col items-center p-3 rounded-2xl bg-brand-cream hover:bg-brand-orange hover:text-white transition-all text-center space-y-2 border border-surface-bordered group shadow-sm"
+              key={sub.slug}
+              to={`/category/camel/${sub.slug}`}
+              className="p-3.5 rounded-2xl bg-brand-cream hover:bg-brand-orange hover:text-white transition-all text-center space-y-1 border border-surface-bordered group shadow-sm"
             >
-              <div className="w-12 h-12 rounded-2xl bg-white border border-brand-orange/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform shadow-inner">
-                {issue.icon}
-              </div>
-              <span className="text-[11px] font-bold leading-tight">
-                {language === 'ar' ? issue.title_ar : issue.title_en}
+              <span className="text-xs font-black block">
+                {language === 'ar' ? sub.name_ar : sub.name_en}
+              </span>
+              <span className="text-[10px] text-bodytext-muted group-hover:text-white/90 font-mono">
+                {sub.items.length} specifications
               </span>
             </Link>
           ))}
         </div>
       </div>
 
-      {/* Clean 4-Column Product Grid (NO SIDEBAR FILTERS) */}
+      {/* Clean 4-Column Product Grid */}
       <div className="space-y-6 pt-2">
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
