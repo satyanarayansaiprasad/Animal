@@ -5,6 +5,9 @@ import {
   Package,
   CreditCard,
   Mail,
+  Stethoscope,
+  PhoneCall,
+  MessageCircle,
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
@@ -254,34 +257,44 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 5. SECTION 2: "Dexa Camel Race" */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
-          <div className="text-center space-y-1">
-            <h2 className="font-display font-black text-2xl sm:text-3xl text-brand-orange">
-              {t('dexaCamel')}
-            </h2>
-            <p className="text-xs text-bodytext-muted">{t('dexaCamelSub')}</p>
-          </div>
+        {/* 5. SECTION 2: "Dexa Camel Race" WITH DEDICATED CAMEL RACE BACKGROUND IMAGE */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="relative rounded-3xl overflow-hidden p-6 sm:p-10 shadow-2xl border border-[#5C2D15] space-y-6 bg-[#351809]">
+            {/* Background Image: camel_race_bg.jpg */}
+            <img
+              src="/images/camel_race_bg.jpg"
+              alt="Camel Race Background"
+              className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#351809]/90 via-[#351809]/70 to-[#351809]/90 pointer-events-none" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {dexaCamel.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-
-          <div className="flex flex-col items-center gap-4 pt-2">
-            <div className="flex justify-center gap-2">
-              <span className="w-2.5 h-2.5 rounded bg-brand-orange" />
-              <span className="w-2.5 h-2.5 rounded bg-brand-orange/40" />
-              <span className="w-2.5 h-2.5 rounded bg-brand-orange/40" />
+            <div className="relative z-10 text-center space-y-1">
+              <h2 className="font-display font-black text-2xl sm:text-4xl text-brand-orange drop-shadow-md">
+                {t('dexaCamel')}
+              </h2>
+              <p className="text-xs sm:text-sm text-white/80 font-medium">{t('dexaCamelSub')}</p>
             </div>
 
-            <Link
-              to="/category/camel/camel-race"
-              className="px-8 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-xs shadow-md transition-all touch-target"
-            >
-              {t('viewAll')}
-            </Link>
+            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {dexaCamel.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+
+            <div className="relative z-10 flex flex-col items-center gap-4 pt-2">
+              <div className="flex justify-center gap-2">
+                <span className="w-2.5 h-2.5 rounded bg-brand-orange" />
+                <span className="w-2.5 h-2.5 rounded bg-white/40" />
+                <span className="w-2.5 h-2.5 rounded bg-white/40" />
+              </div>
+
+              <Link
+                to="/category/camel/camel-race"
+                className="px-8 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-xs shadow-md transition-all touch-target"
+              >
+                {t('viewAll')}
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -444,7 +457,65 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 12. BRIGHT ORANGE NEWSLETTER SUBSCRIPTION BOX */}
+        {/* 12. SPECIALIST DOCTOR CONSULTATION FEATURE SECTION BEFORE FOOTER (FEATURING DOCTOR BANNER IMAGE) */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="relative rounded-3xl overflow-hidden bg-[#351809] text-white p-6 sm:p-10 shadow-2xl border border-[#5C2D15] flex flex-col lg:flex-row items-center justify-between gap-8">
+            {/* Left Info Column */}
+            <div className="space-y-4 max-w-xl text-center lg:text-start z-10">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-orange/20 border border-brand-orange/40 text-brand-orange text-xs font-bold">
+                <Stethoscope className="w-4 h-4" />
+                <span>{language === 'ar' ? 'استشارة طبية تخصصية' : 'Specialized Veterinary Consultation'}</span>
+              </div>
+
+              <h2 className="font-display font-black text-2xl sm:text-4xl leading-tight text-white">
+                {language === 'ar' ? 'استشر طبيبك البيطري المتخصص في أدوية وجرعات الهجن والخيل' : 'Consult Our Licensed Veterinary Doctors for Camel & Equine Care'}
+              </h2>
+
+              <p className="text-xs sm:text-sm text-white/80 leading-relaxed">
+                {language === 'ar'
+                  ? 'فريق الأطباء في صيدلية الناموس متواجد للإجابة على استفسارات العلاج، جدول التحصينات، وجرعات الهجن والخيل في سلطنة عمان والخليج.'
+                  : 'Our dedicated veterinary medical staff is ready to assist with camel race injection schedules, equine endurance vitamins, and treatment guidelines.'}
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                <Link
+                  to="/consultation"
+                  className="px-6 py-3 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold text-xs rounded-xl shadow-lg transition-all flex items-center gap-2 touch-target"
+                >
+                  <PhoneCall className="w-4 h-4" />
+                  <span>{t('askDoctor')}</span>
+                </Link>
+
+                <a
+                  href="https://wa.me/96895266144?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%8A%D9%83%D9%85%D9%8F%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%B7%D8%A8%D9%8A%D8%A9%20%D8%A8%D9%8A%D8%B7%D8%B1%D9%8A%D8%A9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-[#25D366] hover:bg-[#20ba5a] text-white font-display font-bold text-xs rounded-xl shadow-lg transition-all flex items-center gap-2 touch-target"
+                >
+                  <MessageCircle className="w-4 h-4 fill-white text-[#25D366]" />
+                  <span>{t('chatWhatsapp')}</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Right Doctor Image Frame */}
+            <div className="relative w-full max-w-md h-64 sm:h-80 rounded-2xl overflow-hidden border-4 border-brand-orange/40 shadow-2xl shrink-0 group z-10">
+              <img
+                src="/images/doctor_banner.jpg"
+                alt="AL-NAMOOS Veterinary Doctor"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-3 left-3 right-3 text-center bg-black/60 backdrop-blur-md p-2 rounded-xl border border-white/20">
+                <span className="font-display font-bold text-xs text-white block">
+                  {language === 'ar' ? 'د. أحمد الهنائي — استشاري طب وجراحة الهجن' : 'Dr. Ahmed Al Hinai — Senior Veterinary Specialist'}
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 13. BRIGHT ORANGE NEWSLETTER SUBSCRIPTION BOX */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="bg-brand-orange text-white rounded-3xl p-8 sm:p-12 shadow-2xl flex flex-col items-center text-center space-y-4 max-w-4xl mx-auto">
             <h3 className="font-display font-black text-2xl sm:text-3xl">

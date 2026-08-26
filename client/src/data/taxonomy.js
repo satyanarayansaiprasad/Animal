@@ -79,6 +79,13 @@ export const taxonomy = {
           { slug: 'probiotics-med', name_en: 'Camel Probiotics', name_ar: 'المطهرات المعوية', icon: '🦠', img: '/images/species/camel_medicines.jpg' },
           { slug: 'antiparasitic', name_en: 'Camel Antiparasitic', name_ar: 'مضادات الطفيليات والقراد', icon: '🪰', img: '/images/species/camel_medicines.jpg' },
         ]
+      },
+      {
+        slug: 'camel-show',
+        name_en: 'Camel Show',
+        name_ar: 'مزاينة الهجن (Camel Show)',
+        img: '/images/species/camel_show.jpg',
+        items: []
       }
     ]
   },
