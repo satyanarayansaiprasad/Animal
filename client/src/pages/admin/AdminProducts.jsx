@@ -150,7 +150,7 @@ export const AdminProducts = () => {
 
         <button
           onClick={openCreateModal}
-          className="px-5 py-2.5 bg-clay hover:bg-clay-hover text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-2"
+          className="px-5 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-2"
         >
           <Plus className="w-4 h-4" />
           <span>Add New Product</span>
@@ -192,11 +192,11 @@ export const AdminProducts = () => {
                   <td className="p-3">
                     <img src={p.image || '/favicon.svg'} alt="" className="w-10 h-10 object-cover rounded-lg border bg-sand" />
                   </td>
-                  <td className="p-3 font-mono font-bold text-clay">{p.sku}</td>
+                  <td className="p-3 font-mono font-bold text-brand-orange">{p.sku}</td>
                   <td className="p-3 font-bold text-charcoal max-w-xs truncate">{p.name_en}</td>
                   <td className="p-3 text-charcoal max-w-xs truncate dir-rtl">{p.name_ar}</td>
                   <td className="p-3 capitalize font-semibold">{p.category}</td>
-                  <td className="p-3 capitalize font-semibold text-teal">{p.type}</td>
+                  <td className="p-3 capitalize font-semibold text-brand-orange">{p.type}</td>
                   <td className="p-3 font-mono font-bold">{formatPrice(p.price_omr)}</td>
                   <td className="p-3">
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${p.in_stock ? 'bg-teal-light text-teal' : 'bg-clay-light text-clay'}`}>
@@ -257,6 +257,8 @@ export const AdminProducts = () => {
                     <option value="camel">Camel (الإبل والهجن)</option>
                     <option value="horse">Horse (الخيل)</option>
                     <option value="cow">Cow / Cattle (الأبقار والمواشي)</option>
+                    <option value="dog">Dog / Pets (الكلاب والأليفة)</option>
+                    <option value="falcon">Falcon / Birds (الصقور والطيور)</option>
                   </select>
                 </div>
                 <div>
@@ -282,18 +284,18 @@ export const AdminProducts = () => {
 
               <div className="flex items-center gap-6 pt-2">
                 <label className="flex items-center gap-2 cursor-pointer font-bold">
-                  <input type="checkbox" checked={formData.in_stock} onChange={(e) => setFormData({ ...formData, in_stock: e.target.checked })} className="w-4 h-4 text-clay" />
+                  <input type="checkbox" checked={formData.in_stock} onChange={(e) => setFormData({ ...formData, in_stock: e.target.checked })} className="w-4 h-4 text-brand-orange" />
                   <span>In Stock</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer font-bold">
-                  <input type="checkbox" checked={formData.is_featured} onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })} className="w-4 h-4 text-gold" />
+                  <input type="checkbox" checked={formData.is_featured} onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })} className="w-4 h-4 text-brand-orange" />
                   <span>Featured Item</span>
                 </label>
               </div>
 
               <div className="pt-4 flex justify-end gap-3 border-t">
                 <button type="button" onClick={() => setModalOpen(false)} className="px-4 py-2 border rounded-xl font-bold">Cancel</button>
-                <button type="submit" className="px-6 py-2 bg-clay text-white rounded-xl font-bold">Save Product</button>
+                <button type="submit" className="px-6 py-2 bg-brand-orange text-white rounded-xl font-bold">Save Product</button>
               </div>
             </form>
           </div>
