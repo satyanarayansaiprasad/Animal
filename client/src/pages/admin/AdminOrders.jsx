@@ -27,7 +27,6 @@ export const AdminOrders = () => {
     apiFetch('/api/orders')
       .then((data) => {
         if (data && data.success && Array.isArray(data.data)) {
-          // Merge API orders with local orders without duplicates
           const merged = [...data.data];
           localOrders.forEach((lo) => {
             if (!merged.some((m) => String(m.id) === String(lo.id))) {
@@ -70,7 +69,7 @@ export const AdminOrders = () => {
         <p className="text-xs text-bodytext-muted">Manage GCC customer orders, verify payment receipts, and update delivery status.</p>
       </div>
 
-      <div className="bg-surface border border-surface-bordered rounded-3xl overflow-hidden shadow-warm">
+      <div className="bg-white border border-surface-bordered rounded-3xl overflow-hidden shadow-warm">
         {loading ? (
           <div className="p-8 text-center text-xs text-bodytext-muted">Loading customer orders...</div>
         ) : orders.length === 0 ? (
@@ -78,7 +77,7 @@ export const AdminOrders = () => {
         ) : (
           <div className="overflow-x-auto text-xs">
             <table className="w-full text-start border-collapse">
-              <thead className="bg-sand border-b border-surface-bordered text-charcoal font-bold uppercase text-[10px]">
+              <thead className="bg-[#351809] text-white font-bold uppercase text-[10px]">
                 <tr>
                   <th className="p-3 text-start">Order Ref</th>
                   <th className="p-3 text-start">Customer Details</th>
@@ -91,7 +90,7 @@ export const AdminOrders = () => {
               <tbody className="divide-y divide-surface-bordered">
                 {orders.map((o) => (
                   <tr key={o.id} className="hover:bg-sand/30">
-                    <td className="p-3 font-mono font-bold text-clay">{o.id}</td>
+                    <td className="p-3 font-mono font-bold text-[#D97706]">{o.id}</td>
                     <td className="p-3">
                       <span className="font-bold text-charcoal block">{o.customer?.name || 'Customer'}</span>
                       <span className="text-bodytext-muted font-mono dir-ltr">{o.customer?.phone}</span>
@@ -103,7 +102,7 @@ export const AdminOrders = () => {
                       <select
                         value={o.status || 'pending'}
                         onChange={(e) => handleUpdateStatus(o.id, e.target.value)}
-                        className="bg-sand border border-surface-bordered rounded-lg py-1 px-2 text-xs font-bold text-charcoal"
+                        className="bg-[#F9F6F0] border border-surface-bordered rounded-lg py-1 px-2 text-xs font-bold text-charcoal focus:ring-2 focus:ring-[#D97706]"
                       >
                         <option value="pending">Pending</option>
                         <option value="processing">Processing</option>

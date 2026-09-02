@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit2, Trash2, X, Check, Search } from 'lucide-react';
 import { useCurrency } from '../../context/CurrencyContext';
+import { apiFetch } from '../../services/api';
 
 export const AdminProducts = () => {
   const { formatPrice } = useCurrency();
@@ -33,10 +34,9 @@ export const AdminProducts = () => {
 
   const fetchProducts = () => {
     setLoading(true);
-    fetch('/api/products')
-      .then((r) => r.json())
+    apiFetch('/api/products')
       .then((data) => {
-        if (data.success && data.data) setProducts(data.data);
+        if (data && data.success && data.data) setProducts(data.data);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -107,13 +107,12 @@ export const AdminProducts = () => {
     };
 
     try {
-      const res = await fetch(url, {
+      const data = await apiFetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      const data = await res.json();
-      if (data.success) {
+      if (data && data.success) {
         setModalOpen(false);
         fetchProducts();
       }
@@ -125,9 +124,8 @@ export const AdminProducts = () => {
   const handleDeleteProduct = async (id) => {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
     try {
-      const res = await fetch(`/api/products/${id}`, { method: 'DELETE' });
-      const data = await res.json();
-      if (data.success) fetchProducts();
+      const data = await apiFetch(`/api/products/${id}`, { method: 'DELETE' });
+      if (data && data.success) fetchProducts();
     } catch {
       alert('Error deleting product');
     }
@@ -141,7 +139,7 @@ export const AdminProducts = () => {
   );
 
   return (
-    <div className="space-y-6 font-body">
+    <div className="space-y-6 font-body text-start">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-surface-bordered pb-4">
         <div>
           <h2 className="font-display font-black text-2xl text-charcoal">Products Catalog Management</h2>
@@ -150,9 +148,9 @@ export const AdminProducts = () => {
 
         <button
           onClick={openCreateModal}
-          className="px-5 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-2"
+          className="px-5 py-3 bg-[#D97706] hover:bg-[#B45309] text-white font-extrabold text-xs rounded-xl shadow-lg flex items-center gap-2 transition-all active:scale-98"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-4 h-4 text-white" />
           <span>Add New Product</span>
         </button>
       </div>
@@ -164,16 +162,16 @@ export const AdminProducts = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Filter products by name or SKU..."
-          className="w-full bg-surface border border-surface-bordered rounded-xl py-2 px-3 text-xs text-charcoal"
+          className="w-full bg-white border border-surface-bordered rounded-xl py-2.5 px-3 text-xs text-charcoal shadow-sm"
         />
-        <Search className="w-4 h-4 absolute top-2.5 right-3 text-bodytext-muted" />
+        <Search className="w-4 h-4 absolute top-3 right-3 text-bodytext-muted" />
       </div>
 
       {/* Table */}
-      <div className="bg-surface border border-surface-bordered rounded-3xl overflow-hidden shadow-warm">
+      <div className="bg-white border border-surface-bordered rounded-3xl overflow-hidden shadow-warm">
         <div className="overflow-x-auto text-xs">
           <table className="w-full text-start border-collapse">
-            <thead className="bg-sand border-b border-surface-bordered text-charcoal font-bold uppercase text-[10px]">
+            <thead className="bg-[#351809] text-white font-bold uppercase text-[10px]">
               <tr>
                 <th className="p-3 text-start">Image</th>
                 <th className="p-3 text-start">SKU</th>
@@ -192,21 +190,21 @@ export const AdminProducts = () => {
                   <td className="p-3">
                     <img src={p.image || '/favicon.svg'} alt="" className="w-10 h-10 object-cover rounded-lg border bg-sand" />
                   </td>
-                  <td className="p-3 font-mono font-bold text-brand-orange">{p.sku}</td>
+                  <td className="p-3 font-mono font-bold text-[#D97706]">{p.sku}</td>
                   <td className="p-3 font-bold text-charcoal max-w-xs truncate">{p.name_en}</td>
                   <td className="p-3 text-charcoal max-w-xs truncate dir-rtl">{p.name_ar}</td>
                   <td className="p-3 capitalize font-semibold">{p.category}</td>
-                  <td className="p-3 capitalize font-semibold text-brand-orange">{p.type}</td>
+                  <td className="p-3 capitalize font-semibold text-[#D97706]">{p.type}</td>
                   <td className="p-3 font-mono font-bold">{formatPrice(p.price_omr)}</td>
                   <td className="p-3">
-                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${p.in_stock ? 'bg-teal-light text-teal' : 'bg-clay-light text-clay'}`}>
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${p.in_stock ? 'bg-emerald-100 text-emerald-900 border border-emerald-300' : 'bg-rose-100 text-rose-900 border border-rose-300'}`}>
                       {p.in_stock ? 'In Stock' : 'Out of Stock'}
                     </span>
                   </td>
                   <td className="p-3">
                     <div className="flex items-center gap-2">
-                      <button onClick={() => openEditModal(p)} className="p-1.5 hover:bg-sand rounded text-charcoal"><Edit2 className="w-4 h-4" /></button>
-                      <button onClick={() => handleDeleteProduct(p.id)} className="p-1.5 hover:bg-sand rounded text-clay"><Trash2 className="w-4 h-4" /></button>
+                      <button onClick={() => openEditModal(p)} className="p-1.5 bg-amber-50 hover:bg-amber-100 text-[#D97706] rounded-lg border border-amber-200"><Edit2 className="w-4 h-4" /></button>
+                      <button onClick={() => handleDeleteProduct(p.id)} className="p-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg border border-rose-200"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </td>
                 </tr>
@@ -218,13 +216,13 @@ export const AdminProducts = () => {
 
       {/* CREATE / EDIT MODAL */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-charcoal/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-surface border border-surface-bordered rounded-3xl max-w-2xl w-full p-6 space-y-6 shadow-2xl">
-            <div className="flex justify-between items-center border-b border-surface-bordered pb-3">
-              <h3 className="font-display font-bold text-charcoal text-lg">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white border border-surface-bordered rounded-3xl max-w-2xl w-full p-6 space-y-6 shadow-2xl">
+            <div className="flex justify-between items-center border-b border-surface-bordered pb-3 bg-[#351809] -mx-6 -mt-6 p-6 rounded-t-3xl text-white">
+              <h3 className="font-display font-bold text-lg text-white">
                 {editingId ? 'Edit Veterinary Product' : 'Add New Veterinary Product'}
               </h3>
-              <button onClick={() => setModalOpen(false)}><X className="w-6 h-6 text-charcoal" /></button>
+              <button onClick={() => setModalOpen(false)} className="text-white hover:text-amber-300"><X className="w-6 h-6" /></button>
             </div>
 
             <form onSubmit={handleSaveProduct} className="space-y-4 text-xs max-h-[70vh] overflow-y-auto pe-2">
@@ -284,18 +282,18 @@ export const AdminProducts = () => {
 
               <div className="flex items-center gap-6 pt-2">
                 <label className="flex items-center gap-2 cursor-pointer font-bold">
-                  <input type="checkbox" checked={formData.in_stock} onChange={(e) => setFormData({ ...formData, in_stock: e.target.checked })} className="w-4 h-4 text-brand-orange" />
+                  <input type="checkbox" checked={formData.in_stock} onChange={(e) => setFormData({ ...formData, in_stock: e.target.checked })} className="w-4 h-4 text-[#D97706]" />
                   <span>In Stock</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer font-bold">
-                  <input type="checkbox" checked={formData.is_featured} onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })} className="w-4 h-4 text-brand-orange" />
+                  <input type="checkbox" checked={formData.is_featured} onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })} className="w-4 h-4 text-[#D97706]" />
                   <span>Featured Item</span>
                 </label>
               </div>
 
               <div className="pt-4 flex justify-end gap-3 border-t">
-                <button type="button" onClick={() => setModalOpen(false)} className="px-4 py-2 border rounded-xl font-bold">Cancel</button>
-                <button type="submit" className="px-6 py-2 bg-brand-orange text-white rounded-xl font-bold">Save Product</button>
+                <button type="button" onClick={() => setModalOpen(false)} className="px-4 py-2 border rounded-xl font-bold bg-sand hover:bg-sand-dark">Cancel</button>
+                <button type="submit" className="px-6 py-2 bg-[#D97706] hover:bg-[#B45309] text-white rounded-xl font-extrabold shadow-md">Save Product</button>
               </div>
             </form>
           </div>
