@@ -4,6 +4,7 @@ import { ShieldCheck, CreditCard, Building2, Smartphone, Truck, ArrowLeft, Arrow
 import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useCart } from '../context/CartContext';
+import { apiFetch } from '../services/api';
 
 export const Checkout = () => {
   const { language, isRtl, t } = useLanguage();
@@ -73,13 +74,13 @@ export const Checkout = () => {
     };
 
     try {
-      const res = await fetch('/api/orders', {
+      const data = await apiFetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderPayload),
       });
-      const data = await res.json();
-      if (data.success && data.data) {
+
+      if (data && data.success && data.data) {
         clearCart();
         navigate(`/order-confirmation?orderId=${data.data.id}`);
       } else {
