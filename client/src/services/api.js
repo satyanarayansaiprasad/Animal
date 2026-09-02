@@ -42,6 +42,21 @@ export async function apiFetch(endpoint, options = {}) {
   const path = urlObj.pathname;
   const params = urlObj.searchParams;
 
+  // Handling POST /api/admin/login
+  if (path === '/api/admin/login' && options.method === 'POST') {
+    try {
+      const body = typeof options.body === 'string' ? JSON.parse(options.body) : options.body || {};
+      if (body.username === 'admin' && body.password === 'alnamoos2026') {
+        return {
+          success: true,
+          token: 'admin-session-token-alnamoos-2026',
+          user: { username: 'admin', role: 'administrator' },
+        };
+      }
+    } catch {}
+    return { success: false, message: 'Invalid credentials' };
+  }
+
   // Handling POST /api/orders
   if (path === '/api/orders' && options.method === 'POST') {
     try {
