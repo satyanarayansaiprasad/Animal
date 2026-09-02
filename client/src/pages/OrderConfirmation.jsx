@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { CheckCircle2, Building2, MessageCircle, ArrowRight, ArrowLeft, Printer, ShieldCheck, Smartphone, PhoneCall } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
+import { apiFetch } from '../services/api';
 
 export const OrderConfirmation = () => {
   const [searchParams] = useSearchParams();
@@ -15,10 +16,9 @@ export const OrderConfirmation = () => {
 
   useEffect(() => {
     if (orderId) {
-      fetch(`/api/orders/${orderId}`)
-        .then((res) => res.json())
+      apiFetch(`/api/orders/${orderId}`)
         .then((data) => {
-          if (data.success && data.data) {
+          if (data && data.success && data.data) {
             setOrder(data.data);
           }
           setLoading(false);
@@ -50,7 +50,7 @@ export const OrderConfirmation = () => {
   const whatsappUrl = `https://wa.me/96895266144?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 font-body space-y-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 font-body space-y-8 text-start">
       {/* Confirmation Header Card */}
       <div className="bg-surface border border-surface-bordered p-8 rounded-3xl shadow-warm text-center space-y-4">
         <div className="w-20 h-20 rounded-full bg-teal-light text-teal flex items-center justify-center mx-auto shadow-sm">

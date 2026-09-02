@@ -2,7 +2,7 @@ import { fallbackProducts, fallbackSettings, fallbackCategories } from '../data/
 
 /**
  * Resilient API Client for Al Namoos Veterinary Store
- * Tries live API endpoints first; if offline or starting up, gracefully serves fallback dataset without loopback CORS errors.
+ * Tries live API endpoints first; if offline, starting up, or returning 404/500, gracefully serves fallback dataset without unhandled errors.
  */
 export async function apiFetch(endpoint, options = {}) {
   const relativeUrl = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
@@ -10,10 +10,11 @@ export async function apiFetch(endpoint, options = {}) {
   // 1. Try relative endpoint (/api/...)
   try {
     const res = await fetch(relativeUrl, options);
-    if (res.ok) {
-      const json = await res.json();
-      if (json && json.success) return json;
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
     }
+    const json = await res.json();
+    if (json && json.success) return json;
   } catch {
     // Silently continue to fallback attempt
   }
@@ -26,10 +27,11 @@ export async function apiFetch(endpoint, options = {}) {
     try {
       const fallbackUrl = `http://127.0.0.1:5001${relativeUrl}`;
       const res = await fetch(fallbackUrl, options);
-      if (res.ok) {
-        const json = await res.json();
-        if (json && json.success) return json;
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
       }
+      const json = await res.json();
+      if (json && json.success) return json;
     } catch {
       // Silently continue to local fallback engine
     }
@@ -53,7 +55,6 @@ export async function apiFetch(endpoint, options = {}) {
         ...body,
       };
 
-      // Store in sessionStorage for order confirmation display
       if (typeof window !== 'undefined') {
         sessionStorage.setItem(`order_${generatedId}`, JSON.stringify(newOrder));
       }

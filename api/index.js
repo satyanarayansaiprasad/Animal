@@ -23,8 +23,15 @@ app.get(['/api/health', '/health'], (req, res) => {
   });
 });
 
-// Support both /api/... and /... subroutes for Vercel Serverless Function rewrites
-app.use('/api', apiRoutes);
+// Middleware to normalize req.url so Express sub-routers match whether Vercel passes /api/settings or /settings
+app.use((req, res, next) => {
+  if (req.url.startsWith('/api')) {
+    req.url = req.url.replace(/^\/api/, '') || '/';
+  }
+  next();
+});
+
+// Primary API Router Mount
 app.use('/', apiRoutes);
 
 export default app;
