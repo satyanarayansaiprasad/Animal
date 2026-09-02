@@ -57,6 +57,7 @@ export async function apiFetch(endpoint, options = {}) {
 
       if (typeof window !== 'undefined') {
         sessionStorage.setItem(`order_${generatedId}`, JSON.stringify(newOrder));
+        localStorage.setItem(`order_${generatedId}`, JSON.stringify(newOrder));
       }
       return { success: true, data: newOrder };
     } catch {
@@ -69,16 +70,20 @@ export async function apiFetch(endpoint, options = {}) {
   if (path.startsWith('/api/orders/')) {
     const id = path.split('/api/orders/')[1];
     if (typeof window !== 'undefined') {
-      const cached = sessionStorage.getItem(`order_${id}`);
-      if (cached) {
-        return { success: true, data: JSON.parse(cached) };
+      const sessionCached = sessionStorage.getItem(`order_${id}`);
+      const localCached = localStorage.getItem(`order_${id}`);
+      if (sessionCached) {
+        return { success: true, data: JSON.parse(sessionCached) };
+      }
+      if (localCached) {
+        return { success: true, data: JSON.parse(localCached) };
       }
     }
     return {
       success: true,
       data: {
         id: id || 'ALN-84921',
-        customer: { name: 'Customer', phone: '+968 9526 6144', city: 'Muscat', country: 'Oman', address: 'Main St.' },
+        customer: { name: 'Valued Customer', phone: '+968 9526 6144', city: 'Muscat', country: 'Oman', address: 'Main St.' },
         items: [],
         total_omr: 0,
         payment_method: 'bank_transfer',
