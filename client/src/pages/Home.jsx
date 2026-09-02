@@ -457,7 +457,7 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 12. SPECIALIST DOCTOR CONSULTATION FEATURE SECTION BEFORE FOOTER (FEATURING DOCTOR BANNER IMAGE) */}
+        {/* 12. SPECIALIST DOCTOR CONSULTATION FEATURE SECTION BEFORE FOOTER (FEATURING DR HAFEZ PHOTO & BADGE) */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="relative rounded-3xl overflow-hidden bg-[#351809] text-white p-6 sm:p-10 shadow-2xl border border-[#5C2D15] flex flex-col lg:flex-row items-center justify-between gap-8">
             {/* Left Info Column */}
@@ -498,17 +498,17 @@ export const Home = () => {
               </div>
             </div>
 
-            {/* Right Doctor Image Frame */}
+            {/* Right Doctor Image Frame: Featuring Dr. Hafez */}
             <div className="relative w-full max-w-md h-64 sm:h-80 rounded-2xl overflow-hidden border-4 border-brand-orange/40 shadow-2xl shrink-0 group z-10">
               <img
                 src="/images/doctor_banner.jpg"
-                alt="AL-NAMOOS Veterinary Doctor"
+                alt="Dr. Hafez — Senior Veterinary Specialist"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-3 left-3 right-3 text-center bg-black/60 backdrop-blur-md p-2 rounded-xl border border-white/20">
                 <span className="font-display font-bold text-xs text-white block">
-                  {language === 'ar' ? 'د. أحمد الهنائي — استشاري طب وجراحة الهجن' : 'Dr. Ahmed Al Hinai — Senior Veterinary Specialist'}
+                  {language === 'ar' ? 'د. حافظ — استشاري طب وجراحة الهجن والخيل' : 'Dr. Hafez — Senior Veterinary Specialist'}
                 </span>
               </div>
             </div>
