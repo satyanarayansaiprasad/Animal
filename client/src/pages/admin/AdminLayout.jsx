@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Package, ShoppingCart, Tag, Users, Settings, LogOut, ArrowLeft } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { LayoutDashboard, Package, ShoppingCart, Settings, LogOut, ArrowLeft, Stethoscope } from 'lucide-react';
 import { AdminLogin } from './AdminLogin';
 import { AdminDashboard } from './AdminDashboard';
 import { AdminProducts } from './AdminProducts';
 import { AdminOrders } from './AdminOrders';
 import { AdminSettings } from './AdminSettings';
+import { AdminInquiries } from './AdminInquiries';
 
 export const AdminLayout = () => {
   const [token, setToken] = useState(() => localStorage.getItem('alnamoos_admin_token'));
-  const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard' | 'products' | 'orders' | 'settings'
+  const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard' | 'products' | 'orders' | 'inquiries' | 'settings'
 
   if (!token) {
     return <AdminLogin onLogin={(tok) => setToken(tok)} />;
@@ -71,6 +72,7 @@ export const AdminLayout = () => {
               { id: 'dashboard', label: 'Dashboard Overview', icon: LayoutDashboard },
               { id: 'products', label: 'Products Catalog (CRUD)', icon: Package },
               { id: 'orders', label: 'Orders & Fulfillment', icon: ShoppingCart },
+              { id: 'inquiries', label: 'Doctor Inquiries', icon: Stethoscope },
               { id: 'settings', label: 'Store Settings & Rates', icon: Settings },
             ].map((tab) => {
               const Icon = tab.icon;
@@ -98,6 +100,7 @@ export const AdminLayout = () => {
           {activeTab === 'dashboard' && <AdminDashboard onNavigate={(t) => setActiveTab(t)} />}
           {activeTab === 'products' && <AdminProducts />}
           {activeTab === 'orders' && <AdminOrders />}
+          {activeTab === 'inquiries' && <AdminInquiries />}
           {activeTab === 'settings' && <AdminSettings />}
         </main>
       </div>
