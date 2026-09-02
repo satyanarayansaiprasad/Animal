@@ -12,7 +12,6 @@ import { ProductDetail } from './pages/ProductDetail';
 import { Cart } from './pages/Cart';
 import { Checkout } from './pages/Checkout';
 import { OrderConfirmation } from './pages/OrderConfirmation';
-import { Account } from './pages/Account';
 import { Consultation } from './pages/Consultation';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
@@ -52,7 +51,6 @@ export function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          <Route path="/account" element={<Account />} />
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

@@ -3,8 +3,6 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   Search,
   ShoppingBag,
-  Heart,
-  Globe,
   Menu,
   X,
   ChevronDown,
@@ -149,21 +147,14 @@ export const Header = () => {
             </button>
           </form>
 
-          {/* Right Action Icons (Wishlist + Cart) */}
+          {/* Right Action Icons (Cart Only) */}
           <div className="flex items-center gap-4 shrink-0">
-            <Link to="/account" className="relative p-1.5 text-white/80 hover:text-brand-orange transition-colors" title="Wishlist">
-              <Heart className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 bg-brand-orange text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                0
-              </span>
-            </Link>
-
             <button
               onClick={() => setIsCartOpen(true)}
               className="relative p-1.5 text-white/80 hover:text-brand-orange transition-colors"
               title="Cart"
             >
-              <ShoppingBag className="w-5 h-5" />
+              <ShoppingBag className="w-6 h-6 text-white" />
               <span className="absolute -top-1 -right-1 bg-brand-orange text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {itemCount}
               </span>
