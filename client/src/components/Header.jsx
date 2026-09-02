@@ -50,13 +50,17 @@ export const Header = () => {
       <div className="bg-[#3A1E0E] text-white/80 text-xs py-1.5 px-4 sm:px-8 border-b border-[#4A2511]">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Top Utility Links */}
-          <div className="flex items-center gap-4 text-[11px] font-medium text-white/70">
+          <div className="flex items-center gap-3.5 text-[11px] font-medium text-white/70">
             <Link to="/about" className="hover:text-white transition-colors">
-              About us
+              {language === 'ar' ? 'من نحن' : 'About us'}
+            </Link>
+            <span className="text-white/30">|</span>
+            <Link to="/contact" className="hover:text-amber-300 transition-colors font-bold text-amber-300">
+              {language === 'ar' ? 'اتصل بنا' : 'Contact us'}
             </Link>
             <span className="text-white/30">|</span>
             <Link to="/shop?type=medicine" className="hover:text-white transition-colors">
-              Doping Test
+              {language === 'ar' ? 'فحص المنشطات' : 'Doping Test'}
             </Link>
           </div>
 
@@ -103,8 +107,8 @@ export const Header = () => {
             </div>
           </Link>
 
-          {/* 5 Main Category Navigation Links */}
-          <div className="hidden md:flex items-center gap-5 text-xs font-extrabold tracking-wider text-white/90 uppercase">
+          {/* Main Category & Contact Navigation Links */}
+          <div className="hidden md:flex items-center gap-4 lg:gap-6 text-xs font-extrabold tracking-wider text-white/90 uppercase">
             <Link to="/category/camel" className="hover:text-brand-orange transition-colors whitespace-nowrap">
               {language === 'ar' ? 'الهجن والإبل' : 'CAMEL'}
             </Link>
@@ -119,6 +123,9 @@ export const Header = () => {
             </Link>
             <Link to="/category/falcon" className="hover:text-brand-orange transition-colors whitespace-nowrap">
               {language === 'ar' ? 'الصقور' : 'FALCON'}
+            </Link>
+            <Link to="/contact" className="text-amber-300 hover:text-white transition-colors whitespace-nowrap font-black">
+              {language === 'ar' ? 'اتصل بنا' : 'CONTACT US'}
             </Link>
           </div>
 
@@ -203,6 +210,9 @@ export const Header = () => {
             </Link>
             <Link to="/category/falcon" className="hover:text-brand-orange py-1">
               FALCON
+            </Link>
+            <Link to="/contact" className="text-amber-300 py-1 font-black">
+              CONTACT US
             </Link>
             <Link to="/consultation" className="text-brand-orange py-1">
               DOCTOR CONSULTATION
