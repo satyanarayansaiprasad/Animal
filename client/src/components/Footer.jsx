@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Youtube, Video } from 'lucide-react';
+import { Instagram, Youtube, Video, Mail, Phone } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export const Footer = () => {
@@ -79,16 +79,25 @@ export const Footer = () => {
             <div className="space-y-2 pt-2 text-xs text-white/90">
               <div className="flex items-center gap-2 font-mono">
                 <span className="text-base">🇴🇲</span>
-                <span className="font-bold text-white/70">OMAN</span>
-                <a href="tel:+96895266144" className="hover:text-brand-orange transition-colors">
+                <span className="font-bold text-white/70">OMAN:</span>
+                <a href="tel:+96895266144" className="hover:text-brand-orange transition-colors font-bold">
                   +968 9526 6144
                 </a>
               </div>
+
               <div className="flex items-center gap-2 font-mono">
                 <span className="text-base">🇦🇪</span>
-                <span className="font-bold text-white/70">UAE</span>
-                <a href="tel:+971562973007" className="hover:text-brand-orange transition-colors">
+                <span className="font-bold text-white/70">UAE:</span>
+                <a href="tel:+971562973007" className="hover:text-brand-orange transition-colors font-bold">
                   +971 56 297 3007
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2 font-mono pt-1">
+                <Mail className="w-4 h-4 text-brand-orange" />
+                <span className="font-bold text-white/70">EMAIL:</span>
+                <a href="mailto:foxx20041@hotmail.com" className="text-brand-orange font-bold hover:underline">
+                  foxx20041@hotmail.com
                 </a>
               </div>
             </div>
@@ -107,7 +116,7 @@ export const Footer = () => {
                 <Link to="/about" className="hover:text-brand-orange transition-colors">{t('aboutUs')}</Link>
               </li>
               <li>
-                <Link to="/shop?type=medicine" className="hover:text-brand-orange transition-colors">Doping Test</Link>
+                <Link to="/contact" className="hover:text-brand-orange transition-colors font-bold text-white">{t('contactUs')}</Link>
               </li>
               <li>
                 <Link to="/shop" className="hover:text-brand-orange transition-colors">{t('shop')}</Link>
