@@ -3,18 +3,18 @@ export const taxonomy = {
     name_en: 'Camel',
     name_ar: 'الهجن والإبل',
     slug: 'camel',
-    banner: '/images/hero_camel_racing.jpg',
+    banner: '/images/species/camel_race.jpg',
     subcategories: [
       {
         slug: 'camel-race',
         name_en: 'Camel Race',
         name_ar: 'سباقات الهجن',
-        img: '/images/species/camel_card.jpg',
+        img: '/images/species/camel_race.jpg',
         items: [
-          { slug: 'breathing-oxygen', name_en: 'Breathing & Oxygen', name_ar: 'علاجات النسم والتنفس', icon: '🫁', img: '/images/hero_camel_racing.jpg' },
+          { slug: 'breathing-oxygen', name_en: 'Breathing & Oxygen', name_ar: 'علاجات النسم والتنفس', icon: '🫁', img: '/images/species/camel_race.jpg' },
           { slug: 'bones-joints', name_en: 'Bones & Joints', name_ar: 'مفاصل و اوتار', icon: '🦴', img: '/images/hero_equine_medicine.jpg' },
           { slug: 'pain-relievers', name_en: 'Pain Relievers', name_ar: 'مسكنات الألم والالتهاب', icon: '⚡', img: '/images/species/camel_medicines.jpg' },
-          { slug: 'dexamethasone', name_en: 'Dexamethasone', name_ar: 'دكسا الهجن', icon: '🫀', img: '/images/species/camel_card.jpg' },
+          { slug: 'dexamethasone', name_en: 'Dexamethasone', name_ar: 'دكسا الهجن', icon: '🫀', img: '/images/species/camel_race.jpg' },
           { slug: 'energy-power', name_en: 'Energy & Power', name_ar: 'طاقة ونشاط السباق', icon: '💥', img: '/images/species/camel_supplements.jpg' },
           { slug: 'diuretics', name_en: 'Diuretics', name_ar: 'إدرار وتصريف المائيات', icon: '💧', img: '/images/species/camel_medicines.jpg' },
           { slug: 'protectors-recovery', name_en: 'Protectors & Recovery', name_ar: 'حماية واستشفاء المفاصل', icon: '🩹', img: '/images/species/camel_problems.jpg' },
