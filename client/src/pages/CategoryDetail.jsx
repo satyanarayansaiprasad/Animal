@@ -110,17 +110,23 @@ export const CategoryDetail = () => {
               <Link
                 key={i}
                 to={`/category/${catKey}/${sub.slug}`}
-                className="group relative bg-white border border-surface-bordered rounded-3xl p-6 shadow-warm hover:shadow-warm-hover transition-all duration-300 flex flex-col items-center justify-between text-center space-y-4 min-h-[280px]"
+                className="group relative h-60 sm:h-72 rounded-3xl overflow-hidden shadow-warm hover:shadow-warm-hover border border-surface-bordered flex flex-col justify-end p-5 transition-all duration-500"
               >
-                <h3 className="font-display font-black text-lg text-brown-dark group-hover:text-brand-orange transition-colors">
-                  {language === 'ar' ? sub.name_ar : sub.name_en}
-                </h3>
-                <div className="relative w-36 h-36 rounded-2xl overflow-hidden border-2 border-brand-orange/40 shadow-md group-hover:scale-105 transition-transform">
-                  <img src={sub.img} alt={sub.name_en} className="w-full h-full object-cover" />
+                {/* Background Image filling the card */}
+                <img
+                  src={sub.img}
+                  alt={sub.name_en}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                <div className="relative z-10 text-center space-y-1">
+                  <h3 className="font-display font-black text-lg text-white group-hover:text-brand-orange transition-colors drop-shadow-md">
+                    {language === 'ar' ? sub.name_ar : sub.name_en}
+                  </h3>
+                  <span className="inline-block px-3 py-1 bg-brand-orange text-white text-[11px] font-bold rounded-full shadow">
+                    {language === 'ar' ? 'تصفح القسم ➔' : 'Explore Category ➔'}
+                  </span>
                 </div>
-                <span className="text-xs font-bold text-brand-orange group-hover:underline">
-                  {language === 'ar' ? 'تصفح القسم ➔' : 'Explore Category ➔'}
-                </span>
               </Link>
             ))}
           </div>
@@ -137,22 +143,35 @@ export const CategoryDetail = () => {
             <p className="text-xs text-bodytext-muted">Select a specific symptom or treatment area</p>
           </div>
 
+          {/* Full-Background Image Cards for Subcategories (Fixing small image inside card) */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {activeSubcat.items.map((item) => (
               <Link
                 key={item.slug}
                 to={`/category/${catKey}/${activeSubcat.slug}/${item.slug}`}
-                className="group relative bg-white border border-surface-bordered rounded-2xl p-5 shadow-sm hover:shadow-warm-hover hover:border-brand-orange transition-all flex flex-col items-center text-center space-y-3"
+                className="group relative h-52 sm:h-64 rounded-3xl overflow-hidden shadow-warm hover:shadow-warm-hover border border-surface-bordered flex flex-col justify-between p-4 transition-all duration-500"
               >
-                <div className="relative w-20 h-20 rounded-2xl overflow-hidden border border-brand-orange/30 shadow-inner group-hover:scale-105 transition-transform">
-                  <img src={item.img} alt={item.name_en} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center text-2xl">
-                    {item.icon}
-                  </div>
+                {/* Background Image filling 100% of the card */}
+                <img
+                  src={item.img}
+                  alt={item.name_en}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+
+                {/* Dark Gradient Overlay for text contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
+
+                {/* Top Emoji Icon Badge */}
+                <div className="relative z-10 self-start w-10 h-10 rounded-2xl bg-white/90 backdrop-blur-md border border-white/40 flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform">
+                  {item.icon}
                 </div>
-                <span className="font-display font-bold text-xs sm:text-sm text-brown-dark group-hover:text-brand-orange transition-colors">
-                  {language === 'ar' ? item.name_ar : item.name_en}
-                </span>
+
+                {/* Bottom Title Text Overlay */}
+                <div className="relative z-10 text-center pt-2">
+                  <span className="font-display font-black text-xs sm:text-sm text-white drop-shadow-md group-hover:text-brand-orange transition-colors leading-tight block">
+                    {language === 'ar' ? item.name_ar : item.name_en}
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
