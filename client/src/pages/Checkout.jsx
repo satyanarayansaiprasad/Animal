@@ -93,18 +93,19 @@ export const Checkout = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 font-body space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 sm:pt-12 pb-20 font-body space-y-8 text-start bg-brand-cream min-h-screen">
       <div className="border-b border-surface-bordered pb-4">
         <h1 className="font-display font-black text-3xl sm:text-4xl text-charcoal">
           {t('deliveryDetails')} & {t('paymentMethod')}
         </h1>
+        <p className="text-xs text-bodytext-muted">Enter delivery details and select your preferred payment gateway.</p>
       </div>
 
-      <form onSubmit={handleSubmitOrder} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <form onSubmit={handleSubmitOrder} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Delivery Form & Payment Selection */}
         <div className="lg:col-span-8 space-y-8">
           {/* STEP 1: Customer Info */}
-          <div className="bg-surface border border-surface-bordered p-6 rounded-3xl shadow-warm space-y-4">
+          <div className="bg-surface border border-surface-bordered p-6 sm:p-8 rounded-3xl shadow-warm space-y-4">
             <h3 className="font-display font-bold text-charcoal text-lg flex items-center gap-2 border-b border-surface-bordered pb-3">
               <span className="w-6 h-6 rounded-full bg-clay text-white text-xs flex items-center justify-center font-bold">1</span>
               <span>{t('deliveryDetails')}</span>
@@ -120,7 +121,7 @@ export const Checkout = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="e.g. Sheikh Saeed Al-Hajri"
-                  className="w-full bg-sand/50 border border-surface-bordered rounded-xl py-2.5 px-3 text-xs text-charcoal focus:bg-white focus:border-clay"
+                  className="w-full bg-sand/50 border border-surface-bordered rounded-xl py-3 px-3.5 text-xs text-charcoal focus:bg-white focus:border-clay"
                 />
               </div>
 
@@ -133,7 +134,7 @@ export const Checkout = () => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   placeholder="+968 9XXXXXXX or +971 50XXXXXXX"
-                  className="w-full bg-sand/50 border border-surface-bordered rounded-xl py-2.5 px-3 text-xs text-charcoal font-mono focus:bg-white focus:border-clay dir-ltr"
+                  className="w-full bg-sand/50 border border-surface-bordered rounded-xl py-3 px-3.5 text-xs text-charcoal font-mono focus:bg-white focus:border-clay dir-ltr"
                 />
               </div>
 
@@ -143,7 +144,7 @@ export const Checkout = () => {
                   name="country"
                   value={formData.country}
                   onChange={handleInputChange}
-                  className="w-full bg-sand/50 border border-surface-bordered rounded-xl py-2.5 px-3 text-xs text-charcoal font-semibold focus:bg-white focus:border-clay"
+                  className="w-full bg-sand/50 border border-surface-bordered rounded-xl py-3 px-3.5 text-xs text-charcoal font-semibold focus:bg-white focus:border-clay"
                 >
                   <option value="Oman">🇴🇲 Sultanate of Oman</option>
                   <option value="UAE">🇦🇪 United Arab Emirates</option>
@@ -163,7 +164,7 @@ export const Checkout = () => {
                   value={formData.city}
                   onChange={handleInputChange}
                   placeholder="e.g. Muscat, Abu Dhabi, Riyadh"
-                  className="w-full bg-sand/50 border border-surface-bordered rounded-xl py-2.5 px-3 text-xs text-charcoal focus:bg-white focus:border-clay"
+                  className="w-full bg-sand/50 border border-surface-bordered rounded-xl py-3 px-3.5 text-xs text-charcoal focus:bg-white focus:border-clay"
                 />
               </div>
 
@@ -176,14 +177,14 @@ export const Checkout = () => {
                   value={formData.address}
                   onChange={handleInputChange}
                   placeholder="Street name, Villa/Farm number, Camel camp location"
-                  className="w-full bg-sand/50 border border-surface-bordered rounded-xl py-2.5 px-3 text-xs text-charcoal focus:bg-white focus:border-clay"
+                  className="w-full bg-sand/50 border border-surface-bordered rounded-xl py-3 px-3.5 text-xs text-charcoal focus:bg-white focus:border-clay"
                 />
               </div>
             </div>
           </div>
 
           {/* STEP 2: Shipping Option Selection */}
-          <div className="bg-surface border border-surface-bordered p-6 rounded-3xl shadow-warm space-y-4">
+          <div className="bg-surface border border-surface-bordered p-6 sm:p-8 rounded-3xl shadow-warm space-y-4">
             <h3 className="font-display font-bold text-charcoal text-lg flex items-center gap-2 border-b border-surface-bordered pb-3">
               <span className="w-6 h-6 rounded-full bg-clay text-white text-xs flex items-center justify-center font-bold">2</span>
               <span>{t('deliveryOption')}</span>
@@ -224,7 +225,7 @@ export const Checkout = () => {
           </div>
 
           {/* STEP 3: Payment Method Selection */}
-          <div className="bg-surface border border-surface-bordered p-6 rounded-3xl shadow-warm space-y-6">
+          <div className="bg-surface border border-surface-bordered p-6 sm:p-8 rounded-3xl shadow-warm space-y-6">
             <h3 className="font-display font-bold text-charcoal text-lg flex items-center gap-2 border-b border-surface-bordered pb-3">
               <span className="w-6 h-6 rounded-full bg-clay text-white text-xs flex items-center justify-center font-bold">3</span>
               <span>Payment Gateways (خيارات الدفع)</span>
@@ -250,7 +251,7 @@ export const Checkout = () => {
                     />
                     <Building2 className="w-5 h-5 text-clay" />
                     <span className="font-display font-bold text-charcoal text-xs sm:text-sm">
-                      Bank Account Transfer
+                      Direct Bank Transfer
                     </span>
                   </div>
                   <span className="px-2 py-0.5 bg-gold text-charcoal text-[10px] font-bold rounded">RECOMMENDED</span>
@@ -279,7 +280,7 @@ export const Checkout = () => {
                     />
                     <Smartphone className="w-5 h-5 text-charcoal" />
                     <span className="font-display font-bold text-charcoal text-xs sm:text-sm">
-                      Apple Pay (95266144)
+                      Apple Pay
                     </span>
                   </div>
                   <span className="px-2 py-0.5 bg-charcoal text-white font-mono text-[10px] font-bold rounded">
@@ -365,7 +366,7 @@ export const Checkout = () => {
 
         {/* Right Column: Order Summary & Place Order */}
         <div className="lg:col-span-4 space-y-6">
-          <div className="bg-surface border border-surface-bordered p-6 rounded-3xl shadow-warm space-y-6 sticky top-28">
+          <div className="bg-surface border border-surface-bordered p-6 rounded-3xl shadow-warm space-y-6 sticky top-36">
             <h3 className="font-display font-bold text-charcoal text-lg border-b border-surface-bordered pb-4">
               Final Checkout Summary
             </h3>
