@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { CheckCircle2, Building2, MessageCircle, ArrowRight, ArrowLeft, Printer, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, Building2, MessageCircle, ArrowRight, ArrowLeft, Printer, ShieldCheck, Smartphone, PhoneCall } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
-import { PetroglyphIcon } from '../components/PetroglyphIcon';
 
 export const OrderConfirmation = () => {
   const [searchParams] = useSearchParams();
@@ -33,7 +32,7 @@ export const OrderConfirmation = () => {
   if (loading) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center space-y-4 font-body">
-        <div className="w-12 h-12 border-4 border-clay border-t-transparent rounded-full animate-spin mx-auto" />
+        <div className="w-12 h-12 border-4 border-brand-orange border-t-transparent rounded-full animate-spin mx-auto" />
         <p className="font-display font-semibold text-charcoal text-sm">Generating Official Veterinary Receipt...</p>
       </div>
     );
@@ -74,7 +73,7 @@ export const OrderConfirmation = () => {
             className="px-6 py-3.5 bg-[#25D366] hover:bg-[#20ba5a] text-white font-display font-bold rounded-2xl text-xs sm:text-sm transition-all shadow-lg flex items-center gap-2"
           >
             <MessageCircle className="w-5 h-5 fill-white text-[#25D366]" />
-            <span>{t('notifyWhatsapp')}</span>
+            <span>{t('notifyWhatsapp')} (+968 9526 6144)</span>
           </a>
 
           <button
@@ -87,32 +86,57 @@ export const OrderConfirmation = () => {
         </div>
       </div>
 
-      {/* Bank Transfer Instructions Recap */}
-      {orderData.payment_method === 'bank_transfer' && (
-        <div className="bg-sand p-6 rounded-3xl border border-surface-bordered space-y-4">
-          <div className="flex items-center gap-3 text-clay">
-            <Building2 className="w-6 h-6" />
-            <h3 className="font-display font-bold text-charcoal text-base">{t('bankInstructionsTitle')}</h3>
+      {/* Payment Gateway Recapitulation */}
+      <div className="bg-sand p-6 rounded-3xl border border-surface-bordered space-y-4">
+        <div className="flex items-center gap-3 text-brand-orange">
+          {orderData.payment_method === 'apple_pay' ? <Smartphone className="w-6 h-6" /> : <Building2 className="w-6 h-6" />}
+          <h3 className="font-display font-bold text-charcoal text-base">Payment Gateway Details (تفاصيل الدفع)</h3>
+        </div>
+        <p className="text-xs text-bodytext-muted">
+          Order Total: <strong className="text-brand-orange font-mono">{formatPrice(orderData.total_omr || 0)}</strong>. Please send payment reference to customer support for instant dispatch.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 text-xs">
+          {/* ADIB BANK */}
+          <div className="bg-white p-4 rounded-2xl border border-surface-bordered space-y-1">
+            <span className="font-bold text-charcoal block">ADIB BANK (مصرف أبوظبي الإسلامي)</span>
+            <p className="text-sm font-mono font-bold text-brand-orange">Account: 28966881</p>
+            <p className="text-[10px] text-bodytext-muted">Al Namoos Veterinary Pharmacy</p>
           </div>
-          <p className="text-xs text-bodytext-muted">
-            Please complete the transfer for order <strong className="text-charcoal font-mono">{orderData.id}</strong> to one of the authorized accounts below:
-          </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-            <div className="bg-white p-4 rounded-2xl border border-surface-bordered space-y-1">
-              <span className="text-xs font-bold text-charcoal">Bank Muscat (بنك مسقط)</span>
-              <p className="text-sm font-mono font-bold text-clay">0412004099970014</p>
-              <p className="text-[10px] text-bodytext-muted">Account: Al Namoos Veterinary Supplies LLC</p>
-            </div>
+          {/* Muscat Bank */}
+          <div className="bg-white p-4 rounded-2xl border border-surface-bordered space-y-1">
+            <span className="font-bold text-charcoal block">Muscat Bank (بنك مسقط)</span>
+            <p className="text-sm font-mono font-bold text-brand-orange">Account: 0412004099970014</p>
+            <p className="text-[10px] text-bodytext-muted">Al Namoos Veterinary Supplies LLC</p>
+          </div>
 
-            <div className="bg-white p-4 rounded-2xl border border-surface-bordered space-y-1">
-              <span className="text-xs font-bold text-charcoal">ADIB (مصرف أبوظبي الإسلامي)</span>
-              <p className="text-sm font-mono font-bold text-clay">28966881</p>
-              <p className="text-[10px] text-bodytext-muted">Account: Al Namoos Veterinary Pharmacy</p>
-            </div>
+          {/* Apple Pay */}
+          <div className="bg-white p-4 rounded-2xl border border-surface-bordered space-y-1">
+            <span className="font-bold text-charcoal block">Apple Pay Gateway</span>
+            <p className="text-sm font-mono font-bold text-brand-orange">+968 9526 6144 (95266144)</p>
+            <p className="text-[10px] text-bodytext-muted">Direct Mobile Transfer</p>
           </div>
         </div>
-      )}
+      </div>
+
+      {/* Customer Support Information Box */}
+      <div className="bg-surface border border-surface-bordered p-6 rounded-3xl space-y-4">
+        <h3 className="font-display font-bold text-charcoal text-base flex items-center gap-2 border-b border-surface-bordered pb-3">
+          <PhoneCall className="w-5 h-5 text-brand-orange" />
+          <span>Customer Support (خدمة العملاء والتتبع)</span>
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-bodytext">
+          <div>
+            <span className="text-bodytext-muted block">Support Phone / WhatsApp:</span>
+            <strong className="text-charcoal font-mono dir-ltr">+968 9526 6144</strong>
+          </div>
+          <div>
+            <span className="text-bodytext-muted block">Support Email:</span>
+            <strong className="text-brand-orange">foxx20041@hotmail.com</strong>
+          </div>
+        </div>
+      </div>
 
       {/* Customer & Shipping Summary */}
       <div className="bg-surface border border-surface-bordered p-6 rounded-3xl space-y-4">
@@ -140,7 +164,7 @@ export const OrderConfirmation = () => {
       </div>
 
       <div className="text-center pt-4">
-        <Link to="/shop" className="text-xs font-bold text-clay hover:underline inline-flex items-center gap-1">
+        <Link to="/shop" className="text-xs font-bold text-brand-orange hover:underline inline-flex items-center gap-1">
           <span>Continue Shopping Catalog</span>
           {isRtl ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
         </Link>

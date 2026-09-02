@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, CreditCard, Building2, Smartphone, Truck, ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, CreditCard, Building2, Smartphone, Truck, ArrowLeft, ArrowRight, CheckCircle2, PhoneCall } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useCart } from '../context/CartContext';
@@ -21,7 +21,7 @@ export const Checkout = () => {
     notes: '',
   });
 
-  const [shippingOption, setShippingOption] = useState('oman_standard'); // 'oman_standard' | 'oman_express' | 'gcc_standard' | 'gcc_express'
+  const [shippingOption, setShippingOption] = useState('oman_standard');
   const [paymentMethod, setPaymentMethod] = useState('bank_transfer'); // 'bank_transfer' | 'apple_pay'
   const [bankSelected, setBankSelected] = useState('bank_muscat'); // 'bank_muscat' | 'adib'
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -227,11 +227,11 @@ export const Checkout = () => {
           <div className="bg-surface border border-surface-bordered p-6 rounded-3xl shadow-warm space-y-6">
             <h3 className="font-display font-bold text-charcoal text-lg flex items-center gap-2 border-b border-surface-bordered pb-3">
               <span className="w-6 h-6 rounded-full bg-clay text-white text-xs flex items-center justify-center font-bold">3</span>
-              <span>{t('paymentMethod')}</span>
+              <span>Payment Gateways (خيارات الدفع)</span>
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Option 1: Direct Bank Transfer */}
+              {/* Option 1: Direct Bank Account Transfer */}
               <label
                 className={`p-5 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between space-y-3 ${
                   paymentMethod === 'bank_transfer'
@@ -250,13 +250,13 @@ export const Checkout = () => {
                     />
                     <Building2 className="w-5 h-5 text-clay" />
                     <span className="font-display font-bold text-charcoal text-xs sm:text-sm">
-                      {t('bankTransfer')}
+                      Bank Account Transfer
                     </span>
                   </div>
                   <span className="px-2 py-0.5 bg-gold text-charcoal text-[10px] font-bold rounded">RECOMMENDED</span>
                 </div>
                 <p className="text-[11px] text-bodytext-muted">
-                  Direct transfer to ADIB or Bank Muscat account with order reference ID.
+                  Direct transfer to ADIB Bank or Bank Muscat official account.
                 </p>
               </label>
 
@@ -279,7 +279,7 @@ export const Checkout = () => {
                     />
                     <Smartphone className="w-5 h-5 text-charcoal" />
                     <span className="font-display font-bold text-charcoal text-xs sm:text-sm">
-                      {t('applePay')}
+                      Apple Pay (95266144)
                     </span>
                   </div>
                   <span className="px-2 py-0.5 bg-charcoal text-white font-mono text-[10px] font-bold rounded">
@@ -287,7 +287,7 @@ export const Checkout = () => {
                   </span>
                 </div>
                 <p className="text-[11px] text-bodytext-muted">
-                  Instant touch/face checkout via +968 9526 6144 Apple Pay gateway.
+                  Instant mobile transfer via Apple Pay recipient number 95266144.
                 </p>
               </label>
             </div>
@@ -297,11 +297,26 @@ export const Checkout = () => {
               <div className="bg-sand p-5 rounded-2xl border border-surface-bordered space-y-4 animate-fade-in">
                 <h4 className="font-display font-bold text-charcoal text-sm flex items-center gap-2">
                   <Building2 className="w-4 h-4 text-clay" />
-                  <span>{t('bankInstructionsTitle')}</span>
+                  <span>Authorized Bank Account Details</span>
                 </h4>
-                <p className="text-xs text-bodytext-muted">{t('bankNotice')}</p>
+                <p className="text-xs text-bodytext-muted">Please transfer the order total to one of our official bank accounts below:</p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* ADIB BANK */}
+                  <div
+                    onClick={() => setBankSelected('adib')}
+                    className={`p-4 rounded-xl border cursor-pointer bg-white space-y-1 ${
+                      bankSelected === 'adib' ? 'border-clay ring-2 ring-clay/20' : 'border-surface-bordered'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-display font-bold text-charcoal text-xs">ADIB BANK (مصرف أبوظبي الإسلامي)</span>
+                      {bankSelected === 'adib' && <CheckCircle2 className="w-4 h-4 text-clay" />}
+                    </div>
+                    <p className="text-sm font-mono font-bold text-clay">Account: 28966881</p>
+                    <p className="text-[10px] text-bodytext-muted">Al Namoos Veterinary Pharmacy</p>
+                  </div>
+
                   {/* Bank Muscat */}
                   <div
                     onClick={() => setBankSelected('bank_muscat')}
@@ -310,30 +325,41 @@ export const Checkout = () => {
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-display font-bold text-charcoal text-xs">{t('bankMuscatAccount')}</span>
+                      <span className="font-display font-bold text-charcoal text-xs">Muscat Bank (بنك مسقط)</span>
                       {bankSelected === 'bank_muscat' && <CheckCircle2 className="w-4 h-4 text-clay" />}
                     </div>
-                    <p className="text-xs font-mono font-bold text-clay">0412004099970014</p>
+                    <p className="text-sm font-mono font-bold text-clay">Account: 0412004099970014</p>
                     <p className="text-[10px] text-bodytext-muted">Al Namoos Veterinary Supplies LLC</p>
-                  </div>
-
-                  {/* ADIB */}
-                  <div
-                    onClick={() => setBankSelected('adib')}
-                    className={`p-4 rounded-xl border cursor-pointer bg-white space-y-1 ${
-                      bankSelected === 'adib' ? 'border-clay ring-2 ring-clay/20' : 'border-surface-bordered'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-display font-bold text-charcoal text-xs">{t('adibAccount')}</span>
-                      {bankSelected === 'adib' && <CheckCircle2 className="w-4 h-4 text-clay" />}
-                    </div>
-                    <p className="text-xs font-mono font-bold text-clay">28966881</p>
-                    <p className="text-[10px] text-bodytext-muted">Al Namoos Veterinary Pharmacy</p>
                   </div>
                 </div>
               </div>
             )}
+
+            {/* If Apple Pay Selected: Show Apple Pay Instructions */}
+            {paymentMethod === 'apple_pay' && (
+              <div className="bg-sand p-5 rounded-2xl border border-surface-bordered space-y-3 animate-fade-in">
+                <div className="flex items-center gap-2 text-charcoal">
+                  <Smartphone className="w-5 h-5 text-clay" />
+                  <h4 className="font-display font-bold text-sm">Apple Pay Transfer Instructions</h4>
+                </div>
+                <p className="text-xs text-bodytext">
+                  Please send Apple Pay payment of <strong className="text-clay font-mono">{formatPrice(totalOMR)}</strong> to recipient mobile number:
+                </p>
+                <div className="p-3 bg-white border border-surface-bordered rounded-xl font-mono text-center">
+                  <span className="text-xs text-bodytext-muted block uppercase text-[10px]">Apple Pay Recipient Number</span>
+                  <strong className="text-lg text-clay font-bold">+968 9526 6144 (95266144)</strong>
+                </div>
+              </div>
+            )}
+
+            {/* Customer Support Notice */}
+            <div className="p-4 bg-white border border-surface-bordered rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2">
+                <PhoneCall className="w-4 h-4 text-brand-orange" />
+                <span className="font-bold text-charcoal">Customer Support: +968 9526 6144 | foxx20041@hotmail.com</span>
+              </div>
+              <span className="text-[11px] text-bodytext-muted">Available 24/7 for payment assistance</span>
+            </div>
           </div>
         </div>
 
@@ -377,7 +403,7 @@ export const Checkout = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-2xl text-base transition-all shadow-xl flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50"
+              className="w-full py-4 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-2xl text-base transition-all shadow-xl flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50"
             >
               {isSubmitting ? (
                 <span>Processing Order...</span>
