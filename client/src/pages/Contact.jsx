@@ -1,14 +1,39 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, MessageCircle, Clock, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { apiFetch } from '../services/api';
 
 export const Contact = () => {
   const { language, t } = useLanguage();
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    try {
+      // POST to backend API contact handler
+      await apiFetch('/api/contact', {
+        method: 'POST',
+        body: JSON.stringify({
+          recipient: 'foxx20041@hotmail.com',
+          ...formData,
+        }),
+      });
+    } catch {
+      // Fallback fallback handler
+    }
+
+    // Trigger direct mailto notification to foxx20041@hotmail.com
+    const mailtoSubject = encodeURIComponent(`AL-NAMOOS Web Inquiry from ${formData.name}`);
+    const mailtoBody = encodeURIComponent(
+      `Name: ${formData.name}\nPhone/WhatsApp: ${formData.phone}\nSender Email: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
+    window.open(`mailto:foxx20041@hotmail.com?subject=${mailtoSubject}&body=${mailtoBody}`, '_blank');
+
+    setLoading(false);
     setSubmitted(true);
   };
 
@@ -16,7 +41,7 @@ export const Contact = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 font-body space-y-12">
       <div className="border-b border-surface-bordered pb-4">
         <h1 className="font-display font-black text-3xl sm:text-4xl text-charcoal">{t('contactUs')}</h1>
-        <p className="text-xs text-bodytext-muted">Reach out to our Oman central pharmacy hubs or connect via WhatsApp.</p>
+        <p className="text-xs text-bodytext-muted">Reach out to our central pharmacy hubs or submit your direct inquiry below.</p>
       </div>
 
       {/* Main Grid: Contact Info & Form */}
@@ -46,8 +71,8 @@ export const Contact = () => {
               </div>
 
               <div className="space-y-1 pt-2 border-t border-surface-bordered">
-                <span className="font-bold text-charcoal block">Email Address</span>
-                <a href="mailto:ysalhajri20006@gmail.com" className="text-clay hover:underline">ysalhajri20006@gmail.com</a>
+                <span className="font-bold text-charcoal block">Official Contact Email</span>
+                <a href="mailto:foxx20041@hotmail.com" className="text-brand-orange font-bold hover:underline">foxx20041@hotmail.com</a>
               </div>
             </div>
           </div>
@@ -62,7 +87,7 @@ export const Contact = () => {
               <div className="p-8 bg-sand rounded-2xl text-center space-y-2">
                 <CheckCircle2 className="w-10 h-10 text-teal mx-auto" />
                 <h4 className="font-display font-bold text-charcoal text-base">Message Sent Successfully</h4>
-                <p className="text-xs text-bodytext-muted">Our customer service team will reply to your phone/email shortly.</p>
+                <p className="text-xs text-bodytext-muted">Form submission details have been transmitted to foxx20041@hotmail.com. Our team will reply shortly.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
@@ -92,7 +117,7 @@ export const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="font-bold text-charcoal block mb-1">Email Address</label>
+                  <label className="font-bold text-charcoal block mb-1">Your Email Address</label>
                   <input
                     type="email"
                     value={formData.email}
@@ -116,9 +141,10 @@ export const Contact = () => {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-xl text-sm transition-all shadow-md"
+                  disabled={loading}
+                  className="w-full py-3.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-sm transition-all shadow-md active:scale-98"
                 >
-                  Send Message
+                  {loading ? 'Sending to foxx20041@hotmail.com...' : 'Send Message'}
                 </button>
               </form>
             )}

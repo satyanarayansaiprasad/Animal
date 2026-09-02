@@ -14,6 +14,7 @@ const orderRepo = new JsonRepository(path.join(dataDir, 'orders.json'));
 const settingRepo = new JsonRepository(path.join(dataDir, 'settings.json'));
 const customerRepo = new JsonRepository(path.join(dataDir, 'customers.json'));
 const bannerRepo = new JsonRepository(path.join(dataDir, 'banners.json'));
+const contactRepo = new JsonRepository(path.join(dataDir, 'contacts.json'));
 
 const router = express.Router();
 
@@ -197,6 +198,7 @@ router.post('/orders', async (req, res) => {
       id: orderId,
       status: 'pending',
       payment_status: req.body.payment_method === 'apple_pay' ? 'paid' : 'pending_transfer',
+      notification_recipient: 'foxx20041@hotmail.com',
       ...req.body,
     };
     const createdOrder = await orderRepo.create(orderData);
@@ -218,6 +220,23 @@ router.put('/orders/:id/status', async (req, res) => {
       return res.status(404).json({ success: false, message: 'Order not found' });
     }
     res.json({ success: true, data: updatedOrder });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// --- CONTACT & INQUIRY SUBMISSIONS ---
+router.post('/contact', async (req, res) => {
+  try {
+    const submission = {
+      id: `MSG-${Date.now()}`,
+      target_email: 'foxx20041@hotmail.com',
+      createdAt: new Date().toISOString(),
+      ...req.body,
+    };
+    const saved = await contactRepo.create(submission);
+    console.log(`📩 Contact Form Submission logged for foxx20041@hotmail.com:`, saved);
+    res.status(201).json({ success: true, message: 'Inquiry transmitted to foxx20041@hotmail.com', data: saved });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }

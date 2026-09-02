@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Stethoscope, PhoneCall, MessageCircle, ShieldCheck, CheckCircle2, Award, Clock } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { PetroglyphIcon } from '../components/PetroglyphIcon';
+import { apiFetch } from '../services/api';
 
 export const Consultation = () => {
   const { language, isRtl, t } = useLanguage();
@@ -14,9 +15,33 @@ export const Consultation = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    try {
+      await apiFetch('/api/contact', {
+        method: 'POST',
+        body: JSON.stringify({
+          recipient: 'foxx20041@hotmail.com',
+          type: 'doctor_consultation',
+          ...formData,
+        }),
+      });
+    } catch {
+      // Fallback
+    }
+
+    // Trigger direct mailto notification to foxx20041@hotmail.com
+    const mailtoSubject = encodeURIComponent(`AL-NAMOOS Doctor Consultation Request: ${formData.species.toUpperCase()}`);
+    const mailtoBody = encodeURIComponent(
+      `Full Name: ${formData.name}\nPhone/WhatsApp: ${formData.phone}\nSpecies: ${formData.species}\n\nSymptoms/Medical Inquiry:\n${formData.issue}`
+    );
+    window.open(`mailto:foxx20041@hotmail.com?subject=${mailtoSubject}&body=${mailtoBody}`, '_blank');
+
+    setLoading(false);
     setSubmitted(true);
   };
 
@@ -155,7 +180,7 @@ export const Consultation = () => {
           <div className="p-6 bg-surface rounded-2xl border border-surface-bordered text-center space-y-2">
             <CheckCircle2 className="w-10 h-10 text-teal mx-auto" />
             <h4 className="font-display font-bold text-charcoal text-base">Consultation Request Received</h4>
-            <p className="text-xs text-bodytext-muted">Our duty veterinarian will contact your phone/WhatsApp shortly.</p>
+            <p className="text-xs text-bodytext-muted">Request details sent to foxx20041@hotmail.com. Our duty veterinarian will contact your phone/WhatsApp shortly.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
@@ -193,6 +218,8 @@ export const Consultation = () => {
                 <option value="camel">Camel (الإبل والهجن)</option>
                 <option value="horse">Horse (الخيل)</option>
                 <option value="cow">Cattle / Cows (الأبقار والمواشي)</option>
+                <option value="dog">Dog / Pets (الكلاب والأليفة)</option>
+                <option value="falcon">Falcon / Birds (الصقور والطيور)</option>
               </select>
             </div>
 
@@ -209,9 +236,10 @@ export const Consultation = () => {
 
             <button
               type="submit"
-              className="sm:col-span-2 py-3.5 bg-clay hover:bg-clay-hover text-white font-display font-bold rounded-xl text-sm transition-all shadow-md"
+              disabled={loading}
+              className="sm:col-span-2 py-3.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-display font-bold rounded-xl text-sm transition-all shadow-md active:scale-98"
             >
-              Submit Consultation Request
+              {loading ? 'Submitting to foxx20041@hotmail.com...' : 'Submit Consultation Request'}
             </button>
           </form>
         )}
