@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ShoppingBag, Star, ShieldCheck, Truck, MessageCircle, ArrowLeft, ArrowRight, Check, AlertCircle } from 'lucide-react';
+import { ShoppingBag, Star, ShieldCheck, Truck, MessageCircle, Check, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useCart } from '../context/CartContext';
@@ -19,7 +19,7 @@ export const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState(false);
-  const [activeTab, setActiveTab] = useState('dosage'); // 'dosage' | 'details' | 'warnings'
+  const [activeTab, setActiveTab] = useState('dosage'); // 'dosage' | 'warnings'
 
   useEffect(() => {
     setLoading(true);
@@ -44,7 +44,7 @@ export const ProductDetail = () => {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center space-y-4 font-body">
-        <div className="w-12 h-12 border-4 border-clay border-t-transparent rounded-full animate-spin mx-auto" />
+        <div className="w-12 h-12 border-4 border-[#D97706] border-t-transparent rounded-full animate-spin mx-auto" />
         <p className="font-display font-bold text-charcoal text-sm">Loading Veterinary Product Specifications...</p>
       </div>
     );
@@ -56,7 +56,7 @@ export const ProductDetail = () => {
         <PetroglyphIcon species="camel" size="xl" className="mx-auto" />
         <h2 className="font-display font-bold text-charcoal text-2xl">Product Not Found</h2>
         <p className="text-xs text-bodytext-muted">The requested veterinary supply item could not be retrieved.</p>
-        <Link to="/shop" className="px-6 py-2.5 bg-clay text-white rounded-xl font-bold text-xs inline-block">
+        <Link to="/shop" className="px-6 py-3 bg-[#D97706] text-white rounded-xl font-bold text-xs inline-block">
           Return to Shop
         </Link>
       </div>
@@ -79,7 +79,7 @@ export const ProductDetail = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 font-body space-y-8 sm:space-y-12 text-start">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 font-body space-y-8 sm:space-y-12 text-start bg-[#F9F6F0] min-h-screen">
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center gap-2 text-xs text-bodytext-muted flex-wrap">
         <Link to="/" className="hover:text-charcoal">{t('home')}</Link>
@@ -97,12 +97,12 @@ export const ProductDetail = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-12">
         {/* Left Column: Image Showcase & Petroglyph Badge */}
         <div className="lg:col-span-6 space-y-4">
-          <div className="relative aspect-square bg-surface border border-surface-bordered rounded-3xl overflow-hidden shadow-warm flex items-center justify-center p-6">
+          <div className="relative aspect-square bg-white border border-surface-bordered rounded-3xl overflow-hidden shadow-warm flex items-center justify-center p-6">
             {/* Top Badges */}
             <div className="absolute top-4 left-4 right-4 z-10 flex justify-between items-center pointer-events-none">
               <PetroglyphIcon species={product.category} size="md" />
               {product.sale_price_omr && (
-                <span className="bg-gold text-charcoal font-display font-black text-xs px-3 py-1 rounded-full shadow-md">
+                <span className="bg-[#D97706] text-white font-display font-black text-xs px-3 py-1 rounded-full shadow-md">
                   SPECIAL OFFER
                 </span>
               )}
@@ -120,7 +120,7 @@ export const ProductDetail = () => {
         <div className="lg:col-span-6 space-y-5 sm:space-y-6">
           <div className="space-y-2">
             <div className="flex items-center gap-3 flex-wrap">
-              <span className="px-3 py-1 rounded-full bg-teal-light text-teal font-bold text-xs capitalize">
+              <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 font-extrabold text-xs capitalize">
                 {product.type}
               </span>
               <span className="text-xs font-mono text-bodytext-muted">SKU: {product.sku}</span>
@@ -132,9 +132,9 @@ export const ProductDetail = () => {
 
             {/* Rating */}
             <div className="flex items-center gap-2 text-xs">
-              <div className="flex text-gold">
+              <div className="flex text-[#D97706]">
                 {[1, 2, 3, 4, 5].map((s) => (
-                  <Star key={s} className="w-3.5 h-3.5 fill-gold text-gold" />
+                  <Star key={s} className="w-3.5 h-3.5 fill-[#D97706] text-[#D97706]" />
                 ))}
               </div>
               <span className="font-mono font-bold text-charcoal">{product.rating || 4.9}</span>
@@ -143,14 +143,14 @@ export const ProductDetail = () => {
           </div>
 
           {/* Pricing Box */}
-          <div className="bg-surface border border-surface-bordered p-4 sm:p-5 rounded-2xl space-y-2">
+          <div className="bg-white border border-surface-bordered p-4 sm:p-5 rounded-2xl space-y-2 shadow-sm">
             <div className="flex items-baseline gap-3">
               {product.sale_price_omr && (
                 <span className="text-xs sm:text-sm text-bodytext-muted line-through font-mono-price">
                   {formatPrice(product.price_omr)}
                 </span>
               )}
-              <span className="font-mono-price font-black text-2xl sm:text-3xl text-clay">
+              <span className="font-mono-price font-black text-2xl sm:text-3xl text-[#D97706]">
                 {formatPrice(unitPrice)}
               </span>
             </div>
@@ -159,10 +159,10 @@ export const ProductDetail = () => {
             <div className="flex items-center gap-2 text-xs">
               <span
                 className={`w-2.5 h-2.5 rounded-full ${
-                  product.in_stock ? 'bg-teal' : 'bg-clay'
+                  product.in_stock ? 'bg-emerald-500' : 'bg-rose-500'
                 }`}
               />
-              <span className={`font-semibold ${product.in_stock ? 'text-teal' : 'text-clay'}`}>
+              <span className={`font-extrabold ${product.in_stock ? 'text-emerald-700' : 'text-rose-700'}`}>
                 {product.in_stock ? `${t('inStock')} (${product.stock_quantity || 50} units available)` : t('outOfStock')}
               </span>
             </div>
@@ -171,21 +171,21 @@ export const ProductDetail = () => {
           {/* Short Description */}
           <p className="text-bodytext text-xs sm:text-sm leading-relaxed">{description}</p>
 
-          {/* Quantity Selector & Action Buttons */}
+          {/* Quantity Selector & High-Contrast Action Buttons */}
           <div className="space-y-4 pt-2">
             <div className="flex items-center gap-4">
               <span className="text-xs font-bold text-charcoal">{t('quantity')}:</span>
-              <div className="flex items-center border border-surface-bordered rounded-xl bg-white overflow-hidden">
+              <div className="flex items-center border border-surface-bordered rounded-xl bg-white overflow-hidden shadow-sm">
                 <button
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="px-3 py-2 text-charcoal hover:bg-sand font-bold text-sm"
+                  className="px-3.5 py-2 text-charcoal hover:bg-sand font-bold text-base"
                 >
                   -
                 </button>
-                <span className="px-4 font-mono font-bold text-sm">{quantity}</span>
+                <span className="px-4 font-mono font-extrabold text-base">{quantity}</span>
                 <button
                   onClick={() => setQuantity((q) => q + 1)}
-                  className="px-3 py-2 text-charcoal hover:bg-sand font-bold text-sm"
+                  className="px-3.5 py-2 text-charcoal hover:bg-sand font-bold text-base"
                 >
                   +
                 </button>
@@ -196,22 +196,22 @@ export const ProductDetail = () => {
               <button
                 onClick={handleAddToCart}
                 disabled={!product.in_stock}
-                className={`w-full py-4 rounded-2xl font-display font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-lg active:scale-98 touch-target ${
+                className={`w-full py-4 rounded-2xl font-display font-extrabold text-sm transition-all flex items-center justify-center gap-2 shadow-xl active:scale-98 touch-target ${
                   added
-                    ? 'bg-teal text-white'
+                    ? 'bg-emerald-600 text-white'
                     : product.in_stock
-                    ? 'bg-clay hover:bg-clay-hover text-white'
+                    ? 'bg-[#351809] hover:bg-[#5C2D15] text-white'
                     : 'bg-sand text-bodytext-muted cursor-not-allowed'
                 }`}
               >
                 {added ? (
                   <>
-                    <Check className="w-5 h-5" />
+                    <Check className="w-5 h-5 text-white" />
                     <span>Added to Cart</span>
                   </>
                 ) : (
                   <>
-                    <ShoppingBag className="w-5 h-5" />
+                    <ShoppingBag className="w-5 h-5 text-white" />
                     <span>{t('addToCart')}</span>
                   </>
                 )}
@@ -221,7 +221,7 @@ export const ProductDetail = () => {
                 href={whatsappInquiryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-2xl font-display font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-lg active:scale-98 touch-target"
+                className="w-full py-4 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-2xl font-display font-extrabold text-sm transition-all flex items-center justify-center gap-2 shadow-xl active:scale-98 touch-target"
               >
                 <MessageCircle className="w-5 h-5 fill-white text-[#25D366]" />
                 <span>{t('inquireWhatsapp')}</span>
@@ -232,11 +232,11 @@ export const ProductDetail = () => {
           {/* Guarantee Badges */}
           <div className="grid grid-cols-2 gap-4 pt-4 border-t border-surface-bordered text-xs text-bodytext-muted">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-teal shrink-0" />
+              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>Certified Pharmacy Standard</span>
             </div>
             <div className="flex items-center gap-2">
-              <Truck className="w-4 h-4 text-clay shrink-0" />
+              <Truck className="w-4 h-4 text-[#D97706] shrink-0" />
               <span>Cold-Chain GCC Transport</span>
             </div>
           </div>
@@ -244,20 +244,20 @@ export const ProductDetail = () => {
       </div>
 
       {/* Tabbed Detailed Specifications & Directions */}
-      <div className="bg-surface border border-surface-bordered rounded-3xl p-5 sm:p-8 space-y-6 shadow-warm">
+      <div className="bg-white border border-surface-bordered rounded-3xl p-5 sm:p-8 space-y-6 shadow-warm">
         <div className="flex border-b border-surface-bordered gap-6 text-xs sm:text-sm font-display font-bold overflow-x-auto">
           <button
             onClick={() => setActiveTab('dosage')}
-            className={`pb-3 transition-colors border-b-2 whitespace-nowrap ${
-              activeTab === 'dosage' ? 'border-clay text-clay' : 'border-transparent text-bodytext-muted hover:text-charcoal'
+            className={`pb-3 transition-colors border-b-2 whitespace-nowrap font-extrabold ${
+              activeTab === 'dosage' ? 'border-[#D97706] text-[#D97706]' : 'border-transparent text-bodytext-muted hover:text-charcoal'
             }`}
           >
             {t('dosageInstructions')}
           </button>
           <button
             onClick={() => setActiveTab('warnings')}
-            className={`pb-3 transition-colors border-b-2 whitespace-nowrap ${
-              activeTab === 'warnings' ? 'border-clay text-clay' : 'border-transparent text-bodytext-muted hover:text-charcoal'
+            className={`pb-3 transition-colors border-b-2 whitespace-nowrap font-extrabold ${
+              activeTab === 'warnings' ? 'border-[#D97706] text-[#D97706]' : 'border-transparent text-bodytext-muted hover:text-charcoal'
             }`}
           >
             {t('usageWarnings')}
@@ -267,8 +267,8 @@ export const ProductDetail = () => {
         <div className="text-xs sm:text-sm text-bodytext leading-relaxed">
           {activeTab === 'dosage' && (
             <div className="space-y-4">
-              <div className="p-4 bg-sand rounded-2xl border border-surface-bordered flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+              <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-[#D97706] shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-display font-bold text-charcoal text-xs sm:text-sm">Official Veterinary Dosage Direction</h4>
                   <p className="text-xs text-bodytext-muted mt-1">{dosage || 'Follow licensed veterinarian guidance or product packaging instructions.'}</p>
@@ -290,7 +290,7 @@ export const ProductDetail = () => {
       {/* Related Products Section */}
       {relatedProducts.length > 0 && (
         <div className="space-y-6">
-          <h2 className="font-display font-bold text-xl sm:text-2xl text-charcoal">{t('relatedProducts')}</h2>
+          <h2 className="font-display font-black text-xl sm:text-2xl text-charcoal">{t('relatedProducts')}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {relatedProducts.map((p) => (
               <ProductCard key={p.id} product={p} />
