@@ -159,7 +159,6 @@ export const Footer = () => {
 
           <div className="flex items-center gap-2">
             <span className="px-2 py-0.5 bg-blue-600 text-white rounded text-[10px] font-bold">AMEX</span>
-            <span className="px-2 py-0.5 bg-black text-white rounded text-[10px] font-bold"> Pay</span>
             <span className="px-2 py-0.5 bg-red-600 text-white rounded text-[10px] font-bold">MasterCard</span>
             <span className="px-2.5 py-0.5 bg-blue-800 text-white rounded text-[10px] font-bold">VISA</span>
           </div>

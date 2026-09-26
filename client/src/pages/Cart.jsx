@@ -152,7 +152,7 @@ export const Cart = () => {
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#D97706] shrink-0" />
-                <span>Accepting Apple Pay & Direct Bank Transfer (ADIB & Bank Muscat)</span>
+                <span>Accepting Direct Bank Transfer (ADIB & Bank Muscat)</span>
               </div>
             </div>
           </div>
