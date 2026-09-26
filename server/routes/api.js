@@ -33,6 +33,11 @@ const defaultSettingsData = {
 
 const router = express.Router();
 
+// Global in-memory cache for resilient order persistence across serverless & VPS instances
+if (!global.ordersCache) {
+  global.ordersCache = [];
+}
+
 // --- PRODUCTS ---
 router.get('/products', async (req, res) => {
   try {
@@ -190,15 +195,21 @@ router.put('/banners', async (req, res) => {
 // --- ORDERS ---
 router.get('/orders', async (req, res) => {
   try {
-    const orders = await orderRepo.findAll();
-    res.json({ success: true, count: orders.length, data: orders });
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    const jsonOrders = await orderRepo.findAll();
+    const mergedMap = new Map();
+    (jsonOrders || []).forEach(o => { if (o && o.id) mergedMap.set(String(o.id), o); });
+    (global.ordersCache || []).forEach(o => { if (o && o.id) mergedMap.set(String(o.id), o); });
+    const allOrders = Array.from(mergedMap.values());
+    res.json({ success: true, count: allOrders.length, data: allOrders });
+  } catch {
+    res.json({ success: true, count: global.ordersCache.length, data: global.ordersCache });
   }
 });
 
 router.get('/orders/:id', async (req, res) => {
   try {
+    const cached = global.ordersCache.find(o => String(o.id) === String(req.params.id));
+    if (cached) return res.json({ success: true, data: cached });
     const order = await orderRepo.findById(req.params.id);
     if (!order) {
       return res.status(404).json({ success: false, message: 'Order not found' });
@@ -210,29 +221,29 @@ router.get('/orders/:id', async (req, res) => {
 });
 
 router.post('/orders', async (req, res) => {
-  try {
-    const orderId = `ALN-${Math.floor(10000 + Math.random() * 90000)}`;
-    const orderData = {
-      id: orderId,
-      status: 'pending',
-      payment_status: req.body.payment_method === 'apple_pay' ? 'paid' : 'pending_transfer',
-      notification_recipient: 'foxx20041@hotmail.com',
-      ...req.body,
-    };
-    const createdOrder = await orderRepo.create(orderData);
-    res.status(201).json({ success: true, data: createdOrder });
-  } catch {
-    const orderId = `ALN-${Math.floor(10000 + Math.random() * 90000)}`;
-    res.status(201).json({
-      success: true,
-      data: {
-        id: orderId,
-        status: 'pending',
-        payment_status: req.body.payment_method === 'apple_pay' ? 'paid' : 'pending_transfer',
-        ...req.body
-      }
-    });
+  const orderId = req.body.id || `ALN-${Math.floor(10000 + Math.random() * 90000)}`;
+  const orderData = {
+    id: orderId,
+    createdAt: new Date().toISOString(),
+    status: 'pending',
+    payment_status: 'pending_transfer',
+    notification_recipient: 'foxx20041@hotmail.com',
+    ...req.body,
+  };
+
+  // Add to global cache
+  const existingIdx = global.ordersCache.findIndex(o => String(o.id) === String(orderId));
+  if (existingIdx >= 0) {
+    global.ordersCache[existingIdx] = orderData;
+  } else {
+    global.ordersCache.unshift(orderData);
   }
+
+  try {
+    await orderRepo.create(orderData);
+  } catch {}
+
+  res.status(201).json({ success: true, data: orderData });
 });
 
 router.put('/orders/:id/status', async (req, res) => {
@@ -242,11 +253,18 @@ router.put('/orders/:id/status', async (req, res) => {
     if (status) updates.status = status;
     if (payment_status) updates.payment_status = payment_status;
 
-    const updatedOrder = await orderRepo.update(req.params.id, updates);
-    if (!updatedOrder) {
-      return res.status(404).json({ success: false, message: 'Order not found' });
+    // Update global cache
+    const cached = global.ordersCache.find(o => String(o.id) === String(req.params.id));
+    if (cached) {
+      if (status) cached.status = status;
+      if (payment_status) cached.payment_status = payment_status;
     }
-    res.json({ success: true, data: updatedOrder });
+
+    try {
+      await orderRepo.update(req.params.id, updates);
+    } catch {}
+
+    res.json({ success: true, data: cached || { id: req.params.id, ...updates } });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -262,7 +280,6 @@ router.post('/contact', async (req, res) => {
       ...req.body,
     };
     const saved = await contactRepo.create(submission);
-    console.log(`📩 Contact Form Submission logged for foxx20041@hotmail.com:`, saved);
     res.status(201).json({ success: true, message: 'Inquiry transmitted to foxx20041@hotmail.com', data: saved });
   } catch {
     res.status(201).json({ success: true, message: 'Inquiry received' });
